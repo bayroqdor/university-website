@@ -1,0 +1,152 @@
+/* ================================================================ matndan keyingi yolg'iz havolalar — tugma (rich/linkButtons.ts)
+   Sayt tugmalari uslubida: to'q ko'k fon, oq matn, 2px radius, soyasiz. Do'kon havolalari — rasmiy nishonlar uslubida (qora). */
+.prose .rl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+/* keyingi paragrafga ham oraliq (.prose p { margin: 0 } umumiy oraliqni bekor qiladi) */
+.prose > .rl-row:not(:last-child) {
+  margin-bottom: 1.25em;
+}
+.prose ul.rl-row,
+.prose ol.rl-row {
+  list-style: none;
+  padding: 0;
+}
+.prose .rl-row > .rl-item {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 0;
+}
+.prose .rl-row > li.rl-item {
+  flex-wrap: wrap;
+}
+.prose .rl-row > li + li {
+  margin-top: 0;
+}
+/* «Ko'rish» oynasi tugmalar qatorida — butun kenglikda, o'z tugmasining ostida */
+.prose .rl-row > .dv-holder,
+.prose .rl-row > li .dv-holder {
+  flex: 1 0 100%;
+  margin: 0;
+}
+.prose .rl-row > li:has(> .dv-holder:not(:empty)) {
+  flex: 1 0 100%;
+}
+
+.prose a.rl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 10px 22px;
+  border: 1px solid var(--blue-fill, var(--accent));
+  border-radius: var(--radius-sm, 2px);
+  background: var(--blue-fill, var(--accent));
+  color: #fff;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.prose a.rl-btn:hover,
+.prose a.rl-btn:focus-visible {
+  background: var(--blue-d, var(--accent-deep, var(--accent)));
+  border-color: var(--blue-d, var(--accent-deep, var(--accent)));
+  color: #fff;
+}
+.prose a.rl-btn:focus-visible {
+  outline: 2px solid var(--blue, var(--accent));
+  outline-offset: 2px;
+}
+.prose .rl-btn .rl-ic {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s;
+}
+.prose a.rl-arrow:hover .rl-ic {
+  transform: translateX(2px);
+}
+.prose a.rl-external:hover .rl-ic {
+  transform: translate(2px, -2px);
+}
+
+/* do'kon nishonlari: Google Play / App Store */
+.prose a.rl-store {
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 22px 8px 16px;
+  border-color: #a6a6a6;
+  background: #000;
+  color: #fff;
+}
+.prose a.rl-store:hover,
+.prose a.rl-store:focus-visible {
+  border-color: #fff;
+  background: #1c1c1e;
+  color: #fff;
+}
+:root[data-theme="dark"] .prose a.rl-store:hover,
+:root[data-theme="dark"] .prose a.rl-store:focus-visible {
+  border-color: #d9d9d9;
+}
+.prose .rl-store-ic {
+  flex: none;
+  width: 26px;
+  height: 26px;
+}
+.prose .rl-store-t {
+  line-height: 1.1;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+/* PDF/Drive «Ko'rish» tugmasi — asosiy tugmaga yopishgan ikkinchi qism */
+.prose .rl-item > .dv-toggle {
+  margin: 0;
+  padding: 0 16px;
+  min-height: 48px;
+  border: 1px solid var(--blue-fill, var(--accent));
+  border-left-color: color-mix(in srgb, #fff 35%, var(--blue-fill, var(--accent)));
+  border-radius: 0 var(--radius-sm, 2px) var(--radius-sm, 2px) 0;
+  background: var(--blue-fill, var(--accent));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  vertical-align: 0;
+}
+.prose .rl-item > a.rl-btn:has(+ .dv-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.prose .rl-item > .dv-toggle:hover {
+  background: var(--blue-d, var(--accent-deep, var(--accent)));
+  border-color: var(--blue-d, var(--accent-deep, var(--accent)));
+}
+.prose .rl-item > .dv-toggle[aria-expanded="true"] {
+  background: var(--blue-d, var(--accent-deep, var(--accent)));
+  border-color: var(--blue-d, var(--accent-deep, var(--accent)));
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .prose .rl-row {
+    gap: 10px;
+  }
+  .prose a.rl-btn {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+  .prose a.rl-store {
+    padding: 8px 18px 8px 14px;
+  }
+}

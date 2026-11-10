@@ -1,0 +1,1098 @@
+/* Ilmiy jurnal (/journal) — sayt tizimi: Onest, radius 2px, soyasiz, gradientsiz; ko'k #0A2E73 / #071F50, fon oq / #F3F5F8, chiziq #E1E4EA.
+   Ranglar theme.css o'zgaruvchilaridan (tungi rejim ham shu yerdan). */
+.site.uni .jr {
+  --jr-gap: 48px;
+}
+.site.uni .jr-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.site.uni .jr-loading {
+  min-height: 50vh;
+}
+.site.uni .jr-muted {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .jr-empty {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgB);
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- admin ko'rib chiqish rejimi (faqat admin ko'radi) */
+.site.uni .jr-pv {
+  background: var(--blue-d);
+  color: var(--on-dark);
+}
+.site.uni .jr-pv-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.site.uni .jr-pv p {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-pv-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+.site.uni .jr-pv a {
+  color: var(--on-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site.uni .jr-pv a:focus-visible {
+  outline: 2px solid var(--on-dark);
+  outline-offset: 2px;
+}
+.site.uni .jr-draft {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- sahifa sarlavhasi (sayt page-hero naqshi: .container, yo'l, sarlavha)
+   Jurnal bo'limlari (4 ta) — sarlavha pastidagi chiziqli yorliqlar; sayt menyusi ostida alohida qator yo'q. */
+.site.uni .page-hero.jr-ph.has-tabs {
+  padding-bottom: 0;
+}
+.site.uni .jr-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink2);
+}
+.site.uni .jr-crumbs li {
+  min-width: 0;
+}
+.site.uni .jr-crumbs li + li::before {
+  content: "/";
+  margin: 0 10px;
+  color: var(--ink2);
+}
+.site.uni .jr-crumbs a {
+  color: var(--ink2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+.site.uni .jr-crumbs a:hover {
+  color: var(--blue);
+  text-decoration-color: currentColor;
+}
+.site.uni .jr-crumbs [aria-current] {
+  color: var(--ink);
+}
+.site.uni .jr-article .jr-crumbs li[aria-current] {
+  display: flex;
+  max-width: 100%;
+}
+.site.uni .jr-article .jr-crumbs [aria-current] span {
+  display: block;
+  min-width: 0;
+  max-width: 48ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+.site.uni .jr-ph-in {
+  display: grid;
+  gap: 40px 64px;
+  align-items: start;
+}
+.site.uni .jr-ph-in.has-aside {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+.site.uni .jr-ph-side {
+  display: grid;
+  gap: 24px;
+}
+.site.uni .jr-h1 {
+  margin: 0;
+  max-width: 20em;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-tabs {
+  margin-top: clamp(36px, 4vw, 56px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.site.uni .jr-tabs::-webkit-scrollbar {
+  display: none;
+}
+.site.uni .jr-tabs ul {
+  display: flex;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .jr-tabs a {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  border-bottom: 2px solid transparent;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.site.uni .jr-tabs a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+.site.uni .jr-tabs a.on {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .jr-tabs a:focus-visible {
+  outline-offset: -2px;
+}
+
+/* ---------------------------------------------------------------- sarlavhalar */
+.site.uni .jr-h2 {
+  margin: 0 0 28px;
+  font-size: clamp(28px, 2.4vw, 40px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.site.uni .jr-h2 a,
+.site.uni .jr-item-t a {
+  color: inherit;
+  text-decoration: none;
+}
+.site.uni .jr-h2 a:hover,
+.site.uni .jr-item-t a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site.uni .jr-h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.site.uni .jr-lead {
+  margin: 18px 0 0;
+  max-width: 64ch;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .jr-head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin: 20px 0 0;
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- bosh sahifa */
+.site.uni .jr-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: 32px;
+}
+.site.uni .jr-cover {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+.site.uni .jr-cover.sm {
+  max-width: 180px;
+}
+.site.uni .jr-facts {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-facts > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 2fr) minmax(0, 3fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .jr-facts dt {
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .jr-facts dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-sec {
+  padding: 64px 0;
+}
+.site.uni .jr-sec.alt {
+  background: var(--bgB);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .jr-cur {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--jr-gap);
+  align-items: start;
+}
+.site.uni .jr-cur-head {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.site.uni .jr-cur-head .jr-h2 {
+  margin: 0;
+}
+.site.uni .jr-cur-theme {
+  margin: 0;
+  font-size: 18px;
+}
+.site.uni .jr-two {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--jr-gap);
+}
+
+/* ---------------------------------------------------------------- maqolalar ro'yxati */
+.site.uni .jr-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-item {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .jr-item-sec {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .jr-item-t {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.site.uni .jr-item-au {
+  margin: 8px 0 0;
+  font-size: 16px;
+}
+.site.uni .jr-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .jr-item-meta a,
+.site.uni .jr-dl a,
+.site.uni .jr-prose a,
+.site.uni .jr-person-orcid a {
+  color: var(--blue);
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-group + .jr-group {
+  margin-top: 48px;
+}
+
+/* arxiv */
+.site.uni .jr-year + .jr-year {
+  margin-top: 56px;
+}
+.site.uni .jr-issues {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .jr-issue {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--bgA);
+}
+.site.uni .jr-issue:hover {
+  border-color: var(--blue);
+}
+.site.uni .jr-issue img {
+  width: 96px;
+  height: auto;
+  margin-bottom: 8px;
+  border: 1px solid var(--line);
+}
+.site.uni .jr-issue-t {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.site.uni .jr-issue-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: var(--jr-gap);
+  align-items: start;
+}
+
+/* ---------------------------------------------------------------- maqola sahifasi */
+.site.uni .jr-article {
+  padding: 40px 0 96px;
+}
+.site.uni .jr-article .jr-crumbs ol {
+  margin-bottom: 32px;
+}
+.site.uni .jr-art-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 56px;
+  align-items: start;
+}
+.site.uni .jr-art-h1 {
+  margin: 14px 0 0;
+  font-size: clamp(30px, 2.8vw, 46px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-alt-title {
+  margin: 14px 0 0;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+.site.uni .jr-authors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+.site.uni .jr-authors li {
+  display: block;
+}
+.site.uni .jr-authors sup {
+  margin-left: 2px;
+  vertical-align: super;
+}
+.site.uni sup {
+  font-size: 0.68em;
+  line-height: 0;
+}
+.site.uni .jr-orcid {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-left: 6px;
+  border-radius: 50%;
+}
+.site.uni .jr-orcid svg {
+  display: block;
+}
+.site.uni .jr-affs {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .jr-affs li + li {
+  margin-top: 2px;
+}
+.site.uni .jr-abs {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-abs-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+.site.uni .jr-abs-head .jr-h3 {
+  margin: 0;
+}
+.site.uni .jr-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+.site.uni .jr-seg button {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.site.uni .jr-seg button + button {
+  border-left: 1px solid var(--line);
+}
+.site.uni .jr-seg button[aria-pressed="true"] {
+  background: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .jr-prose {
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+}
+.site.uni .jr-prose > :first-child {
+  margin-top: 0;
+}
+.site.uni .jr-prose p,
+.site.uni .jr-prose ul,
+.site.uni .jr-prose ol {
+  margin: 0 0 14px;
+}
+.site.uni .jr-prose ul,
+.site.uni .jr-prose ol {
+  padding-left: 22px;
+}
+.site.uni .jr-prose h2 {
+  margin: 32px 0 12px;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+.site.uni .jr-prose h3 {
+  margin: 24px 0 10px;
+  font-size: 19px;
+  font-weight: 600;
+}
+.site.uni .jr-kw {
+  margin: 16px 0 0;
+  font-size: 16px;
+}
+.site.uni .jr-full,
+.site.uni .jr-refs {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-viewer {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgB);
+  min-height: 320px;
+}
+.site.uni .jr-refs ol {
+  margin: 0;
+  padding-left: 28px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.site.uni .jr-refs li {
+  padding-left: 4px;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-refs li + li {
+  margin-top: 8px;
+}
+.site.uni .jr-refs p {
+  margin: 0;
+}
+.site.uni .jr-art-side {
+  display: grid;
+  gap: 28px;
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+}
+.site.uni .jr-pdf-acts {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.site.uni .jr-pdf-acts .bt {
+  width: 100%;
+}
+.site.uni .jr-dl {
+  margin: 0;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+.site.uni .jr-dl > div {
+  display: grid;
+  grid-template-columns: minmax(110px, 2fr) minmax(0, 3fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .jr-dl dt {
+  color: var(--ink2);
+}
+.site.uni .jr-dl dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-dl.wide {
+  max-width: 640px;
+  margin-top: 32px;
+}
+.site.uni .jr-box {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgB);
+}
+.site.uni .jr-box-t {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.site.uni .jr-cite {
+  margin: 14px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.site.uni .jr-cite-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site.uni .jr-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--blue-fill);
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: var(--on-dark);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.site.uni .jr-btn:hover {
+  background: var(--blue-d);
+}
+.site.uni .jr-btn.ghost {
+  background: var(--bgA);
+  color: var(--blue);
+  border-color: var(--line);
+}
+.site.uni .jr-btn.ghost:hover {
+  border-color: var(--blue);
+}
+.site.uni .jr-license {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- tahrir hay'ati, indekslash */
+.site.uni .jr-people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .jr-person {
+  display: flex;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+.site.uni .jr-person img,
+.site.uni .jr-ini {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.site.uni .jr-ini {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--bgB);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+.site.uni .jr-person-n {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.site.uni .jr-person-pos {
+  margin: 4px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+.site.uni .jr-person-orcid {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+.site.uni .jr-person-orcid .jr-orcid {
+  margin: 0;
+}
+.site.uni .jr-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .jr-index a,
+.site.uni .jr-index li > div {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  height: 100%;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.site.uni .jr-index a:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .jr-index img {
+  max-width: 160px;
+  height: 48px;
+  object-fit: contain;
+  object-position: left center;
+}
+.site.uni .jr-text {
+  max-width: 820px;
+}
+
+/* ---------------------------------------------------------------- qidiruv va forma */
+.site.uni .jr-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgB);
+}
+.site.uni .jr-f {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.site.uni .jr-f.wide,
+.site.uni .jr-err.wide {
+  grid-column: 1 / -1;
+}
+.site.uni .jr-f.end {
+  align-content: end;
+}
+.site.uni .jr-search .jr-f {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+.site.uni .jr-search .jr-f-q {
+  flex: 3 1 340px;
+}
+.site.uni .jr-search .jr-f.end {
+  flex: 0 0 auto;
+}
+.site.uni .jr-search .bt {
+  min-height: 48px;
+}
+.site.uni .jr-found {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin: 0 0 16px;
+  color: var(--ink2);
+}
+.site.uni .jr-f label {
+  font-size: 15px;
+  font-weight: 600;
+}
+.site.uni .jr-f input,
+.site.uni .jr-f select,
+.site.uni .jr-f textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--ink2) 55%, var(--line));
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+}
+.site.uni .jr-f textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+.site.uni .jr-f input[type="file"] {
+  padding: 10px;
+}
+.site.uni .jr-f :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: #b42318;
+}
+.site.uni .jr-err {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #b42318;
+}
+:root[data-theme="dark"] .site.uni .jr-err {
+  color: #ff8a80;
+}
+:root[data-theme="dark"] .site.uni .jr-f :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: #ff8a80;
+}
+.site.uni .jr-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.site.uni .jr-submit-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--jr-gap);
+  align-items: start;
+}
+.site.uni .jr-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 24px 0 0;
+}
+.site.uni .jr-card {
+  position: relative;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+.site.uni .jr-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.site.uni .jr-done {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.site.uni .jr-done p {
+  margin: 0;
+}
+.site.uni .jr-done-t {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green);
+}
+:root[data-theme="dark"] .site.uni .jr-done-t {
+  color: #86c9a8;
+}
+
+/* ---------------------------------------------------------------- «Jurnal haqida»: chapda bo'limlar ro'yxati (yopishqoq), o'ngda bo'limlar */
+.site.uni .jr-about {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+.site.uni .jr-toc {
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+}
+.site.uni .jr-toc .ey {
+  margin-bottom: 12px;
+}
+.site.uni .jr-toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--line);
+}
+.site.uni .jr-toc a {
+  display: block;
+  margin-left: -1px;
+  padding: 8px 0 8px 16px;
+  border-left: 2px solid transparent;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink2);
+  text-decoration: none;
+}
+.site.uni .jr-toc a:hover {
+  color: var(--ink);
+}
+.site.uni .jr-toc a.on {
+  border-left-color: var(--blue);
+  color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .jr-toc a:focus-visible {
+  outline-offset: 0;
+}
+.site.uni .jr-about-main {
+  max-width: 880px;
+}
+.site.uni .jr-asec {
+  scroll-margin-top: calc(var(--nb-h) + 24px);
+}
+.site.uni .jr-asec:focus {
+  outline: none;
+}
+.site.uni .jr-asec + .jr-asec {
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-asec > .jr-h3 {
+  margin-bottom: 20px;
+  font-size: clamp(24px, 2vw, 30px);
+}
+.site.uni .jr-asec .jr-facts {
+  margin-top: 32px;
+}
+.site.uni .jr-asec .jr-group + .jr-group {
+  margin-top: 32px;
+}
+.site.uni .jr-h4 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.site.uni .jr-lic {
+  margin: 0;
+  font-size: 16px;
+}
+.site.uni .jr-lic a {
+  color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .jr-asec .jr-dl.wide {
+  margin-top: 24px;
+}
+
+/* ---------------------------------------------------------------- «Mualliflarga» */
+.site.uni .jr-guide {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 64px;
+  align-items: start;
+}
+.site.uni .jr-guide > .jr-text {
+  grid-column: 1;
+  grid-row: 1;
+}
+.site.uni .jr-guide-side {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+  display: grid;
+  gap: 28px;
+  justify-items: stretch;
+}
+.site.uni .jr-guide-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-guide-links li {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .jr-guide-links a {
+  display: block;
+  padding: 14px 0;
+  color: var(--blue);
+  font-weight: 500;
+  text-decoration: none;
+}
+.site.uni .jr-guide-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site.uni .jr-art-end {
+  margin: 48px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .jr-two .jr-text .tlink {
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------- moslashuvchan */
+@media (max-width: 1100px) {
+  .site.uni .jr-ph-in.has-aside,
+  .site.uni .jr-cur,
+  .site.uni .jr-two,
+  .site.uni .jr-art-grid,
+  .site.uni .jr-submit-grid,
+  .site.uni .jr-issue-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .site.uni .jr-art-side {
+    position: static;
+  }
+}
+@media (max-width: 900px) {
+  /* bo'limlar ro'yxati — sahifa boshida qisqa «Bo'limlar» ro'yxati */
+  .site.uni .jr-about,
+  .site.uni .jr-guide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .site.uni .jr-toc {
+    position: static;
+    padding: 16px 0 8px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .site.uni .jr-toc ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 20px;
+    border-left: 0;
+  }
+  .site.uni .jr-toc a {
+    margin: 0;
+    padding: 10px 0;
+    border-left: 0;
+  }
+  .site.uni .jr-toc a.on {
+    font-weight: 500;
+    color: var(--ink2);
+  }
+  .site.uni .jr-guide > .jr-text,
+  .site.uni .jr-guide-side {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+  }
+}
+@media (max-width: 760px) {
+  .site.uni .jr {
+    --jr-gap: 32px;
+  }
+  .site.uni .jr-tabs ul {
+    gap: 24px;
+  }
+  .site.uni .jr-tabs a {
+    min-height: 48px;
+    font-size: 15px;
+  }
+  .site.uni .jr-sec {
+    padding: 44px 0;
+  }
+  .site.uni .jr-search {
+    padding: 18px;
+  }
+  .site.uni .jr-search .jr-f,
+  .site.uni .jr-search .jr-f.end {
+    flex: 1 1 100%;
+  }
+  .site.uni .jr-search .bt {
+    width: 100%;
+  }
+  .site.uni .jr-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .jr-form {
+    padding: 0;
+  }
+  .site.uni .jr-card {
+    padding: 20px;
+  }
+  .site.uni .jr-people {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .jr-facts > div,
+  .site.uni .jr-dl > div {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+  .site.uni .jr-item-t {
+    font-size: 18px;
+  }
+}

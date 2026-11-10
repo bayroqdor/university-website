@@ -1,0 +1,3330 @@
+/* ================================================================ Asosiy dizayn tizimi
+   Ranglar: ko'k #0A2E73 · fon #F6F4EF / #EDEAE3 · matn #121418 / #5A5F6B · chiziq #DAD6CC · oltin #B08D3C (juda kam) · yashil #1E4A38
+   Shrift: faqat Onest. Radius 2px. Gradient, soya (ochiluvchi menyudan tashqari), blur yo'q. 12 ustunli to'r. */
+
+.site.uni {
+  --blue: #0a2e73;
+  --blue-fill: #0a2e73;
+  --blue-d: #071f50;
+  /* kunduzgi rejim: oq fon */
+  --bgA: #ffffff;
+  --bgB: #f3f5f8;
+  --ink: #121418;
+  --ink2: #565c69;
+  --line: #e1e4ea;
+  --gold: #b08d3c;
+  --green: #1e4a38;
+  --on-dark: #f6f4ef;
+  --on-dark2: rgba(246, 244, 239, 0.74);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gap: 24px;
+  --pad: 40px;
+  --sec: 160px;
+  --nb-h: 84px;
+  --font: "Onest Variable", "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* eski sahifalar o'zgaruvchilari — bir tizimga */
+  --bg: var(--bgA);
+  --bg-2: var(--bgB);
+  --surface: var(--bgA);
+  --surface-2: var(--bgB);
+  --ink-2: var(--ink);
+  --muted: var(--ink2);
+  --line-2: var(--line);
+  --accent: var(--blue);
+  --accent2: var(--green);
+  --accent-ink: var(--on-dark);
+  --accent-soft: var(--bgB);
+  --accent2-soft: var(--bgB);
+  --accent-deep: var(--blue-d);
+  --band: var(--blue);
+  --font-sans: var(--font);
+  --font-head: var(--font);
+  --font-serif: var(--font);
+  --font-mono: var(--font);
+  --radius: 2px;
+  --radius-sm: 2px;
+  --shadow: none;
+  --shadow-lg: none;
+  --header-h: var(--nb-h);
+  --nav-h: var(--nb-h);
+  --topbar-h: 0px;
+
+  background: var(--bgA);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  font-feature-settings: "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html:has(.site.uni),
+html:has(.site.uni) body {
+  background: #ffffff;
+}
+/* ---------------------------------------------------------------- tungi rejim
+   Fon — to'q ko'k-qora, matn — och; ko'k rang matnda och ko'k (o'qilishi uchun), fon sifatida esa to'qroq ko'k (oq matn bilan). */
+:root[data-theme="dark"] .site.uni {
+  --blue: #8fb2f5;
+  --blue-fill: #1d4aa3;
+  --blue-d: #163b85;
+  --bgA: #0b111d;
+  --bgB: #121a2a;
+  --ink: #e8ecf3;
+  --ink2: #a5afc1;
+  --line: #243049;
+  --gold: #d2b166;
+  --green: #17392c;
+  --on-dark: #f3f5f9;
+  --on-dark2: rgba(243, 245, 249, 0.74);
+  /* eski komponentlar: och ko'k fon ustida to'q matn, yashil yorliqlar o'qiladigan */
+  --accent-ink: #0b1530;
+  --accent2: #86c9a8;
+  color-scheme: dark;
+}
+:root[data-theme="dark"]:has(.site.uni),
+:root[data-theme="dark"]:has(.site.uni) body {
+  background: #0b111d;
+}
+:root[data-theme="dark"] .site.uni img:not(.br-logo):not([src$=".svg"]) {
+  filter: brightness(0.92);
+}
+.site.uni * {
+  font-family: inherit;
+}
+.site.uni :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font);
+  text-transform: none;
+}
+.site.uni .tnum,
+.site.uni time {
+  font-variant-numeric: tabular-nums;
+}
+.site.uni ::selection {
+  background: var(--blue-fill);
+  color: var(--on-dark);
+}
+
+/* soya, gradient, blur, radius — butun saytda bir qoida */
+.site.uni *,
+.site.uni *::before,
+.site.uni *::after {
+  box-shadow: none;
+  text-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.site.uni main *:not(img):not(video):not(iframe):not(.ph),
+.site.uni main *::before,
+.site.uni main *::after {
+  border-radius: 2px;
+  background-image: none;
+}
+
+/* ichki sahifalar: sarlavhalar bir xil vaznda */
+.site.uni main h1:not(.display) {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.site.uni main :is(h2, h3):not(.h2, .h3) {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* fokus — klaviatura uchun aniq */
+.site.uni :focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+.site.uni :is(.ub, .sec-g, .ft) :focus-visible {
+  outline-color: var(--on-dark);
+}
+.site.uni .skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--blue-fill);
+  color: var(--on-dark);
+  font-size: 15px;
+  font-weight: 600;
+}
+.site.uni .skip:focus {
+  top: 12px;
+}
+.site.uni main:focus {
+  outline: none;
+}
+.site.uni .boot {
+  min-height: 70vh;
+}
+
+/* ---------------------------------------------------------------- to'r va tipografiya */
+.site.uni .wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.site.uni .ey {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .display {
+  margin: 0;
+  font-size: clamp(56px, 5.6vw, 104px);
+  line-height: 0.98;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+  hyphens: manual;
+}
+.site.uni .h2 {
+  margin: 0;
+  font-size: clamp(36px, 3.3vw, 56px);
+  line-height: 1.06;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.site.uni .h3 {
+  margin: 0;
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.site.uni .body,
+.site.uni .hd-lead {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 65ch;
+  color: var(--ink2);
+}
+.site.uni .meta {
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+/* havolalar va tugmalar */
+.site.uni .tlink {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 5px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  color: var(--blue);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.site.uni .tlink:hover {
+  border-bottom-color: currentColor;
+}
+.site.uni .tlink span[aria-hidden] {
+  transition: transform 0.3s var(--ease-out);
+}
+.site.uni .tlink:hover span[aria-hidden] {
+  transform: translateX(3px);
+}
+.site.uni .bt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.site.uni .bt-blue {
+  background: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .bt-blue:hover {
+  background: var(--blue-d);
+}
+.site.uni .bt-light {
+  background: var(--on-dark);
+  color: var(--green);
+}
+.site.uni .bt-light:hover {
+  background: var(--bgB);
+}
+
+/* ko'rinish animatsiyasi — faqat sarlavha va asosiy bloklar */
+.site.uni .rv {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+.site.uni .rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* surat */
+.site.uni .ph {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--bgB);
+}
+.site.uni .ph img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+.site.uni a:hover .ph.zoom img,
+.site.uni a:focus-visible .ph.zoom img {
+  transform: scale(1.03);
+}
+/* surat yo'q bo'lsa o'rniga hech narsa chizilmaydi (soxta illyustratsiya, kulrang o'rinbosar yo'q) —
+   bloklar rasm ustunisiz, matnli bo'lib qoladi */
+.site.uni .hx-grid:not(:has(.hx-media)) .hx-copy,
+.site.uni .green:not(:has(.green-media)) .green-copy {
+  grid-column: 1 / span 8;
+}
+.site.uni .nw-sm:not(:has(.ph)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.site.uni .post-card-wrap.featured .post-card:not(:has(.post-media)) {
+  display: flex;
+}
+.site.uni :is(.profile-grid:not(:has(.profile-photo)), .dean-card:not(:has(.dean-photo))) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.site.uni .project-meta .project-num {
+  position: static;
+}
+.site.uni .sy-detail.solo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ---------------------------------------------------------------- 1. xizmat qatori */
+.site.uni .hdr {
+  position: relative;
+  z-index: 60;
+}
+.site.uni .ub {
+  background: var(--blue-fill);
+  color: var(--on-dark);
+  font-size: 13px;
+}
+.site.uni .ub-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 40px;
+}
+.site.uni .ub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+.site.uni .ub-link {
+  color: var(--on-dark2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site.uni .ub-link:hover {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site.uni .lx {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+.site.uni .lx-i {
+  display: inline-flex;
+  align-items: center;
+}
+.site.uni .lx-sep {
+  padding: 0 4px;
+  opacity: 0.45;
+}
+.site.uni .lx button {
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0.84;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.site.uni .lx button:hover {
+  opacity: 1;
+}
+.site.uni .lx button.on {
+  opacity: 1;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+
+/* ---------------------------------------------------------------- 2. asosiy menyu */
+.site.uni .nb {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--bgA);
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .hdr {
+  display: contents;
+}
+.site.uni .nb-in {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: var(--nb-h);
+}
+.site.uni .br {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: none;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .br-mark {
+  padding-right: 16px;
+  border-right: 1px solid var(--line);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--blue);
+}
+.site.uni .br-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.site.uni .br-name {
+  max-width: 236px;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--ink);
+}
+.site.uni .nb-nav {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+.site.uni .nb-nav ul {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .nb-item {
+  position: relative;
+  display: flex;
+}
+.site.uni .nb-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.site.uni .nb-link::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 2px;
+  background: transparent;
+  transition: background-color 0.2s;
+}
+.site.uni .nb-item:hover > .nb-link,
+.site.uni .nb-link:focus-visible {
+  color: var(--blue);
+}
+.site.uni .nb-item:hover > .nb-link::after {
+  background: var(--line);
+}
+.site.uni .nb-link.on::after,
+.site.uni .nb-item:hover > .nb-link.on::after {
+  background: var(--gold);
+}
+.site.uni .nb-cta {
+  flex: none;
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+
+/* ochiluvchi panel: ikki ustun, juda yengil soya */
+.site.uni .dd {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 70;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 40px;
+  min-width: 300px;
+  padding: 28px 32px 30px;
+  background: var(--bgA);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  box-shadow: 0 18px 40px -24px rgba(18, 20, 24, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition:
+    opacity 0.18s,
+    transform 0.18s,
+    visibility 0s 0.18s;
+}
+.site.uni .nb-item:nth-last-child(-n + 3) .dd {
+  left: auto;
+  right: 0;
+}
+.site.uni .nb-item:hover .dd,
+.site.uni .nb-item:focus-within .dd {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.18s,
+    transform 0.18s,
+    visibility 0s;
+}
+.site.uni .nb-item.shut .dd {
+  opacity: 0;
+  visibility: hidden;
+}
+.site.uni .dd-col {
+  display: flex;
+  flex-direction: column;
+}
+.site.uni .dd-head {
+  margin-bottom: 12px;
+}
+.site.uni .dd-link {
+  display: block;
+  padding: 7px 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site.uni .dd-link:hover,
+.site.uni .dd-link.on {
+  color: var(--blue);
+}
+.site.uni .dd-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* mobil menyu */
+.site.uni .nb-burger {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  margin-left: auto;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.site.uni .nb-burger:hover {
+  border-color: var(--ink);
+}
+.site.uni .nb-burger-ic {
+  position: relative;
+  width: 18px;
+  height: 10px;
+}
+.site.uni .nb-burger-ic i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.25s, top 0.25s;
+}
+.site.uni .nb-burger-ic i:first-child {
+  top: 0;
+}
+.site.uni .nb-burger-ic i:last-child {
+  top: 8.5px;
+}
+.site.uni .nb-burger-ic.x i:first-child {
+  top: 4.25px;
+  transform: rotate(45deg);
+}
+.site.uni .nb-burger-ic.x i:last-child {
+  top: 4.25px;
+  transform: rotate(-45deg);
+}
+.site.uni .mm {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: calc(100dvh - var(--nb-h));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--bgA);
+  border-top: 1px solid var(--line);
+}
+.site.uni .mm[hidden] {
+  display: none;
+}
+.site.uni .mm-in {
+  padding-top: 8px;
+  padding-bottom: 48px;
+}
+.site.uni .mm-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .mm-item {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .mm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 60px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.site.uni .mm-sign {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink2);
+}
+.site.uni .mm-sub {
+  display: grid;
+  padding: 0 0 18px;
+}
+.site.uni .mm-sub .dd-link {
+  padding: 9px 0;
+  font-size: 16px;
+}
+.site.uni .mm-util {
+  display: grid;
+  gap: 4px;
+  margin-top: 28px;
+}
+.site.uni .mm-util a {
+  padding: 6px 0;
+  font-size: 15px;
+  color: var(--ink2);
+  text-decoration: none;
+}
+.site.uni .mm-cta {
+  width: 100%;
+  margin-top: 28px;
+}
+.site.uni .mm-lang {
+  margin-top: 24px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- 3. hero */
+.site.uni .hx {
+  padding: 72px 0 0;
+  overflow: clip;
+}
+.site.uni .hx-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  align-items: start;
+}
+.site.uni .hx-copy {
+  grid-column: 1 / span 5;
+  padding: 0 0 72px;
+}
+.site.uni .hx-copy .ey {
+  margin-bottom: 28px;
+}
+.site.uni .hx-lead {
+  max-width: 34ch;
+  margin: 32px 0 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .hx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 32px;
+  margin-top: 44px;
+}
+.site.uni .hx-media {
+  grid-column: 6 / span 7;
+  align-self: stretch;
+  display: flex;
+  margin-right: calc(-1 * var(--pad));
+}
+.site.uni .hx-media .ph {
+  flex: 1;
+  min-height: 560px;
+  aspect-ratio: auto !important;
+}
+/* bir nechta surat: yangisi o'ngdan surilib kiradi, eskisi chapga chiqib ketadi (orqaga bosilsa — teskarisi) */
+.site.uni .hx-media:has(.hx-slides) {
+  position: relative;
+}
+.site.uni .hx-slides img {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  transition: none;
+}
+.site.uni .hx-slides img.on,
+.site.uni .hx-slides.moving img.was {
+  visibility: visible;
+}
+.site.uni .hx-slides.moving img.on {
+  animation: hx-slide-in 1.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+.site.uni .hx-slides.moving img.was {
+  animation: hx-slide-out 1.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+.site.uni .hx-slides.back img.on {
+  animation-name: hx-slide-in-back;
+}
+.site.uni .hx-slides.back img.was {
+  animation-name: hx-slide-out-back;
+}
+@keyframes hx-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes hx-slide-out {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes hx-slide-in-back {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes hx-slide-out-back {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+/* holat chiziqlari: 2px, tekis; bosish maydoni kattaroq */
+.site.uni .hx-dots {
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px 2px 2px;
+  /* suratning yorug' joyida ham chiziqlar va tugma ko'rinsin: tekis yarim shaffof fon */
+  background: rgba(7, 31, 80, 0.62);
+  border-radius: 2px;
+}
+.site.uni .hx-dots button {
+  width: 32px;
+  height: 28px;
+  padding: 13px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.site.uni .hx-dots .hx-pause {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #fff;
+}
+.site.uni .hx-dots .hx-pause::before {
+  content: none;
+}
+.site.uni .hx-dots .hx-pause:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.site.uni .hx-dots button::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.site.uni .hx-dots button[aria-current]::before,
+.site.uni .hx-dots button:hover::before {
+  opacity: 1;
+}
+.site.uni .hx-dots button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+@media (min-width: 1441px) {
+  .site.uni .hx-media {
+    margin-right: calc((1440px - 100vw) / 2 - var(--pad));
+  }
+}
+
+/* ---------------------------------------------------------------- 4. raqamlar */
+.site.uni .nums {
+  padding: 0 0 128px;
+}
+.site.uni .nums-row {
+  /* raqam o'lchami qator kengligiga bog'liq (hamma katakda bir xil): «10 000+» hech qachon qo'shni katakka chiqmaydi */
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .num {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+  padding: 4px 28px 0;
+  border-left: 1px solid var(--line);
+}
+.site.uni .num:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.site.uni .num-val {
+  display: flex;
+  white-space: nowrap;
+  align-items: flex-end;
+  min-height: 1.1em;
+  max-width: 100%;
+  margin: 0;
+  font-size: clamp(30px, 4.6vw, 80px);
+  font-size: min(80px, 4.5cqi);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--blue);
+}
+.site.uni .num-suf {
+  margin-left: 2px;
+}
+.site.uni .num-ph {
+  min-height: calc(1.1 * clamp(48px, 4.6vw, 80px));
+  padding-bottom: 0.12em;
+  font-size: clamp(28px, 2.4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink2);
+  font-weight: 500;
+}
+.site.uni .num-label {
+  margin: 0;
+  max-width: 22ch;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- bo'limlar */
+.site.uni .sec {
+  padding: var(--sec) 0;
+}
+.site.uni .sec-tight {
+  padding: 96px 0;
+}
+.site.uni .sec-a {
+  background: var(--bgA);
+}
+.site.uni .sec-b {
+  background: var(--bgB);
+}
+.site.uni .sec-g {
+  background: var(--green);
+  color: var(--on-dark);
+}
+.site.uni .sec-a + .sec-a {
+  border-top: 1px solid var(--line);
+}
+
+/* bo'lim boshi */
+.site.uni .hd {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  align-items: end;
+  margin-bottom: 80px;
+}
+.site.uni .hd-ey {
+  grid-column: 1 / span 3;
+  align-self: start;
+  padding-top: 0.9em;
+}
+.site.uni .hd-main {
+  grid-column: 4 / span 7;
+}
+.site.uni .hd-lead {
+  margin: 24px 0 0;
+  max-width: 56ch;
+}
+.site.uni .hd-more {
+  grid-column: 11 / span 2;
+  justify-self: end;
+  white-space: nowrap;
+}
+.site.uni .sec-g .ey,
+.site.uni .sec-g .hd-lead {
+  color: var(--on-dark2);
+}
+
+/* ---------------------------------------------------------------- 5. ta'lim */
+.site.uni .edu {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+}
+.site.uni .edu-col {
+  grid-column: span 3;
+  padding-top: 28px;
+  border-top: 1px solid var(--ink);
+}
+.site.uni .edu-col:first-child {
+  grid-column: 4 / span 3;
+}
+.site.uni .h3-link {
+  color: inherit;
+  text-decoration: none;
+}
+.site.uni .h3-link:hover {
+  color: var(--blue);
+}
+.site.uni .edu-desc {
+  min-height: 3.2em;
+  margin: 14px 0 28px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .edu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .edu-prog {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .edu-prog span {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+.site.uni .edu-prog:hover span {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.site.uni .kaf {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin-top: 112px;
+}
+.site.uni .kaf-h {
+  grid-column: 1 / span 3;
+  padding-top: 26px;
+}
+.site.uni .kaf-list {
+  grid-column: 4 / span 9;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: kaf;
+}
+.site.uni .kaf-list li {
+  counter-increment: kaf;
+}
+.site.uni .kaf-link {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 5fr) minmax(0, 4fr);
+  gap: 0 var(--gap);
+  align-items: baseline;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .kaf-list li:last-child .kaf-link {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .kaf-link::before {
+  content: counter(kaf, decimal-leading-zero);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink2);
+}
+.site.uni .kaf-name {
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.site.uni .kaf-sum {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .kaf-link:hover .kaf-name {
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- 6. 1+1 */
+.site.uni .jt-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  align-items: start;
+}
+.site.uni .jt-num {
+  grid-column: 1 / span 3;
+  margin-top: -0.06em;
+  font-size: clamp(96px, 11vw, 176px);
+  line-height: 0.8;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-dark);
+}
+.site.uni .jt-head .ey {
+  margin-bottom: 20px;
+}
+.site.uni .tl {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .tl-step {
+  position: relative;
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  padding-top: 36px;
+  border-top: 1px solid rgba(246, 244, 239, 0.4);
+}
+.site.uni .tl-step:first-child {
+  grid-column: 4 / span 3;
+}
+.site.uni .tl-pt {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  background: var(--on-dark);
+}
+.site.uni .tl-end .tl-pt {
+  background: var(--gold);
+}
+.site.uni .tl-k {
+  order: -1;
+  position: absolute;
+  top: -34px;
+  left: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-dark2);
+}
+.site.uni .tl-place {
+  font-size: clamp(30px, 2.6vw, 44px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.site.uni .tl-text {
+  max-width: 30ch;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--on-dark2);
+}
+.site.uni .tl-step:not(.tl-end)::after {
+  content: "→";
+  position: absolute;
+  top: -15px;
+  right: 0;
+  padding-left: 8px;
+  background: var(--green);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--on-dark2);
+}
+.site.uni .sec-g .tl {
+  margin-top: 112px;
+}
+.site.uni .joint-cta {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin-top: 80px;
+}
+.site.uni .joint-cta .bt {
+  grid-column: 4 / span 4;
+  justify-self: start;
+}
+
+/* ---------------------------------------------------------------- 7. yashil institut */
+.site.uni .green {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  align-items: start;
+}
+.site.uni .green-media {
+  grid-column: 1 / span 7;
+}
+.site.uni .green-media .ph {
+  aspect-ratio: 7 / 6 !important;
+}
+.site.uni .green-copy {
+  grid-column: 9 / span 4;
+}
+.site.uni .green-copy .h2 {
+  margin-top: 20px;
+  font-size: clamp(32px, 2.6vw, 44px);
+}
+.site.uni .green-copy .body {
+  margin: 24px 0 0;
+}
+.site.uni .green-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 32px;
+}
+.site.uni .sdg {
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .sdg li {
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.45;
+}
+.site.uni .sdg li a {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.site.uni .sdg li a:hover,
+.site.uni .sdg li a:focus-visible {
+  color: var(--blue);
+}
+.site.uni .sdg li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .sdg-n {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- 8. yangiliklar */
+.site.uni .news {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+}
+.site.uni .nw {
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .nw-lead {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+}
+.site.uni .nw-lead .meta {
+  margin-top: 24px;
+}
+.site.uni .nw-title-lg {
+  max-width: 24ch;
+  margin: 10px 0 0;
+  font-size: clamp(26px, 2.2vw, 34px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.site.uni .nw-ex {
+  max-width: 58ch;
+  margin: 14px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .news-side {
+  grid-column: 9 / span 4;
+  display: flex;
+  flex-direction: column;
+}
+.site.uni .nw-sm {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .nw-sm:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.site.uni .nw-sm-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.site.uni .nw-title {
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.site.uni .nw:hover :is(.nw-title, .nw-title-lg) {
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- 9. e'lonlar */
+.site.uni .an-list {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .an-list li {
+  grid-column: 4 / span 9;
+}
+.site.uni .an-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 32px;
+  gap: var(--gap);
+  align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .an-list li:last-child .an-row {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .an-date {
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .an-title {
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.site.uni .an-arrow {
+  justify-self: end;
+  font-size: 18px;
+  color: var(--ink2);
+  transition:
+    transform 0.3s var(--ease-out),
+    color 0.2s;
+}
+.site.uni .an-row:hover .an-title {
+  color: var(--blue);
+}
+.site.uni .an-row:hover .an-arrow {
+  color: var(--blue);
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------------- 10. kampus */
+.site.uni .campus {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 56px var(--gap);
+}
+.site.uni .cp {
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .cp-auditorium {
+  grid-column: 1 / span 8;
+}
+.site.uni .cp-library {
+  grid-column: 9 / span 4;
+}
+.site.uni .cp-dormitory {
+  grid-column: 1 / span 4;
+}
+.site.uni .cp-student_life {
+  grid-column: 5 / span 8;
+}
+.site.uni .cp-auditorium .ph,
+.site.uni .cp-student_life .ph {
+  aspect-ratio: 16 / 10 !important;
+}
+.site.uni .cp-library .ph,
+.site.uni .cp-dormitory .ph {
+  aspect-ratio: 7 / 9 !important;
+}
+.site.uni .cp-cap {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink2);
+}
+.site.uni .cp:hover .cp-cap {
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- 11. o'qituvchilar */
+.site.uni .people {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .pp {
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .pp .ph {
+  aspect-ratio: 4 / 5 !important;
+}
+.site.uni .pp-name {
+  margin-top: 18px;
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.site.uni .pp-pos {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+.site.uni .pp-deg {
+  margin-top: 2px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink2);
+}
+.site.uni .pp:hover .pp-name {
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- 12. foydali havolalar */
+.site.uni .links {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 var(--gap);
+}
+.site.uni .links-head {
+  grid-column: 1 / span 3;
+  padding-top: 14px;
+}
+.site.uni .links-list {
+  grid-column: 4 / span 9;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .lk {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .lk-t {
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.site.uni .lk:hover .lk-t {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* ---------------------------------------------------------------- 13. pastki qism */
+.site.uni .ft {
+  padding: 112px 0 40px;
+  background: var(--green);
+  color: var(--on-dark);
+  font-size: 15px;
+}
+.site.uni .ft-top {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 40px var(--gap);
+}
+.site.uni .ft-brand {
+  grid-column: 1 / span 4;
+}
+.site.uni .ft-abbr {
+  display: block;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.site.uni .ft-name {
+  max-width: 28ch;
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--on-dark2);
+}
+/* ixcham obuna: ko'k-yashil fonda ingichka chiziqli maydon va tugma */
+.site.uni .ft-sub {
+  max-width: 380px;
+  margin-top: 32px;
+}
+.site.uni .ft-sub .ft-h {
+  display: block;
+}
+.site.uni .ft-sub-f {
+  display: flex;
+  border: 1px solid rgba(246, 244, 239, 0.35);
+  border-radius: 2px;
+  transition: border-color 0.2s;
+}
+.site.uni .ft-sub-f:focus-within {
+  border-color: var(--on-dark);
+}
+.site.uni .ft-sub-f input[type="email"] {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--on-dark);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+}
+.site.uni .ft-sub-f input::placeholder {
+  color: var(--on-dark2);
+}
+.site.uni .ft-sub-f button {
+  flex: none;
+  height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-left: 1px solid rgba(246, 244, 239, 0.35);
+  border-radius: 0;
+  background: var(--on-dark);
+  color: var(--green);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.site.uni .ft-sub-f button:hover,
+.site.uni .ft-sub-f button:focus-visible {
+  background: #ffffff;
+}
+.site.uni .ft-sub-f button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.site.uni .ft-sub-done,
+.site.uni .ft-sub-err {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--on-dark);
+}
+.site.uni .ft-sub-err {
+  color: #f3c9a8;
+}
+.site.uni .ft-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  grid-column: span 3;
+}
+.site.uni .ft-col:nth-child(2) {
+  grid-column: 5 / span 3;
+}
+.site.uni .ft-col:nth-child(3) {
+  grid-column: 8 / span 3;
+}
+.site.uni .ft-col:last-child {
+  grid-column: 11 / span 2;
+}
+.site.uni .ft-h {
+  margin-bottom: 8px;
+  color: var(--on-dark2);
+}
+.site.uni .ft-addr {
+  max-width: 26ch;
+  font-style: normal;
+  line-height: 1.5;
+}
+.site.uni .ft-link {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(246, 244, 239, 0.35);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s;
+}
+.site.uni .ft-link:hover {
+  text-decoration-color: var(--on-dark);
+}
+.site.uni .ft-ph,
+.site.uni .ft-muted {
+  color: var(--on-dark2);
+}
+.site.uni .ft-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  margin-top: 80px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(246, 244, 239, 0.2);
+}
+.site.uni .ft-navlink {
+  color: var(--on-dark);
+  font-weight: 500;
+  text-decoration: none;
+}
+.site.uni .ft-navlink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site.uni .ft-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--on-dark2);
+}
+.site.uni .ft-bottom .ft-link {
+  color: var(--on-dark2);
+}
+/* eng pastki o'ng burchak: muallif */
+.site.uni .ft-made {
+  margin-left: auto;
+}
+.site.uni .ft-made a {
+  color: var(--on-dark);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site.uni .ft-made a:hover,
+.site.uni .ft-made a:focus-visible {
+  color: #fff;
+}
+
+/* ================================================================ moslashuv */
+@media (max-width: 1280px) {
+  .site.uni .nb-link {
+    padding: 0 11px;
+  }
+  .site.uni .nb-link::after {
+    left: 11px;
+    right: 11px;
+  }
+  .site.uni .br-name {
+    max-width: 200px;
+    font-size: 13px;
+  }
+  .site.uni .nb-in {
+    gap: 24px;
+  }
+}
+
+/* planshet: menyu burgerga o'tadi */
+@media (max-width: 1180px) {
+  .site.uni {
+    --pad: 32px;
+    --sec: 128px;
+    --nb-h: 76px;
+  }
+  .site.uni .nb-nav {
+    display: none;
+  }
+  .site.uni .nb-burger {
+    display: inline-flex;
+  }
+  .site.uni .nb-cta {
+    margin-left: auto;
+  }
+  .site.uni .nb-cta + .nb-burger {
+    margin-left: 0;
+  }
+  .site.uni .hx-copy {
+    grid-column: 1 / span 12;
+    padding-bottom: 56px;
+  }
+  .site.uni .display {
+    font-size: clamp(56px, 8vw, 88px);
+    max-width: 14ch;
+  }
+  .site.uni .hx-lead {
+    max-width: 46ch;
+  }
+  .site.uni .hx-media {
+    grid-column: 1 / span 12;
+    margin: 0 calc(-1 * var(--pad));
+  }
+  .site.uni .hx-media .ph {
+    min-height: 0;
+    aspect-ratio: 16 / 10 !important;
+  }
+  .site.uni .jt-num {
+    grid-column: 1 / span 12;
+    margin-bottom: 40px;
+  }
+  .site.uni .jt-head .hd-main {
+    grid-column: 1 / span 10;
+  }
+  .site.uni .hd-ey {
+    grid-column: 1 / span 12;
+    padding: 0 0 18px;
+  }
+  .site.uni .hd-main {
+    grid-column: 1 / span 9;
+  }
+  .site.uni .hd-more {
+    grid-column: 10 / span 3;
+  }
+  .site.uni .edu-col,
+  .site.uni .edu-col:first-child {
+    grid-column: span 4;
+  }
+  .site.uni .kaf-h {
+    grid-column: 1 / span 12;
+    padding: 0 0 18px;
+  }
+  .site.uni .kaf-list {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .tl-step,
+  .site.uni .tl-step:first-child {
+    grid-column: span 4;
+  }
+  .site.uni .joint-cta .bt {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .green-media {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .green-media .ph {
+    aspect-ratio: 16 / 10 !important;
+  }
+  .site.uni .green-copy {
+    grid-column: 1 / span 9;
+    margin-top: 48px;
+  }
+  .site.uni .nw-lead {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .news-side {
+    grid-column: 1 / span 12;
+    margin-top: 48px;
+  }
+  .site.uni .nw-sm:first-child {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .site.uni .an-list li {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .links-head {
+    grid-column: 1 / span 12;
+    padding: 0 0 20px;
+  }
+  .site.uni .links-list {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .people {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px var(--gap);
+  }
+  .site.uni .ft-brand {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .ft-col,
+  .site.uni .ft-col:nth-child(2),
+  .site.uni .ft-col:nth-child(3),
+  .site.uni .ft-col:last-child {
+    grid-column: span 4;
+  }
+}
+
+/* telefon: alohida kompozitsiya */
+@media (max-width: 760px) {
+  .site.uni {
+    --pad: 20px;
+    --gap: 16px;
+    --sec: 96px;
+    --nb-h: 68px;
+    font-size: 16px;
+  }
+  .site.uni .ub-links {
+    display: none;
+  }
+  .site.uni .ub-in {
+    justify-content: flex-end;
+    min-height: 36px;
+  }
+  .site.uni .br-mark {
+    font-size: 21px;
+    padding-right: 12px;
+  }
+  .site.uni .br {
+    gap: 12px;
+    min-width: 0;
+  }
+  .site.uni .br-name {
+    max-width: 150px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .site.uni .nb-in {
+    gap: 12px;
+  }
+  .site.uni .nb-cta {
+    display: none;
+  }
+  .site.uni .nb-burger {
+    margin-left: auto;
+    padding: 0 12px;
+  }
+  .site.uni .nb-burger > span:first-child {
+    font-size: 14px;
+  }
+  .site.uni .hx {
+    padding-top: 40px;
+  }
+  .site.uni .hx-copy {
+    padding: 0 0 40px;
+  }
+  .site.uni .hx-copy .ey {
+    margin-bottom: 20px;
+  }
+  .site.uni .display {
+    font-size: clamp(40px, 11.4vw, 60px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .site.uni .hx-lead {
+    margin-top: 22px;
+    font-size: 17px;
+  }
+  .site.uni .hx-actions {
+    margin-top: 32px;
+    gap: 20px 24px;
+  }
+  .site.uni .hx-actions .bt {
+    width: 100%;
+  }
+  .site.uni .hx-media .ph {
+    aspect-ratio: 4 / 3.4 !important;
+  }
+  .site.uni .nums {
+    padding-bottom: 88px;
+  }
+  .site.uni .nums-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: 0;
+    border-top: 0;
+  }
+  .site.uni .num,
+  .site.uni .num:first-child {
+    padding: 24px 16px 24px 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .site.uni .num:nth-child(2n) {
+    padding-left: 16px;
+    padding-right: 0;
+    border-left: 1px solid var(--line);
+  }
+  .site.uni .num-val {
+    font-size: 38px;
+    white-space: nowrap;
+  }
+  .site.uni .num-ph {
+    min-height: 42px;
+    font-size: 24px;
+  }
+  .site.uni .h2 {
+    font-size: clamp(30px, 8.4vw, 38px);
+    line-height: 1.08;
+  }
+  .site.uni .hd {
+    margin-bottom: 48px;
+  }
+  .site.uni .hd-main {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .hd-more {
+    grid-column: 1 / span 12;
+    justify-self: start;
+    margin-top: 24px;
+  }
+  .site.uni .edu {
+    gap: 48px 0;
+  }
+  .site.uni .edu-col,
+  .site.uni .edu-col:first-child {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .edu-desc {
+    min-height: 0;
+  }
+  .site.uni .kaf {
+    margin-top: 72px;
+  }
+  .site.uni .kaf-link {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 6px 12px;
+  }
+  .site.uni .kaf-sum {
+    grid-column: 2;
+  }
+  .site.uni .kaf-name {
+    font-size: 19px;
+  }
+  .site.uni .sec-g .tl {
+    margin-top: 72px;
+  }
+  .site.uni .tl {
+    gap: 0;
+  }
+  .site.uni .tl-step,
+  .site.uni .tl-step:first-child {
+    grid-column: 1 / span 12;
+    padding: 0 0 40px 32px;
+    border-top: 0;
+    border-left: 1px solid rgba(246, 244, 239, 0.4);
+  }
+  .site.uni .tl-step.tl-end {
+    padding-bottom: 0;
+    border-left-color: transparent;
+  }
+  .site.uni .tl-pt {
+    top: 0;
+    left: -5px;
+  }
+  .site.uni .tl-k {
+    position: static;
+    margin: -4px 0 10px;
+  }
+  .site.uni .tl-step:not(.tl-end)::after {
+    display: none;
+  }
+  .site.uni .tl-place {
+    font-size: 30px;
+  }
+  .site.uni .joint-cta {
+    margin-top: 48px;
+  }
+  .site.uni .joint-cta .bt {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  .site.uni .green-media {
+    margin: 0 calc(-1 * var(--pad));
+  }
+  .site.uni .green-copy {
+    grid-column: 1 / span 12;
+    margin-top: 40px;
+  }
+  .site.uni .green-copy .h2 {
+    font-size: clamp(28px, 7.6vw, 34px);
+  }
+  .site.uni .nw-sm {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .site.uni .an-row {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    gap: 6px 12px;
+    padding: 18px 0;
+  }
+  .site.uni .an-date {
+    grid-column: 1 / span 2;
+    font-size: 14px;
+  }
+  .site.uni .an-title {
+    font-size: 17px;
+  }
+  .site.uni .campus {
+    gap: 32px var(--gap);
+  }
+  .site.uni .cp-auditorium,
+  .site.uni .cp-student_life {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .cp-library,
+  .site.uni .cp-dormitory {
+    grid-column: span 6;
+  }
+  .site.uni .cp-dormitory {
+    grid-row: 2;
+  }
+  .site.uni .cp-library .ph,
+  .site.uni .cp-dormitory .ph {
+    aspect-ratio: 4 / 5 !important;
+  }
+  .site.uni .cp-cap {
+    font-size: 14px;
+  }
+  .site.uni .people {
+    display: flex;
+    gap: 16px;
+    margin: 0 calc(-1 * var(--pad));
+    padding: 0 var(--pad) 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--pad);
+    scrollbar-width: none;
+  }
+  .site.uni .people::-webkit-scrollbar {
+    display: none;
+  }
+  .site.uni .people li {
+    flex: 0 0 68%;
+    scroll-snap-align: start;
+  }
+  .site.uni .pp-name {
+    font-size: 17px;
+  }
+  .site.uni .links-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .sec-tight {
+    padding: 72px 0;
+  }
+  .site.uni .ft {
+    padding-top: 72px;
+  }
+  .site.uni .ft-col,
+  .site.uni .ft-col:nth-child(2),
+  .site.uni .ft-col:nth-child(3),
+  .site.uni .ft-col:last-child {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .ft-col:empty {
+    display: none;
+  }
+  .site.uni .jt-head .hd-main {
+    grid-column: 1 / span 12;
+  }
+  .site.uni .jt-num {
+    margin-bottom: 28px;
+  }
+  .site.uni .ft-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site.uni .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .site.uni .ph img {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------- sahifalar ro'yxati (Qabul, Institut haqida…): hover — och fon, ko'k matn
+   (avval fon qatlami sahifa orqasida qolib, oq matn ko'rinmay qolardi) */
+.site.uni .interest {
+  isolation: isolate;
+  padding-inline: 12px;
+}
+.site.uni .interest::before {
+  background: var(--bgB);
+}
+.site.uni .interest:hover .interest-text,
+.site.uni .interest:hover .interest-idx,
+.site.uni .interest-arrow {
+  color: var(--blue);
+  font-style: normal;
+}
+.site.uni .interest:hover .interest-sub {
+  color: var(--ink2);
+}
+.site.uni .interest-text {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- xizmat qatori: davlat ramzlari, kun/tun */
+.site.uni .ub-sym {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: none;
+  padding-right: 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+.site.uni .ub-sym-i {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--on-dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+.site.uni .ub-sym-i:hover span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site.uni .ub-sym-i img {
+  display: block;
+  flex: none;
+}
+.site.uni .ub-sym-i img[src$="flag.svg"] {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+.site.uni .ub-links {
+  margin-right: auto;
+}
+.site.uni .ub-end {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+.site.uni .ub-theme {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: none;
+  color: var(--on-dark);
+  cursor: pointer;
+}
+.site.uni .ub-theme:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.site.uni .mm-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+.site.uni .mm-tools .mm-lang {
+  margin-top: 0;
+}
+.site.uni .mm-theme {
+  width: 40px;
+  height: 40px;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- qidiruv */
+.site.uni .nb-search {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-left: 8px;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.site.uni .nb-search:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+html.ss-lock,
+html.ss-lock body {
+  overflow: hidden;
+}
+.site.uni .ss-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10vh 16px 16px;
+  background: rgba(10, 14, 22, 0.55);
+}
+.site.uni .ss {
+  width: min(720px, 100%);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bgA);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.45);
+}
+.site.uni .ss-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 0 20px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink2);
+}
+.site.uni .ss-field input,
+.site.uni .sr-form input {
+  flex: 1;
+  min-width: 0;
+  height: 64px;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--ink);
+  font: 500 18px/1 var(--font);
+}
+.site.uni .ss-field input::placeholder,
+.site.uni .sr-form input::placeholder {
+  color: var(--ink2);
+}
+.site.uni .ss-x {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  color: var(--ink2);
+  cursor: pointer;
+}
+.site.uni .ss-x:hover {
+  color: var(--ink);
+}
+.site.uni .ss-spin {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--line);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: ss-rot 0.7s linear infinite;
+}
+@keyframes ss-rot {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.site.uni .ss-list {
+  overflow-y: auto;
+  padding: 8px 8px 12px;
+}
+.site.uni .ss-glabel {
+  margin: 10px 12px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .ss-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 12px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .ss-row.cur,
+.site.uni .ss-row:hover {
+  background: var(--bgB);
+}
+.site.uni .ss-row.cur b {
+  color: var(--blue);
+}
+.site.uni .ss-type {
+  justify-self: start;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+.site.uni .ss-type.t-section {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .ss-txt {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.site.uni .ss-txt b {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.site.uni .ss-txt small {
+  color: var(--ink2);
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.site.uni .ss-txt mark {
+  background: color-mix(in srgb, var(--gold) 30%, transparent);
+  color: inherit;
+}
+.site.uni .ss-go {
+  color: var(--ink2);
+}
+.site.uni .ss-none {
+  margin: 0;
+  padding: 22px 12px;
+  color: var(--ink2);
+}
+.site.uni .ss-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 12px 0;
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+.site.uni .sr-page .ey {
+  margin-bottom: 18px;
+}
+.site.uni .sr-form {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 880px;
+  padding: 0 0 0 20px;
+  border: 1px solid var(--line);
+  color: var(--ink2);
+}
+.site.uni .sr-form .bt {
+  align-self: stretch;
+  padding: 0 28px;
+}
+.site.uni .sr-count {
+  margin: 18px 0 8px;
+  color: var(--ink2);
+}
+.site.uni .sr-list {
+  max-width: 880px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .sr-list .ss-row {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------------------------------------------------------------- davlat ramzlari */
+.site.uni .sy-head {
+  max-width: 880px;
+}
+.site.uni .sy-head .h1,
+.site.uni .sy .h1 {
+  margin: 14px 0 18px;
+  font-size: clamp(40px, 4.4vw, 72px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.site.uni .sy-intro {
+  margin: 0;
+  max-width: 65ch;
+  color: var(--ink2);
+  font-size: 18px;
+}
+.site.uni .sy-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 48px 0 40px;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .sy-tabs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  color: var(--ink2);
+  font-weight: 600;
+  text-decoration: none;
+}
+.site.uni .sy-tabs a:hover {
+  color: var(--ink);
+}
+.site.uni .sy-tabs a.on {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+.site.uni .sy-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+.site.uni .sy-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.site.uni .sy-card:hover {
+  border-color: var(--blue);
+}
+.site.uni .sy-card-img {
+  height: 200px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  background: var(--bgB);
+  color: var(--blue);
+}
+.site.uni .sy-card-img img {
+  max-width: 78%;
+  max-height: 160px;
+}
+.site.uni .sy-card-img.flag img {
+  box-shadow: 0 0 0 1px var(--line);
+}
+.site.uni .sy-card b {
+  font-size: 22px;
+  font-weight: 600;
+}
+.site.uni .sy-card small {
+  color: var(--ink2);
+}
+.site.uni .sy-card .tlink {
+  align-self: flex-start;
+  margin-top: 10px;
+}
+.site.uni .sy-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: calc(var(--gap) * 2.5);
+  align-items: start;
+}
+.site.uni .sy-visual {
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+  display: grid;
+  place-items: center;
+  padding: 48px;
+  background: var(--bgB);
+}
+.site.uni .sy-visual img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+}
+.site.uni .sy-visual.flag img {
+  box-shadow: 0 0 0 1px var(--line);
+}
+.site.uni .sy-anthem-art {
+  width: 220px;
+  height: 220px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+.site.uni .sy-anthem-art img {
+  width: 150px;
+  height: 150px;
+}
+.site.uni .sy-text p {
+  margin: 0 0 1.1em;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 68ch;
+}
+.site.uni .sy-text .h2 {
+  margin-bottom: 20px;
+}
+.site.uni .sy-lead {
+  font-size: 19px !important;
+  color: var(--ink2) !important;
+}
+.site.uni .sy-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 0 0 24px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .sy-facts dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .sy-facts dd {
+  margin: 4px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.site.uni .sy-h3 {
+  margin: 36px 0 14px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.site.uni .sy-lyrics p {
+  font-size: 19px;
+  line-height: 1.75;
+}
+.site.uni .sy-lyrics .ch {
+  padding-left: 20px;
+  border-left: 2px solid var(--gold);
+}
+.site.uni .sy-lyrics em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .sy-note,
+.site.uni .sy-src {
+  font-size: 14px !important;
+  color: var(--ink2) !important;
+}
+.site.uni .sy-src {
+  margin: 48px 0 0;
+}
+.site.uni .sy-player {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: 8px 0 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: var(--bgB);
+}
+.site.uni .sy-play {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border: 0;
+  background: var(--blue-fill);
+  color: #fff;
+  cursor: pointer;
+}
+.site.uni .sy-play:hover {
+  background: var(--blue-d);
+}
+.site.uni .sy-track {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  align-items: center;
+}
+.site.uni .sy-track b {
+  grid-column: 1 / -1;
+  font-size: 15px;
+}
+.site.uni .sy-track small {
+  color: var(--ink2);
+  font-variant-numeric: tabular-nums;
+}
+.site.uni .sy-track input[type="range"] {
+  width: 100%;
+  accent-color: var(--blue);
+}
+.site.uni .sy-dl {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.site.uni .sy-dl:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+@media (max-width: 1180px) {
+  .site.uni .ub-links {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .site.uni .sy-detail {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .sy-visual {
+    position: static;
+    padding: 28px;
+  }
+  .site.uni .sy-cards {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .site.uni .ub-in {
+    justify-content: space-between;
+  }
+  .site.uni .ub-sym {
+    gap: 12px;
+    padding-right: 0;
+    border-right: 0;
+  }
+  .site.uni .ub-sym-i span {
+    font-size: 12px;
+  }
+  .site.uni .ub-end .lx {
+    display: none;
+  }
+  .site.uni .nb-search {
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+  }
+  .site.uni .nb-search + .nb-cta + .nb-burger,
+  .site.uni .nb-search ~ .nb-burger {
+    margin-left: 8px;
+  }
+  .site.uni .ss-bg {
+    padding: 0;
+  }
+  .site.uni .ss {
+    max-height: 100vh;
+    height: 100%;
+  }
+  .site.uni .ss-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .site.uni .ss-type {
+    grid-column: 1 / -1;
+  }
+  .site.uni .sr-form .bt {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .site.uni .num-val {
+    font-size: min(56px, 9cqi);
+  }
+}
+
+/* Asosiy tugmalar va faol filtrlar: ikkala rejimda to'q ko'k fon + oq matn (eski uni-theme qoidalari --accent fonini ishlatardi) */
+.site.uni .btn-primary:not(.inverse),
+.site.uni .filter.on,
+.site.uni .faq-cats button.on,
+.site.uni .lb-search-go {
+  background: var(--blue-fill);
+  border-color: var(--blue-fill);
+  color: #fff;
+  box-shadow: none;
+}
+.site.uni .btn-primary:not(.inverse):hover,
+.site.uni .lb-search-go:hover {
+  background: var(--blue-d);
+  color: #fff;
+}
+:root[data-theme="dark"] .site.uni .faculty-idx {
+  color: var(--blue);
+}
+.site.uni .project-num {
+  background: var(--blue-fill);
+  color: #fff;
+  backdrop-filter: none;
+}
+.site.uni .lb-size button.on,
+.site.uni .lb-hero button.on {
+  background: var(--blue-fill);
+  color: #fff;
+}
+/* Karyera sahifasi boshi: tekis to'q ko'k blok (gradientsiz), oq matn */
+.site.uni .careers-hero {
+  background: var(--blue-fill);
+  color: #fff;
+}
+.site.uni .careers-hero :is(.careers-title, h1) {
+  color: #fff;
+}
+.site.uni .careers-hero .btn-primary {
+  background: #fff;
+  border-color: #fff;
+  color: #0a2e73;
+}
+/* «Qanday ishga kiriladi» qadam raqami: gradient o'chirilgani uchun oq raqam ko'rinmay qolardi — tekis ko'k */
+.site.uni .hire-steps li span {
+  background: var(--blue-fill);
+  color: #fff;
+}
+/* Rasmsiz xodim — faqat kichik yuz doirachalarida (bo'lim kartalari): bosh harflar ko'k rangda och fonda */
+.site.uni .avatar-fallback {
+  background: var(--bgB);
+  color: var(--blue);
+}
+/* Tor ekran: qidiruv tugmasi qo'shilgach «Menyu» yozuvi sig'maydi — faqat belgi */
+@media (max-width: 480px) {
+  .site.uni .nb-burger {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+  .site.uni .nb-burger > span:first-child {
+    display: none;
+  }
+}
+/* planshet: qidiruv tugmasi o'ng guruhda (Qabul va Menyu yonida) */
+@media (max-width: 1180px) {
+  .site.uni .nb-search {
+    margin-left: auto;
+  }
+  .site.uni .nb-search + .nb-cta {
+    margin-left: 0;
+  }
+}
+
+/* BRM (SDGs) — yuqori qatorda boshqa havolalardan ajralib turadi: chiziq bilan ajratilgan, 17 rangli halqali oq «tabletka» */
+.site.uni .ub-links {
+  align-items: center;
+}
+.site.uni .ub-sdg {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: 4px;
+  padding: 3px 12px 3px 4px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0a2e73;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s;
+}
+.site.uni .ub-sdg::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  width: 1px;
+  height: 18px;
+  translate: 0 -50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+.site.uni .ub-sdg svg {
+  flex: none;
+  transition: rotate 0.8s var(--ease-out);
+}
+.site.uni .ub-sdg:hover svg,
+.site.uni .ub-sdg:focus-visible svg {
+  rotate: 120deg;
+}
+.site.uni .ub-sdg:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.site.uni .mm-util .ub-sdg {
+  justify-self: start;
+  margin: 10px 0 0;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--bgA);
+  font-size: 13px;
+}
+.site.uni .mm-util .ub-sdg::before {
+  display: none;
+}
+:root[data-theme="dark"] .site.uni .ub-sdg {
+  background: #f3f5f9;
+  color: #0a2e73;
+}
+
+/* ---------------------------------------------------------------- obuna holati / obunani bekor qilish */
+.site.uni .stp {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 40px var(--gap);
+  align-items: end;
+  padding-top: 112px;
+  padding-bottom: 128px;
+}
+.site.uni .stp-t {
+  grid-column: 1 / span 7;
+}
+.site.uni .stp-h {
+  margin: 18px 0 0;
+  font-size: clamp(40px, 4.4vw, 72px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.site.uni .stp-lead {
+  max-width: 54ch;
+  margin: 24px 0 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .stp-lead b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.site.uni .stp-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+.site.uni .stp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid var(--blue-fill);
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: #fff;
+  font: 600 16px var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.site.uni .stp-btn:hover,
+.site.uni .stp-btn:focus-visible {
+  background: var(--blue-d);
+  border-color: var(--blue-d);
+  color: #fff;
+}
+.site.uni .stp-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.site.uni .stp-btn.ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.site.uni .stp-btn.ghost:hover,
+.site.uni .stp-btn.ghost:focus-visible {
+  background: var(--bgB);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.site.uni .stp-box {
+  grid-column: 9 / span 4;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  background: var(--bgB);
+}
+.site.uni .stp-box .ft-sub {
+  max-width: none;
+  margin: 0;
+}
+/* obuna formasi oq/kul fonda */
+.site.uni .ft-sub.light .ft-h {
+  color: var(--ink2);
+}
+.site.uni .ft-sub.light .ft-sub-f {
+  border-color: var(--line);
+  background: var(--bgA);
+}
+.site.uni .ft-sub.light .ft-sub-f:focus-within {
+  border-color: var(--blue);
+}
+.site.uni .ft-sub.light .ft-sub-f input[type="email"] {
+  color: var(--ink);
+}
+.site.uni .ft-sub.light .ft-sub-f input::placeholder {
+  color: var(--ink2);
+}
+.site.uni .ft-sub.light .ft-sub-f button {
+  border-left-color: var(--blue-fill);
+  background: var(--blue-fill);
+  color: #fff;
+}
+.site.uni .ft-sub.light .ft-sub-f button:hover,
+.site.uni .ft-sub.light .ft-sub-f button:focus-visible {
+  background: var(--blue-d);
+}
+.site.uni .ft-sub.light .ft-sub-done {
+  color: var(--ink);
+}
+.site.uni .ft-sub.light .ft-sub-err {
+  color: #b42318;
+}
+@media (max-width: 1100px) {
+  .site.uni .stp-t,
+  .site.uni .stp-box {
+    grid-column: 1 / -1;
+  }
+  .site.uni .stp-box {
+    max-width: 520px;
+  }
+}
+@media (max-width: 760px) {
+  .site.uni .stp {
+    padding-top: 64px;
+    padding-bottom: 80px;
+  }
+  .site.uni .stp-lead {
+    font-size: 17px;
+  }
+  .site.uni .stp-box {
+    padding: 24px 20px;
+  }
+}
+
+/* cookie oynasi: sayt dizayni — 2px, soyasiz, gradientsiz; yuqorida oltin chiziq */
+.site.uni .ck,
+.ck {
+  border-radius: 2px;
+  box-shadow: none;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+}
+.ck::before {
+  display: none;
+}
+.ck-x {
+  border-radius: 2px;
+}
+.ck-ic {
+  border-radius: 2px;
+  background: var(--blue-fill);
+  box-shadow: none;
+}
+.ck-cat {
+  border-radius: 2px;
+}
+.ck-actions .btn {
+  border-radius: 2px;
+  box-shadow: none;
+}
+@media (max-width: 760px) {
+  .ck {
+    border-radius: 2px;
+  }
+}
+/* oyna hech qachon ekrandan oshmaydi (200% matnda ham yopish tugmasi ko'rinadi), doim to'liq noshaffof */
+.site.uni .ck,
+.ck {
+  max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 1;
+  z-index: 97;
+}
+@media (max-width: 520px) {
+  /* telefonda oyna pastki qismni egallaydi: sahifa oxiriga shuncha joy qo'shiladi, chat tugmasi oyna ustiga chiqadi */
+  html:has(.ck) body {
+    padding-bottom: calc(var(--ck-h, 0px) + 16px);
+  }
+  html:has(.ck) .site.uni .cw-fab {
+    bottom: calc(var(--ck-h, 0px) + 16px);
+  }
+}
+
+/* Ikkilamchi (ghost) tugma: hover'da qora qatlam chiqmasin — och fon, ko'k matn va chegara (ikkala rejimda o'qiladi) */
+.site.uni .btn-ghost:not(.inverse)::before {
+  display: none;
+}
+.site.uni .btn-ghost:not(.inverse) {
+  background: var(--bgA);
+  color: var(--ink);
+}
+.site.uni .btn-ghost:not(.inverse):hover,
+.site.uni .btn-ghost:not(.inverse):focus-visible {
+  background: var(--bgB);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- sahifadagi mas'ul xodim kartasi */
+.site.uni .pc-list {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 48px;
+}
+.site.uni .pc {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: 2px;
+  background: var(--bgB);
+}
+.site.uni .pc-photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--bgA);
+}
+.site.uni .pc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.site.uni .pc-body {
+  min-width: 0;
+}
+.site.uni .pc-name {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.site.uni .pc-pos {
+  margin: 8px 0 0;
+  max-width: 60ch;
+  color: var(--ink2);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.site.uni .pc-facts {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+.site.uni .pc-facts li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.site.uni .pc-facts li::before {
+  display: none;
+}
+.site.uni .pc-facts svg {
+  flex: none;
+  color: var(--blue);
+}
+.site.uni .pc-facts a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+}
+.site.uni .pc-facts a:hover {
+  color: var(--blue);
+  text-decoration-color: var(--blue);
+}
+.site.uni .pc-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.site.uni .pc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--blue-fill);
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.site.uni .pc-btn:hover,
+.site.uni .pc-btn:focus-visible {
+  background: var(--blue-d);
+  border-color: var(--blue-d);
+  color: #fff;
+}
+.site.uni .pc-btn.ghost {
+  background: var(--bgA);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.site.uni .pc-btn.ghost:hover,
+.site.uni .pc-btn.ghost:focus-visible {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--bgA);
+}
+@media (max-width: 600px) {
+  .site.uni .pc {
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px;
+  }
+  .site.uni .pc-facts,
+  .site.uni .pc-acts {
+    grid-column: 1 / -1;
+  }
+  .site.uni .pc-body {
+    display: contents;
+  }
+  .site.uni .pc {
+    row-gap: 6px;
+  }
+  .site.uni .pc-photo {
+    grid-row: span 3;
+    align-self: start;
+  }
+  .site.uni .pc-body > .ey,
+  .site.uni .pc-name,
+  .site.uni .pc-pos {
+    grid-column: 2;
+    margin: 0;
+  }
+  .site.uni .pc-name {
+    font-size: 18px;
+  }
+  .site.uni .pc-pos {
+    font-size: 14px;
+  }
+  .site.uni .pc-facts {
+    margin-top: 10px;
+  }
+}
+/* bir nechta mas'ul xodim (masalan, tyutorlar) — ikki ustun, ixchamroq karta */
+.site.uni .pc-list.many {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.site.uni .pc-list.many .pc {
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+}
+.site.uni .pc-list.many .pc-name {
+  font-size: 18px;
+}
+.site.uni .pc-list.many .pc-pos {
+  font-size: 14px;
+}
+.site.uni .pc-list.many .pc-acts {
+  margin-top: 14px;
+}
+@media (max-width: 900px) {
+  .site.uni .pc-list.many {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.site.uni .pc-list.many .pc-body > .ey {
+  display: none;
+}
+.site.uni .pc-list.many .pc-name {
+  margin-top: 0;
+}
+.site.uni .pc-list.many .pc-facts li {
+  font-size: 14px;
+}
+.site.uni .pc-list.many .pc-btn {
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  .site.uni .pc-list.many .pc-photo {
+    grid-row: span 2;
+  }
+  /* rasm balandligi qatorlarga bo'linmasin: lavozim F.I.Sh. ostida turadi */
+  .site.uni .pc-list.many .pc {
+    grid-template-rows: auto 1fr;
+  }
+  .site.uni .pc-list.many .pc-pos {
+    align-self: start;
+  }
+}
+
+/* ---------------------------------------------------------------- murojaat holati va baholash (havola — xat / chatda) */
+.site.uni .stp.rq {
+  align-items: start;
+}
+.site.uni .rq-h {
+  font-size: clamp(30px, 3.4vw, 52px);
+}
+.site.uni .rq-now {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 0;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: var(--bgB);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.site.uni .rq-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink2);
+}
+.site.uni .rq-dot.st-new {
+  background: #3b82f6;
+}
+.site.uni .rq-dot.st-in_progress {
+  background: #f59e0b;
+}
+.site.uni .rq-dot.st-waiting {
+  background: #8b5cf6;
+}
+.site.uni .rq-dot.st-resolved {
+  background: #16a34a;
+}
+.site.uni .rq-dot.st-failed {
+  background: #dc2626;
+}
+.site.uni .rq-sub {
+  margin: 48px 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .rq-rate .rq-sub {
+  margin-top: 0;
+}
+.site.uni .rq-hist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .rq-hist li {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 4px 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .rq-hist time {
+  color: var(--ink2);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.site.uni .rq-hist b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.site.uni .rq-hist p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--ink2);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.site.uni .rq-rate form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.site.uni .rq-stars {
+  display: flex;
+  gap: 4px;
+}
+.site.uni .rq-stars svg {
+  color: var(--line-2, var(--line));
+}
+.site.uni .rq-stars svg.on {
+  color: var(--gold);
+  fill: currentColor;
+}
+.site.uni .rq-stars.pick button {
+  display: grid;
+  padding: 4px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.site.uni .rq-stars.pick button:focus-visible {
+  outline: 2px solid var(--blue);
+}
+.site.uni .rq-rate .stp-btn {
+  align-self: flex-start;
+}
+.site.uni .rq-q {
+  margin: 16px 0 0;
+  color: var(--ink2);
+  line-height: 1.55;
+}
+@media (max-width: 700px) {
+  .site.uni .rq-hist li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .rq-hist p {
+    grid-column: 1;
+  }
+}

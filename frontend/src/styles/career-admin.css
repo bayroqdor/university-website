@@ -1,0 +1,248 @@
+/* Admin: hamkorlik va karyera (admin/pages/Career.tsx) — MatDash tokenlari (--md-* / --a-*) */
+.ca-wrap > .a-tabs.ca-page-tabs {
+  margin: 0 0 4px;
+  padding: 0 24px;
+  overflow-x: auto;
+}
+.ca-tools {
+  align-items: center;
+  margin-bottom: 14px;
+}
+.ca-tools-l {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+.ca-sel {
+  min-width: 180px;
+}
+.ca-sel .a-input {
+  height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.ca-none {
+  margin: 0;
+  padding: 18px 16px;
+  color: var(--a-muted, var(--md-muted));
+}
+.ca-open {
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.ca-open:focus-visible,
+.ca-check input:focus-visible {
+  outline: 2px solid var(--md-primary, #0a2e73);
+  outline-offset: 2px;
+}
+.ca-thumb {
+  width: 52px;
+  height: 52px;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--md-light, var(--a-surface-2));
+}
+.ca-thumb img {
+  object-fit: contain;
+  background: #fff;
+}
+.ca-checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px 16px;
+  max-height: 240px;
+  overflow: auto;
+  padding: 10px 12px;
+  border: 1px solid var(--a-line, var(--md-border));
+  border-radius: var(--md-r-sm, 2px);
+}
+.ca-check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.ca-check input {
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  accent-color: var(--md-primary, #0a2e73);
+}
+.ca-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+.ca-rows > .pair-row,
+.ca-rows > .ca-row4 {
+  width: 100%;
+  margin: 0;
+}
+.ca-row4 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr 1.4fr auto;
+  gap: 8px;
+  align-items: center;
+}
+.ca-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.ca-logo {
+  max-width: 260px;
+}
+.ca-photo {
+  max-width: 180px;
+}
+.ca-rich {
+  border: 1px solid var(--a-line, var(--md-border));
+  border-radius: var(--md-r-sm, 2px);
+  min-height: 220px;
+  padding: 8px 12px;
+  background: var(--a-surface, var(--md-card));
+}
+.ca-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ca-info .ca-rich {
+  margin-top: 12px;
+}
+.ca-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+.ca-mod {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--a-line, var(--md-border));
+  border-left: 3px solid var(--md-gold, #b08d3c);
+  border-radius: var(--md-r-sm, 2px);
+  background: var(--md-light, var(--a-surface-2));
+}
+.ca-mod.published {
+  border-left-color: var(--md-green, #1e6b47);
+}
+.ca-mod.rejected {
+  border-left-color: var(--md-red, #b42318);
+}
+.ca-mod-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  color: var(--a-muted, var(--md-muted));
+}
+.ca-dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px 16px;
+  margin: 0;
+}
+.ca-dl dt {
+  font-size: 12px;
+  color: var(--a-muted, var(--md-muted));
+}
+.ca-dl dd {
+  margin: 2px 0 0;
+  overflow-wrap: anywhere;
+}
+.ca-reason {
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+.ca-reject {
+  margin-top: 10px;
+}
+.ca-table td {
+  vertical-align: top;
+}
+.ca-sub {
+  display: block;
+  color: var(--a-muted, var(--md-muted));
+  font-size: 12.5px;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+.ca-mini {
+  min-width: 90px;
+  height: 34px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.ca-table-foot {
+  padding: 12px 16px;
+  border-top: 1px solid var(--a-line, var(--md-border));
+}
+.a-icon.ok {
+  color: var(--md-green, #1e6b47);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .ca-row4 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ca-sel {
+    min-width: 0;
+    flex: 1 1 140px;
+  }
+  .ca-tools .a-search {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* talaba kabineti: «Karyera» */
+.pc-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  align-items: center;
+  justify-content: space-between;
+}
+.pc-prog {
+  margin: 0;
+}
+.pc-prog span {
+  color: var(--a-muted, var(--md-muted));
+}
+.pc-count {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--a-muted, var(--md-muted));
+}
+.pc-row {
+  color: inherit;
+  text-decoration: none;
+}
+.pc-row:focus-visible {
+  outline: 2px solid var(--md-primary, #0a2e73);
+  outline-offset: -2px;
+}
+.pc-go {
+  flex: none;
+  color: var(--a-muted, var(--md-muted));
+}

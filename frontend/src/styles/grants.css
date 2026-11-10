@@ -1,0 +1,479 @@
+/* Grant taqsimoti (/grant-redistribution) — sayt tizimi: Onest, radius 2px, soyasiz, ko'k #0A2E73. */
+/* Bo'limlar: .wrap ichkarida — .wrap'ning «padding: 0 var(--pad)» qoidasi bo'lim oralig'ini yeb qo'ymasin */
+.site.uni .gr-hero {
+  padding: 96px 0 64px;
+}
+.site.uni .gr-hero .display {
+  margin-top: 18px;
+  max-width: 14ch;
+}
+.site.uni .gr-lead {
+  margin: 24px 0 0;
+  max-width: 62ch;
+  font-size: 19px;
+  color: var(--ink2);
+}
+/* holat qatori: qabul holati yoki «Grant natijalari» tugmasi */
+.site.uni .gr-hero-a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+.site.uni .gr-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin: 0;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink2);
+}
+.site.uni .gr-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink2);
+}
+.site.uni .gr-status.on {
+  color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 35%, var(--line));
+}
+:root[data-theme="dark"] .site.uni .gr-status.on {
+  color: #86c9a8;
+}
+.site.uni .gr-status.on .gr-dot {
+  background: #1f9d55;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #1f9d55 20%, transparent);
+}
+.site.uni .gr-status b {
+  padding-left: 10px;
+  border-left: 1px solid var(--line);
+  font-weight: 500;
+}
+
+.site.uni .gr-main {
+  padding-bottom: 128px;
+}
+.site.uni .gr-main > .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 48px;
+  align-items: start;
+}
+.site.uni .gr-aside {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+}
+.site.uni .gr-note {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  background: var(--bgB);
+  border-radius: 2px;
+}
+.site.uni .gr-note.warn {
+  border-left-color: var(--gold);
+}
+.site.uni .gr-note svg {
+  flex: none;
+  color: var(--blue);
+  margin-top: 2px;
+}
+.site.uni .gr-note.warn svg {
+  color: var(--gold);
+}
+.site.uni .gr-note b {
+  display: block;
+  margin-bottom: 4px;
+}
+.site.uni .gr-note p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink2);
+}
+.site.uni .gr-card {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 36px;
+  background: var(--bgA);
+}
+.site.uni .gr-card-t {
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.site.uni .gr-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 20px;
+}
+.site.uni .gr-f {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.site.uni .gr-f.wide {
+  grid-column: 1 / -1;
+}
+.site.uni .gr-l {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.site.uni .gr-l i {
+  font-style: normal;
+  color: #b42318;
+}
+.site.uni .gr-f input,
+.site.uni .gr-f select,
+.site.uni .gr-f textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  font: 400 16px/1.4 var(--font);
+  outline: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.site.uni .gr-f select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink2) 50%), linear-gradient(135deg, var(--ink2) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 22px, calc(100% - 15px) 22px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+.site.uni .gr-f textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+.site.uni .gr-f input:focus,
+.site.uni .gr-f select:focus,
+.site.uni .gr-f textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 15%, transparent);
+}
+.site.uni .gr-f.bad input,
+.site.uni .gr-f.bad select,
+.site.uni .gr-f.bad textarea {
+  border-color: #b42318;
+}
+.site.uni .gr-err,
+.site.uni .gr-formerr {
+  font-size: 13.5px;
+  color: #b42318;
+}
+.site.uni .gr-formerr {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+:root[data-theme="dark"] .site.uni .gr-err,
+:root[data-theme="dark"] .site.uni .gr-formerr,
+:root[data-theme="dark"] .site.uni .gr-l i {
+  color: #f97066;
+}
+.site.uni .gr-btn {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 1px solid var(--blue-fill);
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: #fff;
+  font: 600 16px var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.site.uni .gr-form .gr-btn {
+  grid-column: 1 / -1;
+}
+.site.uni .gr-btn:hover:not(:disabled),
+.site.uni .gr-btn:focus-visible {
+  background: var(--blue-d);
+}
+.site.uni .gr-btn:disabled {
+  opacity: 0.6;
+}
+.site.uni .gr-btn.ghost {
+  background: var(--bgA);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.site.uni .gr-btn.ghost:hover,
+.site.uni .gr-btn.ghost:focus-visible {
+  background: var(--bgB);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .gr-btn.sm {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+}
+.site.uni .gr-closed {
+  margin: 0;
+  color: var(--ink2);
+}
+.site.uni .gr-sent {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  color: var(--ink);
+}
+.site.uni .gr-sent svg {
+  color: #1f9d55;
+}
+.site.uni .gr-sent h3 {
+  margin: 0;
+  font-size: 24px;
+}
+.site.uni .gr-sent p {
+  margin: 0 0 12px;
+  color: var(--ink2);
+}
+
+/* natijalar */
+.site.uni .gr-res {
+  padding: 112px 0 128px;
+  background: var(--bgB);
+  border-top: 1px solid var(--line);
+}
+.site.uni .gr-res-head .h2 {
+  margin-top: 14px;
+}
+.site.uni .gr-res-intro {
+  margin: 18px 0 0;
+  max-width: 70ch;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+.site.uni .gr-res-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin: 32px 0 8px;
+}
+.site.uni .gr-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 320px;
+  max-width: 460px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink2);
+}
+.site.uni .gr-search:focus-within {
+  border-color: var(--blue);
+}
+.site.uni .gr-search input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 400 16px var(--font);
+}
+.site.uni .gr-count {
+  font-size: 14px;
+  color: var(--ink2);
+}
+/* komissiya qarori: ko'rish (pdf.js) va yuklab olish tugmalari */
+.site.uni .gr-doc {
+  margin-top: 32px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+}
+.site.uni .gr-doc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 20px;
+  padding: 18px 20px;
+}
+.site.uni .gr-doc-ic {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--blue) 9%, var(--bgA));
+  color: var(--blue);
+}
+.site.uni .gr-doc-t {
+  flex: 1 1 200px;
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.site.uni .gr-doc-a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.site.uni .gr-doc-view {
+  padding: 0 20px 20px;
+}
+.site.uni .gr-doc .dv-acts a {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  color: var(--ink2);
+  text-decoration: none;
+}
+.site.uni .gr-doc .dv-acts a:hover,
+.site.uni .gr-doc .dv-acts a:focus-visible {
+  background: var(--bgB);
+  color: var(--blue);
+}
+.site.uni .gr-doc .dv-bar > svg {
+  color: var(--blue);
+}
+.site.uni .gr-group {
+  margin-top: 40px;
+}
+.site.uni .gr-group h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.site.uni .gr-group h3 small {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink2);
+}
+.site.uni .gr-tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+}
+.site.uni .gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15.5px;
+}
+.site.uni .gr-table th {
+  position: sticky;
+  top: 0;
+  padding: 14px 18px;
+  background: var(--blue-fill);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  white-space: nowrap;
+}
+.site.uni .gr-table td {
+  padding: 13px 18px;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+}
+.site.uni .gr-table tbody tr:nth-child(even) td {
+  background: var(--bgB);
+}
+.site.uni .gr-table tbody tr:hover td {
+  background: color-mix(in srgb, var(--blue) 7%, var(--bgA));
+}
+.site.uni .gr-table .gr-n {
+  width: 56px;
+  text-align: right;
+  color: var(--ink2);
+}
+.site.uni .gr-none,
+.site.uni .gr-upd {
+  margin: 24px 0 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+@media (max-width: 900px) {
+  .site.uni .gr-main {
+    padding-bottom: 96px;
+  }
+  .site.uni .gr-main > .wrap {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .site.uni .gr-aside {
+    position: static;
+  }
+  .site.uni .gr-hero {
+    padding: 56px 0 48px;
+  }
+  .site.uni .gr-res {
+    padding: 72px 0 96px;
+  }
+}
+@media (max-width: 640px) {
+  .site.uni .gr-card {
+    padding: 22px 18px;
+  }
+  .site.uni .gr-form {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .gr-btn,
+  .site.uni .gr-hero-a > *,
+  .site.uni .gr-doc-a > * {
+    flex: 1 1 auto;
+    width: 100%;
+    justify-content: center;
+  }
+  .site.uni .gr-status {
+    justify-content: flex-start;
+  }
+  .site.uni .gr-status b {
+    flex-basis: 100%;
+    padding: 0 0 0 19px;
+    border: 0;
+  }
+  .site.uni .gr-doc-row {
+    padding: 16px;
+  }
+  .site.uni .gr-doc-a {
+    flex-basis: 100%;
+  }
+  .site.uni .gr-doc-view {
+    padding: 0 12px 12px;
+  }
+  .site.uni .gr-table td,
+  .site.uni .gr-table th {
+    padding: 11px 12px;
+  }
+}

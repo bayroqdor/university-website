@@ -1,0 +1,1747 @@
+/* ================================================================ Maxsus imkoniyatlar (zaif ko'radiganlar uchun versiya)
+   Sozlamalar <html data-a11y-*> atributlari orqali qo'llanadi (src/a11y/prefs.ts, index.html dagi boshlang'ich skript).
+   Dizayn: sayt bilan bir xil — Onest, #0A2E73 / #071F50, oq / #F3F5F8 fon, #E1E4EA chiziq, 2px radius, tekis.
+   Tarkib:
+     1. shriftlar (o'z serverimizda, OFL)            6. havolalar, fokus, kursor
+     2. matn o'lchami va oraliqlar                   7. animatsiyani to'xtatish
+     3. rang sxemalari (yuqori kontrast ≥ 7:1)       8. o'qish chizg'ichi, niqob, ovozli o'qish
+     4. oq-qora                                      9. panel, tugmalar, o'yinchi
+     5. rasmlar                                     10. tizim sozlamalari (prefers-contrast, forced-colors), WCAG umumiy */
+
+/* ---------------------------------------------------------------- 1. shriftlar
+   Har bir shrift Onest o'lchamlariga keltiriladi (size-adjust — x-balandlik ≈ 0.527em, ascent/descent-override — qator qutisi
+   Onest'niki kabi 0.97 / 0.305em), aks holda tugmalar, menyu va qat'iy balandlikdagi bloklar «yorilib» ketadi.
+   override qiymatlari size-adjust'dan oldingi birlikda: 97% / size-adjust va h.k.
+   Qamrov (fontTools bilan tekshirilgan):
+     Atkinson Hyperlegible Next — lotin (oʻ gʻ uchun U+02BB/02BC ‘ ’ glifiga ulangan, OFL, RFN yo'q), kirill yo'q → Andika;
+     Andika (SIL) — lotin + kirill + o'zbek kirill (Ў Қ Ғ Ҳ) + №;
+     OpenDyslexic 0.92 — faqat lotin: uning kirill qismi yamoq (kichik «ж» = katta «Ж», bosh harflar balandligi 729/849 aralash),
+     shuning uchun kirill harflari va № Andika'dan olinadi — bitta so'z ichida ikki shrift aralashmaydi. */
+@font-face {
+  font-family: "A11y Atkinson";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url(/fonts/a11y/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 106%;
+  ascent-override: 91.5%;
+  descent-override: 28.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Atkinson";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url(/fonts/a11y/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  size-adjust: 106%;
+  ascent-override: 91.5%;
+  descent-override: 28.8%;
+  line-gap-override: 0%;
+}
+
+/* Andika: kirill (rus, o'zbek kirill) va lotin; 400 — 100…500, 700 — 600…900 (sintetik qalinlik bo'lmasin) */
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 500;
+  src: url(/fonts/a11y/andika-cyrillic-400-normal.woff2) format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600 900;
+  src: url(/fonts/a11y/andika-cyrillic-700-normal.woff2) format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 500;
+  src: url(/fonts/a11y/andika-cyrillic-ext-400-normal.woff2) format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600 900;
+  src: url(/fonts/a11y/andika-cyrillic-ext-700-normal.woff2) format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 500;
+  src: url(/fonts/a11y/andika-latin-400-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y Andika";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600 900;
+  src: url(/fonts/a11y/andika-latin-700-normal.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 104%;
+  ascent-override: 93.3%;
+  descent-override: 29.3%;
+  line-gap-override: 0%;
+}
+
+/* OpenDyslexic 0.92: harflari Onest'dan ~1.5 baravar keng (yon oraliqlari 0.15em), bo'sh joy 0.85em (Onest'da 0.27em),
+   qator qutisi 1.82em. x-balandlik Onest'ga tenglashtiriladi (94%), qator qutisi — override bilan, so'z oralig'i — pastda
+   word-spacing bilan (≈0.42em, Onest'nikidan 1.5 baravar keng — shriftning «keng» g'oyasi saqlanadi). */
+@font-face {
+  font-family: "A11y OpenDyslexic";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 500;
+  src: url(/fonts/a11y/opendyslexic-latin-400-normal.woff2) format("woff2");
+  unicode-range: U+0000-024F, U+0259, U+02B9-02BA, U+02C6-02DD, U+0300-036F, U+1E00-1EFF, U+2000-2115, U+2117-21FF, U+2200-22FF, U+FEFF, U+FFFD;
+  size-adjust: 94%;
+  ascent-override: 103.2%;
+  descent-override: 32.4%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y OpenDyslexic";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600 900;
+  src: url(/fonts/a11y/opendyslexic-latin-700-normal.woff2) format("woff2");
+  unicode-range: U+0000-024F, U+0259, U+02B9-02BA, U+02C6-02DD, U+0300-036F, U+1E00-1EFF, U+2000-2115, U+2117-21FF, U+2200-22FF, U+FEFF, U+FFFD;
+  size-adjust: 94%;
+  ascent-override: 103.2%;
+  descent-override: 32.4%;
+  line-gap-override: 0%;
+}
+
+/* oʻ gʻ (U+02BB) va maʼ (U+02BC): OpenDyslexic'da bu ikki belgi noto'g'ri chizilgan (ʻ — keng bo'shliq, ʼ — urg'u «´» kabi).
+   Ularning o'rniga OpenDyslexic'ning o'zidagi ‘ ’ glifi — fontTools bilan ajratilgan 3 KB kichik shrift (OFL: RFN tufayli boshqa nom). */
+@font-face {
+  font-family: "A11y OpenDyslexic";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 500;
+  src: url(/fonts/a11y/a11y-dyslexic-modifier-letters-400.woff2) format("woff2");
+  unicode-range: U+02BB-02BC;
+  size-adjust: 94%;
+  ascent-override: 103.2%;
+  descent-override: 32.4%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "A11y OpenDyslexic";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600 900;
+  src: url(/fonts/a11y/a11y-dyslexic-modifier-letters-700.woff2) format("woff2");
+  unicode-range: U+02BB-02BC;
+  size-adjust: 94%;
+  ascent-override: 103.2%;
+  descent-override: 32.4%;
+  line-gap-override: 0%;
+}
+
+html[data-a11y-font="legible"],
+html[data-a11y-font="legible"] :lang(uz),
+html[data-a11y-font="legible"] :lang(en) {
+  --a11y-font: "A11y Atkinson", "A11y Andika", "Onest Variable", "Onest", system-ui, sans-serif;
+}
+/* rus / o'zbek kirill matn — butunlay Andika (raqam, defis, tinish belgilari ham), so'z ichida shrift almashmaydi */
+html[data-a11y-font="legible"]:lang(ru),
+html[data-a11y-font="legible"] :lang(ru),
+html[data-a11y-font="legible"] :lang(uz-Cyrl) {
+  --a11y-font: "A11y Andika", "A11y Atkinson", "Onest Variable", "Onest", system-ui, sans-serif;
+}
+/* disleksiya: lotin matn — OpenDyslexic (kirill harflari avtomatik Andika'dan); rus / o'zbek kirill sahifa yoki blok — butunlay Andika
+   (raqam va tinish belgilari ham — so'z ichida shrift almashmasin), so'zlar orasi biroz kengroq. */
+html[data-a11y-font="dyslexic"],
+html[data-a11y-font="dyslexic"] :lang(uz),
+html[data-a11y-font="dyslexic"] :lang(en) {
+  --a11y-font: "A11y OpenDyslexic", "A11y Andika", "Onest Variable", "Onest", system-ui, sans-serif;
+  --a11y-ws0: -0.38em;
+}
+html[data-a11y-font="dyslexic"]:lang(ru),
+html[data-a11y-font="dyslexic"] :lang(ru),
+html[data-a11y-font="dyslexic"] :lang(uz-Cyrl) {
+  --a11y-font: "A11y Andika", "Onest Variable", "Onest", system-ui, sans-serif;
+  --a11y-ws0: 0.12em;
+}
+/* svg (lucide ikonkalar), kod / monospace, formulalar va bosh sahifadagi katta raqamlar (.num-val) o'z shriftida qoladi */
+html[data-a11y-font] body,
+html[data-a11y-font] body :not(svg, svg *, code, pre, kbd, samp, code *, pre *, kbd *, samp *, .katex, .katex *, .a11y-fsample, .ProseMirror code, .num-val, .num-val *) {
+  font-family: var(--a11y-font) !important;
+}
+/* saytdagi manfiy harf oralig'i (sarlavhalarda −0.02…−0.045em) Onest uchun tanlangan — boshqa shriftda harflar yopishib qoladi.
+   O'qish shrifti tanlanganda shriftning o'z oralig'i ishlatiladi; panelning «harf oralig'i» tanlovi (pastda) baribir ustun. */
+html[data-a11y-font] body :not(svg, svg *, .num-val, .num-val *) {
+  letter-spacing: normal !important;
+}
+/* so'z oralig'i: shrift tuzatmasi (--a11y-ws0) + panel tanlovi (--a11y-ws) */
+html[data-a11y-word="1"] {
+  --a11y-ws: 0.16em;
+}
+html[data-a11y-word="2"] {
+  --a11y-ws: 0.32em;
+}
+html:is([data-a11y-word], [data-a11y-font="dyslexic"]) body :not(svg, svg *, code, pre, code *, pre *, .a11y-fsample) {
+  word-spacing: calc(var(--a11y-ws0, 0em) + var(--a11y-ws, 0em)) !important;
+}
+.a11y-f-default {
+  font-family: "Onest Variable", "Onest", system-ui, sans-serif !important;
+  word-spacing: normal;
+}
+.a11y-f-legible {
+  font-family: "A11y Atkinson", "A11y Andika", sans-serif !important;
+  word-spacing: normal;
+}
+.a11y-f-dyslexic {
+  font-family: "A11y OpenDyslexic", "A11y Andika", sans-serif !important;
+  word-spacing: -0.38em !important;
+}
+/* namunalar sahifa tilida haqiqatda qo'llanadigan shriftni ko'rsatadi */
+:lang(ru) .a11y-f-legible,
+:lang(ru) .a11y-f-dyslexic {
+  font-family: "A11y Andika", sans-serif !important;
+}
+:lang(ru) .a11y-f-dyslexic {
+  word-spacing: 0.12em !important;
+}
+
+/* ---------------------------------------------------------------- 2. matn o'lchami (px o'lchamlar build vaqtida calc(... * var(--a11y-fz)) ga o'ralgan) */
+html[data-a11y-size="125"] {
+  --a11y-fz: 1.25;
+  --a11y-lg-s: 1.125;
+}
+html[data-a11y-size="150"] {
+  --a11y-fz: 1.5;
+  --a11y-lg-s: 1.25;
+}
+html[data-a11y-size="175"] {
+  --a11y-fz: 1.75;
+  --a11y-lg-s: 1.375;
+}
+html[data-a11y-size="200"] {
+  --a11y-fz: 2;
+  --a11y-lg-s: 1.5;
+}
+/* telefonda katta sarlavhalar sekinroq kattalashadi (uzun so'zlar satrga sig'sin), oddiy matn — to'liq */
+@media (max-width: 760px) {
+  html[data-a11y-size="125"] {
+    --a11y-lg-s: 1.04;
+  }
+  html[data-a11y-size="150"] {
+    --a11y-lg-s: 1.08;
+  }
+  html[data-a11y-size="175"] {
+    --a11y-lg-s: 1.12;
+  }
+  html[data-a11y-size="200"] {
+    --a11y-lg-s: 1.16;
+  }
+}
+/* katta sarlavhalar: --a11y-fz-lg = o'lcham koeffitsiyenti (--a11y-lg-s); «display» sarlavhalar (eng kichigi ham ≥ 30px, a11y-text-scale.ts)
+   uchun --a11y-fz-xl = o'lcham × shrift kengligi tuzatmasi (--a11y-lg-w):
+   OpenDyslexic lotin harflari Onest'dan ~1.4 baravar keng — bunday sarlavhalar 0.82 (telefonda 0.74) ga kichraytiriladi,
+   aks holda «yo‘nalishlari» kabi uzun so'zlar telefonda ham, kompyuterda ham satrga sig'maydi */
+html[data-a11y] {
+  --a11y-fz-lg: var(--a11y-lg-s, 1);
+  --a11y-fz-xl: calc(var(--a11y-lg-s, 1) * var(--a11y-lg-w, 1));
+}
+html[data-a11y-font="dyslexic"]:not(:lang(ru)) {
+  --a11y-lg-w: 0.82;
+}
+@media (max-width: 760px) {
+  html[data-a11y-font="dyslexic"]:not(:lang(ru)) {
+    --a11y-lg-w: 0.74;
+  }
+}
+html[data-a11y-size] {
+  font-size: calc(100% * var(--a11y-fz, 1));
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+/* kattalashgan matn qirqilmasin: uzun so'zlar bo'linadi, qat'iy balandliklar o'rniga minimal balandlik.
+   Disleksiya shrifti (OpenDyslexic, lotin) Onest'dan ~1.4 baravar keng — u ham xuddi kattalashgan matn kabi «keng matn» tartibini oladi. */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) body :is(h1, h2, h3, h4, h5, h6, p, li, dd, dt, td, th, a, button, label, span, small, b, strong, em, figcaption, blockquote) {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) body :is(h1, h2, h3, h4) {
+  overflow-wrap: anywhere;
+}
+
+/* kattalashtirilgan matnda sahifa tuzilishi «planshet» ko'rinishiga o'tadi (sarlavha — burger menyu, hero — bir ustun) */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ub-in {
+  flex-wrap: wrap;
+  row-gap: 4px;
+  padding-block: 4px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ub-links,
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-nav {
+  display: none;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-burger {
+  display: inline-flex;
+  height: auto;
+  min-height: 44px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-in {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: var(--nb-h);
+  padding-block: 8px;
+  gap: 8px 16px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .br {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .br-name {
+  max-width: 32ch;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-search {
+  margin-left: auto;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-cta {
+  margin-left: 0;
+  min-height: 44px;
+  height: auto;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .mm {
+  height: auto;
+  max-height: calc(100dvh - 120px);
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .hx-copy,
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .hx-media {
+  grid-column: 1 / -1;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .hx-media {
+  margin-bottom: 28px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .hd {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 16px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni :is(.hd-ey, .hd-main, .hd-more) {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding-top: 0;
+  white-space: normal;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nums-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 40px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ft-sub-f {
+  flex-wrap: wrap;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ft-sub-f :is(input, button) {
+  flex: 1 1 100%;
+  min-height: 44px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) :is(.skip, .a11y-skip, .md-skip) {
+  max-width: calc(100vw - 32px);
+  white-space: normal;
+}
+@media (max-width: 760px) {
+  html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .br-name,
+  html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .nb-cta,
+  html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ub-sym-i span {
+    display: none;
+  }
+}
+
+/* oraliqlar (WCAG 1.4.12: qator 1.5, harf 0.12em, so'z 0.16em, xatboshi 2em gacha) */
+html[data-a11y-line="1"] body :not(svg, svg *, .a11y-guide, .a11y-guide *) {
+  line-height: 1.8 !important;
+}
+html[data-a11y-line="2"] body :not(svg, svg *, .a11y-guide, .a11y-guide *) {
+  line-height: 2.1 !important;
+}
+html[data-a11y-line="2"] main p:not(:last-child) {
+  margin-bottom: 2em !important;
+}
+html[data-a11y-letter="1"] body :not(svg, svg *) {
+  letter-spacing: 0.06em !important;
+}
+html[data-a11y-letter="2"] body :not(svg, svg *) {
+  letter-spacing: 0.12em !important;
+}
+
+/* ---------------------------------------------------------------- 3. rang sxemalari
+   Har bir element bir xil fon va matn rangini oladi (rang tokenlari ham almashtiriladi — psevdo-elementlar, chiziqlar uchun).
+   Kontrast: qora/oq 21:1, sariq/qora 19.6:1, ko'k #063462 / havorang #9DD1FF 7.7:1; havolalar ≥ 8.9:1. */
+html[data-a11y-scheme="hc-dark"] {
+  --a11y-bg: #000000;
+  --a11y-fg: #ffffff;
+  --a11y-link: #8fd3ff;
+  --a11y-line: #ffffff;
+  color-scheme: dark;
+}
+html[data-a11y-scheme="hc-light"] {
+  --a11y-bg: #ffffff;
+  --a11y-fg: #000000;
+  --a11y-link: #0033cc;
+  --a11y-line: #000000;
+  color-scheme: light;
+}
+html[data-a11y-scheme="yellow"] {
+  --a11y-bg: #000000;
+  --a11y-fg: #ffff00;
+  --a11y-link: #00ffff;
+  --a11y-line: #ffff00;
+  color-scheme: dark;
+}
+html[data-a11y-scheme="blue"] {
+  --a11y-bg: #9dd1ff;
+  --a11y-fg: #063462;
+  --a11y-link: #3a0070;
+  --a11y-line: #063462;
+  color-scheme: light;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]),
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body,
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) .site.uni,
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) .md-shell,
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) .a11y-dlg {
+  /* sayt, kabinet va panel tokenlari */
+  --blue: var(--a11y-fg);
+  --blue-fill: var(--a11y-bg);
+  --blue-d: var(--a11y-bg);
+  --bgA: var(--a11y-bg);
+  --bgB: var(--a11y-bg);
+  --ink: var(--a11y-fg);
+  --ink2: var(--a11y-fg);
+  --line: var(--a11y-line);
+  --gold: var(--a11y-fg);
+  --green: var(--a11y-fg);
+  --on-dark: var(--a11y-fg);
+  --on-dark2: var(--a11y-fg);
+  --bg: var(--a11y-bg);
+  --bg-2: var(--a11y-bg);
+  --surface: var(--a11y-bg);
+  --surface-2: var(--a11y-bg);
+  --muted: var(--a11y-fg);
+  --accent: var(--a11y-fg);
+  --accent2: var(--a11y-fg);
+  --accent-ink: var(--a11y-bg);
+  --accent-soft: var(--a11y-bg);
+  --accent2-soft: var(--a11y-bg);
+  --accent-deep: var(--a11y-bg);
+  --band: var(--a11y-bg);
+  --md-primary: var(--a11y-fg);
+  --md-primary-d: var(--a11y-fg);
+  --md-primary-s: var(--a11y-bg);
+  --md-fill: var(--a11y-bg);
+  --md-fill-d: var(--a11y-bg);
+  --md-on-primary: var(--a11y-fg);
+  --md-heading: var(--a11y-fg);
+  --md-body: var(--a11y-fg);
+  --md-muted: var(--a11y-fg);
+  --md-border: var(--a11y-line);
+  --md-border-2: var(--a11y-line);
+  --md-page: var(--a11y-bg);
+  --md-rail: var(--a11y-bg);
+  --md-bg: var(--a11y-bg);
+  --md-light: var(--a11y-bg);
+  --md-card: var(--a11y-bg);
+  --md-hover: var(--a11y-bg);
+  --p-bg: var(--a11y-bg);
+  --p-bg2: var(--a11y-bg);
+  --p-ink: var(--a11y-fg);
+  --p-ink2: var(--a11y-fg);
+  --p-line: var(--a11y-line);
+  --p-blue: var(--a11y-fg);
+  --p-fill: var(--a11y-fg);
+  --p-fill-d: var(--a11y-fg);
+  --p-on: var(--a11y-bg);
+  background: var(--a11y-bg) !important;
+  color: var(--a11y-fg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :not(svg, svg *, img, video, canvas, iframe, picture, .a11y-keep, .a11y-keep *, .a11y-guide, .a11y-guide *) {
+  color: var(--a11y-fg) !important;
+  -webkit-text-fill-color: currentColor !important;
+  border-color: var(--a11y-line) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  outline-color: var(--a11y-fg) !important;
+  text-decoration-color: currentColor !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :not(svg, svg *, img, video, canvas, iframe, picture, .a11y-keep, .a11y-keep *, .a11y-guide, .a11y-guide *):not(:empty) {
+  background-color: var(--a11y-bg) !important;
+  background-image: none !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body *::before,
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body *::after {
+  color: inherit !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) ::placeholder {
+  color: var(--a11y-fg) !important;
+  opacity: 0.85 !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) ::selection {
+  background: var(--a11y-fg) !important;
+  color: var(--a11y-bg) !important;
+  -webkit-text-fill-color: var(--a11y-bg) !important;
+}
+/* havolalar — alohida rang va doim tagiga chizilgan */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body a[href]:not(.a11y-keep),
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body a[href]:not(.a11y-keep) :not(svg, svg *, img) {
+  color: var(--a11y-link) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body a[href]:not(.a11y-keep) {
+  text-decoration-line: underline !important;
+  text-underline-offset: 0.18em;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body a[href]:hover {
+  text-decoration-thickness: 3px !important;
+}
+/* tugmalar va maydonlar — aniq chegara bilan */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :is(button, .bt, .btn, [role="button"], [role="tab"], input:not([type="radio"], [type="checkbox"], [type="range"]), select, textarea, summary):not(.a11y-keep, .a11y-opt input, .a11y-sw input) {
+  border: 2px solid var(--a11y-line) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :is(input[type="radio"], input[type="checkbox"]) {
+  accent-color: var(--a11y-fg);
+}
+/* tanlangan / joriy holat — teskari ranglar */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :is([aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [aria-expanded="true"]:is(button, [role="tab"]), button.on, .bt.on, [role="tab"].on, .filter.on, .on:is(button)):not(.a11y-keep, svg, svg *) {
+  background-color: var(--a11y-fg) !important;
+  color: var(--a11y-bg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :is([aria-pressed="true"], [aria-selected="true"], [aria-checked="true"], [aria-expanded="true"]:is(button, [role="tab"]), button.on, .bt.on, [role="tab"].on, .filter.on, .on:is(button)):not(.a11y-keep, svg, svg *) :not(svg, svg *, img) {
+  background-color: transparent !important;
+  color: var(--a11y-bg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body a[href]:is([aria-current="page"], [aria-current="true"], .on) {
+  text-decoration-thickness: 4px !important;
+  font-weight: 700 !important;
+}
+/* bo'sh tugmalar (karusel nuqtalari va h.k.) — chegara; joriysi to'ldirilgan */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body button:empty {
+  background-color: transparent !important;
+  border: 2px solid var(--a11y-fg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body button:empty:is([aria-current="true"], [aria-pressed="true"], [aria-selected="true"], .on) {
+  background-color: var(--a11y-fg) !important;
+}
+/* ma'lumot ustunlari (bo'sh span, rangi fonda): yuqori kontrastda matn rangida — aks holda fon bilan birlashib yo'qoladi */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body :is(.of-bar, .cc-bar-track > span, .tu-bar > span, .read-progress) {
+  background-color: var(--a11y-fg) !important;
+  background-image: none !important;
+}
+/* bezak qatlamlari (bayram bezaklari, gradient soyalar) yuqori kontrastda ko'rsatilmaydi */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) :is(.pop-shade, .fest-canvas, .fs2-fx, .fs2-fw, .fs2-sleigh, .cursor-dot, .cursor-ring) {
+  display: none !important;
+}
+
+/* panel boshqaruvlari yuqori kontrastda: tanlangan variant — teskari ranglar */
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body .a11y-seg .a11y-opt input:checked + .a11y-opt-in,
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body .a11y-sw input:checked ~ .a11y-sw-track {
+  background-color: var(--a11y-fg) !important;
+  color: var(--a11y-bg) !important;
+  -webkit-text-fill-color: var(--a11y-bg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body .a11y-cards .a11y-opt input:checked + .a11y-opt-in {
+  border-width: 3px !important;
+  outline: 2px solid var(--a11y-fg);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- 4. oq-qora (butun sahifa) */
+html[data-a11y-scheme="gray"] {
+  filter: grayscale(1);
+}
+
+/* ---------------------------------------------------------------- 5. rasmlar */
+html[data-a11y-images="gray"] :is(img, video, picture, iframe, canvas, [style*="background-image"]) {
+  filter: grayscale(1) !important;
+}
+html[data-a11y-images="hide"] body img:not(.a11y-keep img) {
+  display: none !important;
+}
+html[data-a11y-images="hide"] body :is([style*="background-image"], .kb, .kb-img) {
+  background-image: none !important;
+}
+/* rasmlar yashirilganda logotip va davlat ramzlari ikonkalari o'rnida ularning nomi ko'rinadi
+   (telefonda / katta matnda nomlar yashiriladi — aks holda havolalar bo'm-bo'sh qolardi) */
+html[data-a11y-images="hide"] .site.uni .br-name {
+  display: block !important;
+}
+html[data-a11y-images="hide"] .site.uni .ub-sym-i span {
+  display: inline !important;
+}
+html[data-a11y-images="hide"] :has(> .a11y-alt),
+html[data-a11y-images="hide"] .ph:has(> img:only-child) {
+  background-color: transparent;
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding-bottom: 0 !important;
+}
+.a11y-alt {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 2.6em;
+  margin: 4px 0;
+  padding: 0.45em 0.75em;
+  border: 2px dashed currentColor;
+  border-radius: 2px;
+  background: transparent;
+  font-size: 0.92em;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-align: left;
+  position: static !important;
+}
+
+/* ---------------------------------------------------------------- 6. havolalarni ajratish, kuchaytirilgan fokus, katta kursor */
+html[data-a11y-links] body a[href] {
+  text-decoration-line: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 0.2em !important;
+  outline: 2px dashed currentColor;
+  outline-offset: 2px;
+}
+html[data-a11y-links] body a[href]:hover {
+  text-decoration-thickness: 3px !important;
+}
+html[data-a11y-focus] body :focus-visible,
+html[data-a11y-focus] .a11y-dlg :focus-visible,
+html[data-a11y-focus] .a11y-opt input:focus-visible + .a11y-opt-in,
+html[data-a11y-focus] .a11y-sw input:focus-visible ~ .a11y-sw-track {
+  outline: 4px solid #0a2e73 !important;
+  outline-offset: 3px !important;
+  box-shadow:
+    0 0 0 3px #ffffff,
+    0 0 0 11px #ffffff !important;
+  z-index: 2;
+}
+html[data-a11y-focus][data-theme="dark"] body :focus-visible,
+html[data-a11y-focus][data-a11y-scheme="hc-dark"] body :focus-visible,
+html[data-a11y-focus][data-a11y-scheme="yellow"] body :focus-visible {
+  outline-color: var(--a11y-fg, #ffffff) !important;
+  box-shadow:
+    0 0 0 3px #000000,
+    0 0 0 11px #000000 !important;
+}
+html[data-a11y-focus][data-theme="dark"]:not([data-a11y-scheme]) body :focus-visible {
+  outline-color: #8fb2f5 !important;
+  box-shadow:
+    0 0 0 3px #0b111d,
+    0 0 0 11px #0b111d !important;
+}
+html[data-a11y-cursor],
+html[data-a11y-cursor] * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 32 32'%3E%3Cpath d='M4 2v24l6.2-6.1 4.1 9.4 4.2-1.8-4-9.3H23z' fill='%23000' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 6 3,
+    auto !important;
+}
+html[data-a11y-cursor] :is(a[href], button, [role="button"], [role="tab"], [role="switch"], label, select, summary, input[type="checkbox"], input[type="radio"], input[type="submit"], input[type="button"], input[type="range"]),
+html[data-a11y-cursor] :is(a[href], button, [role="button"], label, summary) * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 32 32'%3E%3Cpath d='M12 4.6c0-1.5 1-2.6 2.3-2.6s2.3 1.1 2.3 2.6V13c.3-1.1 1.2-1.8 2.3-1.8 1.2 0 2.1.9 2.2 2 .4-.7 1.1-1.2 2-1.2 1.3 0 2.3 1 2.3 2.3v.5c.4-.3.9-.5 1.4-.5 1.2 0 2.2 1 2.2 2.2V22c0 4.4-3.6 8-8 8h-2.6c-2.6 0-5-1.3-6.5-3.4L4.6 20c-.7-1-.5-2.4.5-3.1s2.3-.6 3.1.3L12 21z' fill='%23fff' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 21 3,
+    pointer !important;
+}
+html[data-a11y-cursor] :is(input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"], [type="range"]), textarea, [contenteditable="true"]) {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewBox='0 0 20 24'%3E%3Cpath d='M5 2h3.5L10 3.4 11.5 2H15M5 22h3.5l1.5-1.4 1.5 1.4H15M10 3.4v17.2' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M5 2h3.5L10 3.4 11.5 2H15M5 22h3.5l1.5-1.4 1.5 1.4H15M10 3.4v17.2' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 20 24,
+    text !important;
+}
+
+/* ---------------------------------------------------------------- 7. animatsiyani to'xtatish (panel) */
+html[data-a11y-still],
+html[data-a11y-still] * {
+  scroll-behavior: auto !important;
+}
+html[data-a11y-still] *,
+html[data-a11y-still] *::before,
+html[data-a11y-still] *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0s !important;
+}
+
+/* bayram bezaklari (canvas) va sichqoncha ortidan yuruvchi nuqta — to'xtatilganda ko'rsatilmaydi */
+html[data-a11y-still] :is(.fest-canvas, .fs2-fx, .fs2-fw, .fs2-sleigh, .cursor-dot, .cursor-ring) {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------- 8. o'qish chizg'ichi, niqob, ovozli o'qish */
+.a11y-guide {
+  --a11y-gy: 33vh;
+  --band: calc(112px * var(--a11y-fz, 1));
+  position: fixed;
+  inset: 0;
+  z-index: 2147482000;
+  pointer-events: none;
+}
+.a11y-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--a11y-gy) + 12px);
+  height: 4px;
+  background: #0a2e73;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+.a11y-mask-t,
+.a11y-mask-b {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: rgba(5, 10, 20, 0.66);
+}
+.a11y-mask-t {
+  top: 0;
+  height: max(0px, calc(var(--a11y-gy) - var(--band) / 2));
+  border-bottom: 2px solid #ffffff;
+}
+.a11y-mask-b {
+  top: calc(var(--a11y-gy) + var(--band) / 2);
+  bottom: 0;
+  border-top: 2px solid #ffffff;
+}
+.a11y-speaking {
+  outline: 3px solid #0a2e73 !important;
+  outline-offset: 4px !important;
+  background-color: #e8eef9 !important;
+  color: #121418 !important;
+  scroll-margin: 120px 0;
+}
+:root[data-theme="dark"] .a11y-speaking {
+  outline-color: #8fb2f5 !important;
+  background-color: #172136 !important;
+  color: #e8ecf3 !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body .a11y-speaking {
+  outline: 4px solid var(--a11y-fg) !important;
+  background-color: var(--a11y-fg) !important;
+  color: var(--a11y-bg) !important;
+  -webkit-text-fill-color: var(--a11y-bg) !important;
+}
+html[data-a11y-scheme]:not([data-a11y-scheme="gray"]) body .a11y-speaking * {
+  background-color: transparent !important;
+  color: var(--a11y-bg) !important;
+  -webkit-text-fill-color: var(--a11y-bg) !important;
+}
+
+/* ---------------------------------------------------------------- 9. panel */
+.a11y-dlg {
+  --p-bg: #ffffff;
+  --p-bg2: #f3f5f8;
+  --p-ink: #121418;
+  --p-ink2: #565c69;
+  --p-line: #e1e4ea;
+  --p-blue: #0a2e73;
+  --p-fill: #0a2e73;
+  --p-fill-d: #071f50;
+  --p-on: #ffffff;
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(460px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--p-line);
+  border-radius: 0;
+  background: var(--p-bg);
+  color: var(--p-ink);
+  font-family: "Onest Variable", "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.a11y-dlg *,
+.a11y-dlg *::before,
+.a11y-dlg *::after {
+  box-sizing: border-box;
+}
+:root[data-theme="dark"] .a11y-dlg {
+  --p-bg: #0b111d;
+  --p-bg2: #121a2a;
+  --p-ink: #e8ecf3;
+  --p-ink2: #a5afc1;
+  --p-line: #243049;
+  --p-blue: #8fb2f5;
+  --p-fill: #1d4aa3;
+  --p-fill-d: #163b85;
+  --p-on: #ffffff;
+  color-scheme: dark;
+}
+.a11y-dlg:not([open]) {
+  display: none;
+}
+.a11y-dlg::backdrop {
+  background: rgba(10, 14, 22, 0.32);
+}
+html.a11y-lock,
+html.a11y-lock body {
+  overflow: hidden;
+}
+.a11y-in {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100dvh;
+}
+.a11y-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: none;
+  padding: 14px 16px 14px 24px;
+  border-bottom: 1px solid var(--p-line);
+}
+.a11y-dlg .a11y-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--p-ink);
+}
+/* panel sarlavhasi 150% dan ortiq kattalashmaydi (aks holda telefonda «imkoniyat|lar» bo'linadi) */
+.a11y-dlg .a11y-head h2 {
+  font-size: calc(20px * min(var(--a11y-fz, 1), 1.5));
+}
+/* katta matnda (150–200%) panel bir butun aylanadi: pastki «tiklash» qatori ekranning yarmini egallamaydi,
+   sarlavha (yopish tugmasi bilan) yuqorida yopishib turadi */
+html:is([data-a11y-size="150"], [data-a11y-size="175"], [data-a11y-size="200"]) .a11y-in {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+html:is([data-a11y-size="150"], [data-a11y-size="175"], [data-a11y-size="200"]) .a11y-body {
+  flex: none;
+  min-height: auto;
+  overflow: visible;
+}
+html:is([data-a11y-size="150"], [data-a11y-size="175"], [data-a11y-size="200"]) .a11y-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--p-bg);
+}
+.a11y-dlg .a11y-head h2 svg {
+  flex: none;
+  color: var(--p-blue);
+}
+.a11y-x {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--p-line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--p-ink);
+  cursor: pointer;
+}
+.a11y-x:hover {
+  border-color: var(--p-ink);
+}
+.a11y-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 24px;
+}
+.a11y-sec {
+  padding: 22px 0 6px;
+  border-bottom: 1px solid var(--p-line);
+}
+.a11y-sec:last-child {
+  border-bottom: 0;
+  padding-bottom: 24px;
+}
+.a11y-dlg .a11y-sec h3 {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--p-ink2);
+}
+.a11y-fs {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+.a11y-dlg .a11y-fs legend {
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--p-ink);
+}
+.a11y-opts {
+  display: grid;
+  /* em — matn kattalashganda variantlar o'z-o'zidan yangi qatorga o'tadi */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 4em), 1fr));
+  gap: 6px;
+}
+.a11y-cards .a11y-opts {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 6.4em), 1fr));
+}
+.a11y-opt {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+.a11y-opt input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.a11y-opt-in {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px 8px;
+  border: 1px solid var(--p-line);
+  border-radius: 2px;
+  background: var(--p-bg);
+  color: var(--p-ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+.a11y-opt:hover .a11y-opt-in {
+  border-color: var(--p-blue);
+}
+.a11y-opt input:checked + .a11y-opt-in {
+  border-color: var(--p-fill);
+  background: var(--p-fill);
+  color: var(--p-on);
+  font-weight: 600;
+}
+.a11y-opt input:focus-visible + .a11y-opt-in {
+  outline: 3px solid var(--p-blue);
+  outline-offset: 2px;
+}
+.a11y-cards .a11y-opt-in {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 92px;
+  padding: 10px 8px;
+}
+.a11y-cards .a11y-opt input:checked + .a11y-opt-in {
+  border: 2px solid var(--p-blue);
+  padding: 9px 7px;
+  background: var(--p-bg);
+  color: var(--p-ink);
+}
+.a11y-cards .a11y-opt input:checked + .a11y-opt-in::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--p-blue);
+}
+.a11y-opt-name {
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+.a11y-fsample {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.a11y-swatch {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #c4cad4;
+  border-radius: 2px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+/* namunalar har doim o'z ranglarida (yuqori kontrast rejimida ham) */
+.a11y-sw-default .a11y-swatch {
+  background: #ffffff !important;
+  color: #0a2e73 !important;
+  -webkit-text-fill-color: #0a2e73 !important;
+}
+.a11y-sw-hc-dark .a11y-swatch {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.a11y-sw-hc-light .a11y-swatch {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.a11y-sw-yellow .a11y-swatch {
+  background: #000000 !important;
+  color: #ffff00 !important;
+  -webkit-text-fill-color: #ffff00 !important;
+}
+.a11y-sw-blue .a11y-swatch {
+  background: #9dd1ff !important;
+  color: #063462 !important;
+  -webkit-text-fill-color: #063462 !important;
+}
+.a11y-sw-gray .a11y-swatch {
+  background: #e6e6e6 !important;
+  color: #333333 !important;
+  -webkit-text-fill-color: #333333 !important;
+}
+.a11y-sws {
+  margin: -6px 0 16px;
+}
+.a11y-sw {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 52px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--p-line);
+  cursor: pointer;
+}
+.a11y-sw input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.a11y-sw.dis,
+.a11y-sw.dis input {
+  cursor: default;
+}
+.a11y-sw-txt {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.a11y-sw-track {
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 26px;
+  border: 2px solid var(--p-ink2);
+  border-radius: 2px;
+  background: var(--p-bg);
+  pointer-events: none;
+}
+.a11y-sw-track i {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--p-ink2);
+  transition: transform 0.15s;
+}
+.a11y-sw input:checked ~ .a11y-sw-track {
+  border-color: var(--p-fill);
+  background: var(--p-fill);
+}
+.a11y-sw input:checked ~ .a11y-sw-track i {
+  background: var(--p-on);
+  transform: translateX(20px);
+}
+.a11y-sw input:focus-visible ~ .a11y-sw-track {
+  outline: 3px solid var(--p-blue);
+  outline-offset: 2px;
+}
+.a11y-sw.dis .a11y-sw-track {
+  opacity: 0.7;
+}
+.a11y-hint {
+  display: block;
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--p-ink2);
+}
+.a11y-note {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--p-blue);
+  background: var(--p-bg2);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--p-ink);
+}
+.a11y-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--p-blue);
+  border-radius: 2px;
+  background: var(--p-bg);
+  color: var(--p-blue);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+}
+.a11y-btn:hover:not(:disabled) {
+  border-color: var(--p-ink);
+  color: var(--p-ink);
+}
+.a11y-btn.primary {
+  border-color: var(--p-fill);
+  background: var(--p-fill);
+  color: var(--p-on);
+}
+.a11y-btn.primary:hover {
+  border-color: var(--p-fill-d);
+  background: var(--p-fill-d);
+  color: var(--p-on);
+}
+.a11y-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.a11y-btn:focus-visible,
+.a11y-x:focus-visible,
+.a11y-link:focus-visible,
+.a11y-field select:focus-visible {
+  outline: 3px solid var(--p-blue);
+  outline-offset: 2px;
+}
+.a11y-live {
+  margin: 0;
+  font-size: 14px;
+  color: var(--p-ink);
+}
+.a11y-live:empty {
+  height: 0;
+  overflow: hidden;
+}
+.a11y-sec .a11y-live:not(:empty) {
+  margin: 4px 0 12px;
+}
+.a11y-field {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 18px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.a11y-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--p-line);
+  border-radius: 2px;
+  background: var(--p-bg);
+  color: var(--p-ink);
+  font: inherit;
+  font-weight: 400;
+}
+.a11y-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  flex: none;
+  padding: 12px 24px;
+  border-top: 1px solid var(--p-line);
+  background: var(--p-bg2);
+}
+.a11y-foot .a11y-live:not(:empty) {
+  flex-basis: 100%;
+}
+.a11y-keys {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 8px;
+  font-size: 14.5px;
+}
+.a11y-keys div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.a11y-keys dt {
+  min-width: 128px;
+}
+.a11y-keys dd {
+  margin: 0;
+  color: var(--p-ink2);
+}
+.a11y-dlg kbd,
+.a11y-skip kbd {
+  display: inline-block;
+  padding: 1px 7px;
+  border: 1px solid var(--p-line, #e1e4ea);
+  border-radius: 2px;
+  background: var(--p-bg, #fff);
+  color: var(--p-ink, #121418);
+  font: inherit;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.a11y-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--p-blue);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.a11y-link:hover {
+  text-decoration-thickness: 2px;
+}
+/* telefonda — pastdan chiqadigan varaq */
+@media (max-width: 600px) {
+  .a11y-dlg {
+    inset: auto 0 0 0;
+    width: 100vw;
+    height: auto;
+    max-height: 92dvh;
+    border-left: 0;
+    border-top: 1px solid var(--p-line);
+  }
+  .a11y-in {
+    max-height: 92dvh;
+  }
+  .a11y-head {
+    padding: 10px 12px 10px 16px;
+  }
+  .a11y-head h2 {
+    font-size: 18px;
+  }
+  .a11y-body {
+    padding: 0 16px;
+  }
+  .a11y-foot {
+    padding: 8px 16px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-a11y-still]) .a11y-dlg[open] {
+    animation: a11y-in 0.18s ease-out;
+  }
+  @media (max-width: 600px) {
+    html:not([data-a11y-still]) .a11y-dlg[open] {
+      animation-name: a11y-up;
+    }
+  }
+}
+@keyframes a11y-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+@keyframes a11y-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+/* sarlavhadagi tugma */
+.a11y-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: none;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 2px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.a11y-open svg {
+  flex: none;
+}
+.a11y-open:hover,
+.a11y-open.on {
+  background: rgba(255, 255, 255, 0.14);
+}
+.a11y-open.md {
+  padding: 0;
+  border: 0;
+}
+.a11y-open.md.on {
+  background: var(--md-primary-s);
+  color: var(--md-primary);
+}
+.a11y-sr,
+.a11y-open-t.sr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+@media (max-width: 1280px) {
+  .ub .a11y-open {
+    padding: 0;
+    width: 30px;
+  }
+  .ub .a11y-open-t {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+/* rus tilidagi nom uzunroq — o'rta kenglikdagi ekranlarda xizmat qatori ikki qatorga tushmasligi uchun faqat belgi (nom saqlanadi) */
+@media (max-width: 1560px) {
+  :root[lang="ru"] .ub .a11y-open {
+    width: 30px;
+    padding: 0;
+  }
+  :root[lang="ru"] .ub .a11y-open-t {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+/* mobil menyudagi tugma — to'liq yozuv bilan */
+.mm .a11y-open {
+  min-height: 44px;
+  padding: 0 14px;
+  border-color: var(--line, #e1e4ea);
+  color: var(--ink, #121418);
+  font-size: 15px;
+}
+.mm .a11y-open:hover {
+  border-color: var(--ink, #121418);
+  background: none;
+}
+
+.mm .mm-a11y {
+  margin-top: 20px;
+}
+/* kabinet va admin panel: o'tish havolalari */
+.md-skip {
+  position: fixed;
+  left: 16px;
+  top: -80px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  background: #0a2e73;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.md-skip:focus {
+  top: 12px;
+  outline: 3px solid #ffffff;
+  outline-offset: -6px;
+}
+.a11y-skip.md {
+  position: fixed;
+  z-index: 1001;
+}
+.md-wrap:focus {
+  outline: none;
+}
+
+/* ikkinchi «o'tish havolasi»: klaviaturada Tab bosilganda ikkinchi bo'lib chiqadi */
+.a11y-skip {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 201;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 2px;
+  background: #0a2e73;
+  color: #ffffff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.a11y-skip:focus {
+  top: 12px;
+  outline: 3px solid #ffffff;
+  outline-offset: -6px;
+}
+.a11y-skip kbd {
+  color: #0a2e73;
+}
+
+/* «Tinglash» — maqola sahifasida */
+.a11y-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line, #e1e4ea);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink, #121418);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.a11y-listen:hover,
+.a11y-listen.on {
+  border-color: var(--blue, #0a2e73);
+  color: var(--blue, #0a2e73);
+}
+
+:root[data-theme="dark"] .site.uni .page-hero.tinted .page-eyebrow {
+  color: var(--blue) !important;
+}
+.field .req {
+  font-style: normal;
+}
+.post-byline .a11y-listen {
+  margin-left: auto;
+}
+/* harflarga bo'lingan sarlavhalar: ekran o'qish dasturi uchun butun matn */
+.split-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+/* harflarga bo'lingan sarlavha (.split-word, site.css): so'z butunligicha keyingi qatorga o'tadi, faqat satrdan keng bo'lsagina
+   o'zi ichida bo'linadi. Avvalgi «display: inline» har bir harf orasida qatorni uzardi («s / ari») — olib tashlandi. */
+/* /open-data diagramma jadvali (gorizontal aylantirishsiz): katta matnda sarlavha katakchalari bo'linadi — sahifa eniga sig'adi */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .of-bars :is(th, td) {
+  overflow-wrap: anywhere;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .of-bars thead .of-num {
+  white-space: normal;
+}
+/* /reception: kun ro'yxatida vaqt ism ostiga tushadi (qirqilmaydi); telefonda rahbar kartasi bir ustunga */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .of-agenda ul li {
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 0;
+}
+@media (max-width: 760px) {
+  html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .of-person {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* futerdagi e-pochta va uzun havolalar */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .site.uni .ft-link {
+  overflow-wrap: anywhere;
+}
+/* kabinetlar va admin (MdShell): yuqori panel qatorga sig'masa o'raladi, telefonda ko'rsatkich kartalari bir ustunda */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .md-top {
+  height: auto;
+  min-height: var(--md-top-h);
+  flex-wrap: wrap;
+  row-gap: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .md-top-r {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) .md-brand {
+  height: auto;
+  min-height: var(--md-top-h);
+  padding-block: 6px;
+}
+@media (max-width: 640px) {
+  html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) :is(.kpis, .kpis.three, .guide) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* kattalashtirilgan matnda tugmalar qatorga sig'masa ikki qatorga o'tadi */
+html:is([data-a11y-size], [data-a11y-font="dyslexic"]:not(:lang(ru))) body :is(.bt, .btn, .tag, .chip-btn, .pop-btn) {
+  white-space: normal !important;
+  height: auto;
+}
+
+/* o'tish havolalari: har qanday matn o'lchamida to'liq yashirinadi va fokusda to'liq ko'rinadi */
+.site.uni .skip,
+.a11y-skip,
+.md-skip {
+  top: 0 !important;
+  transform: translateY(calc(-100% - 12px));
+  flex-wrap: wrap;
+  max-width: calc(100vw - 32px);
+}
+.site.uni .skip:focus,
+.a11y-skip:focus,
+.md-skip:focus {
+  transform: translateY(12px);
+}
+
+/* ovozli o'qish paneli */
+.a11y-player {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  z-index: 2147482500;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  max-width: calc(100vw - 32px);
+  padding: 4px 4px 4px 14px;
+  border: 1px solid #071f50;
+  border-radius: 2px;
+  background: #0a2e73;
+  color: #ffffff;
+  font-family: "Onest Variable", "Onest", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateX(-50%);
+}
+.a11y-player-t {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.a11y-player button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.a11y-player button:hover,
+.a11y-player button.main {
+  background: rgba(255, 255, 255, 0.14);
+}
+.a11y-player button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: -3px;
+}
+@media (max-width: 420px) {
+  .a11y-player-t {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .a11y-player {
+    padding-left: 4px;
+  }
+}
+
+/* ---------------------------------------------------------------- 10. tizim sozlamalari va umumiy WCAG qoidalari */
+/* yopishqoq sarlavha fokuslangan elementni yopib qo'ymasin (WCAG 2.4.11) */
+html:has(.site.uni) {
+  scroll-padding-top: calc(100px * var(--a11y-fz-lg, 1));
+}
+@media (max-width: 1180px) {
+  html:has(.site.uni) {
+    scroll-padding-top: calc(92px * var(--a11y-fz-lg, 1));
+  }
+}
+html:has(.md-shell) {
+  scroll-padding-top: 88px;
+}
+/* tizimda «kontrastni oshirish» yoqilgan bo'lsa: yordamchi matn va chiziqlar to'qroq, havolalar tagiga chizilgan */
+@media (prefers-contrast: more) {
+  :root:not([data-theme="dark"]) .site.uni {
+    --ink2: #2f343d;
+    --line: #8a919e;
+  }
+  :root[data-theme="dark"] .site.uni {
+    --ink2: #d3d9e4;
+    --line: #6b7890;
+  }
+  :root:not([data-theme="dark"]) {
+    --md-body: #2f343d;
+    --md-muted: #3d424c;
+    --md-border: #8a919e;
+  }
+  :root[data-theme="dark"] {
+    --md-body: #d3d9e4;
+    --md-muted: #c2cad8;
+    --md-border: #6b7890;
+  }
+  .site.uni main a[href]:not(.bt, .btn) {
+    text-decoration-line: underline;
+  }
+  .a11y-dlg {
+    --p-ink2: #2f343d;
+    --p-line: #8a919e;
+  }
+}
+/* Windows yuqori kontrast (forced colors): tizim ranglari, belgilangan holatlar ko'rinadi */
+@media (forced-colors: active) {
+  .a11y-opt input:checked + .a11y-opt-in {
+    border: 3px solid Highlight;
+    background: Highlight;
+    color: HighlightText;
+    forced-color-adjust: none;
+  }
+  .a11y-cards .a11y-opt input:checked + .a11y-opt-in {
+    background: Canvas;
+    color: CanvasText;
+  }
+  .a11y-cards .a11y-opt input:checked + .a11y-opt-in::after {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+  .a11y-swatch {
+    forced-color-adjust: none;
+  }
+  .a11y-sw-track,
+  .a11y-sw-track i {
+    forced-color-adjust: none;
+    border-color: CanvasText;
+    background: Canvas;
+  }
+  .a11y-sw-track i {
+    background: CanvasText;
+  }
+  .a11y-sw input:checked ~ .a11y-sw-track {
+    background: Highlight;
+    border-color: Highlight;
+  }
+  .a11y-sw input:checked ~ .a11y-sw-track i {
+    background: HighlightText;
+  }
+  .a11y-speaking {
+    outline: 3px solid Highlight !important;
+    forced-color-adjust: none;
+    background: Highlight !important;
+    color: HighlightText !important;
+  }
+  .a11y-line {
+    forced-color-adjust: none;
+    background: Highlight;
+    border-color: Canvas;
+  }
+  .a11y-mask-t,
+  .a11y-mask-b {
+    forced-color-adjust: none;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  :focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 2px;
+  }
+}

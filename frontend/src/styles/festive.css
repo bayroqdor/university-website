@@ -1,0 +1,732 @@
+/* ================================================================ Bayram bezaklari */
+.fest-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  pointer-events: none;
+}
+/* tepadan tushadigan yumshoq rangli nur */
+.fest-aura {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 70vh;
+  z-index: 64;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(40% 60% at 12% 0%, var(--fest-1), transparent 70%),
+    radial-gradient(36% 55% at 50% -10%, var(--fest-2), transparent 70%),
+    radial-gradient(40% 60% at 88% 0%, var(--fest-3), transparent 70%);
+  -webkit-mask-image: linear-gradient(#000, transparent);
+  mask-image: linear-gradient(#000, transparent);
+  animation: fest-aura 14s ease-in-out infinite alternate;
+}
+@keyframes fest-aura {
+  0% {
+    transform: translateX(-3%) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: translateX(3%) scale(1.08);
+    filter: hue-rotate(25deg);
+  }
+}
+
+/* ---------------------------------------------------------------- gulchambar */
+.fest-garland {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 46px;
+  pointer-events: none;
+  z-index: 2;
+}
+.fg-wire {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.fg-wire path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 55%, transparent);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+.fest-garland > i {
+  position: absolute;
+  display: block;
+  transform: translate(-50%, 0);
+  font-style: normal;
+}
+
+/* chiroqlar */
+.fg-bulb {
+  width: 9px;
+  height: 14px;
+  margin-top: 1px;
+  border-radius: 45% 45% 50% 50% / 35% 35% 65% 65%;
+  background: var(--c);
+  box-shadow: 0 0 6px 1px var(--c), 0 0 18px 3px color-mix(in srgb, var(--c) 60%, transparent);
+  animation: fg-twinkle 2.4s ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1);
+}
+.fg-bulb::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: 6px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: #4b5563;
+}
+@keyframes fg-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1.15);
+  }
+  45% {
+    opacity: 0.35;
+    filter: brightness(0.7);
+    box-shadow: 0 0 2px var(--c);
+  }
+  70% {
+    opacity: 1;
+  }
+}
+/* chiroqlar navbat bilan «yugurgan»dek */
+.fg-lights .fg-bulb:nth-child(3n) {
+  animation-duration: 1.7s;
+}
+.fg-lights .fg-bulb:nth-child(4n + 1) {
+  animation-duration: 3.1s;
+}
+
+/* bayroqchalar */
+.fg-flag {
+  width: 22px;
+  height: 26px;
+  margin-top: 0;
+  background: var(--c);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0;
+  animation: fg-swing 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1);
+  display: grid !important;
+  place-items: start center;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+}
+.fg-flag b {
+  margin-top: 3px;
+  font: 800 10.5px/1 var(--font-sans);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+[data-festive="independence"] .fg-flag:nth-child(4n + 2),
+[data-festive="korea"] .fg-flag:nth-child(4n + 3) {
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.06);
+}
+@keyframes fg-swing {
+  0%,
+  100% {
+    transform: translate(-50%, 0) rotate(-7deg);
+  }
+  50% {
+    transform: translate(-50%, 0) rotate(7deg);
+  }
+}
+
+/* gullar */
+.fg-flower {
+  margin-top: -7px;
+  animation: fg-bob 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12));
+}
+.fg-flower svg {
+  display: block;
+  animation: fg-spin 14s linear infinite;
+}
+.fg-flower.leaf svg {
+  animation: none;
+  transform: rotate(20deg);
+}
+@keyframes fg-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, 3px) scale(1.08);
+  }
+}
+@keyframes fg-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* fonuslar (hayit va koreys bayramlari) */
+.fg-lantern {
+  transform-origin: 50% 0;
+  animation: fg-swing 4.2s ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1);
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+.fg-string {
+  display: block;
+  width: 1px;
+  height: var(--l);
+  background: color-mix(in srgb, var(--ink) 50%, transparent);
+}
+.fg-lantern svg {
+  display: block;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--fest-glow) 70%, transparent));
+}
+.fg-flame {
+  animation: fg-flame 2.2s ease-in-out infinite;
+}
+@keyframes fg-flame {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+/* lenta (xotira kuni, Konstitutsiya kuni) */
+.fg-ribbon .fg-wire path {
+  stroke: var(--fest-1);
+  stroke-width: 2.4;
+  stroke-dasharray: 10 6;
+  animation: fg-dash 8s linear infinite;
+}
+@keyframes fg-dash {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+.fg-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: -2px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 10px var(--c);
+}
+
+/* sharlar */
+.fg-balloons {
+  position: absolute;
+  top: 4px;
+  display: flex;
+}
+.fg-balloons.l {
+  left: clamp(8px, 3vw, 40px);
+}
+.fg-balloons.r {
+  right: clamp(8px, 3vw, 40px);
+  flex-direction: row-reverse;
+}
+.fg-balloon {
+  margin: 0 -6px;
+  color: var(--ink);
+  transform-origin: 50% 100%;
+  animation: fg-balloon 4s ease-in-out infinite;
+  animation-delay: calc(var(--d) * -1);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.14));
+}
+.fg-balloon:nth-child(2n) {
+  margin-top: 10px;
+}
+@keyframes fg-balloon {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(5deg);
+  }
+}
+
+/* ---------------------------------------------------------------- logotip bezagi */
+.brand {
+  position: relative;
+}
+.fest-logo {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  line-height: 0;
+  animation: fest-logo-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both 0.4s;
+}
+.fest-logo svg {
+  display: block;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.18));
+}
+.fl-snowcap {
+  left: -12px;
+  top: -12px;
+  transform: rotate(-22deg);
+}
+.fl-snowcap svg {
+  animation: fest-wiggle 5s ease-in-out infinite 1.4s;
+  transform-origin: 20% 90%;
+}
+.fest-logo:not(.fl-snowcap) {
+  left: -10px;
+  top: -10px;
+}
+.fest-logo:not(.fl-snowcap) svg {
+  width: 22px;
+  height: 22px;
+  animation: fest-float 3.4s ease-in-out infinite;
+}
+@keyframes fest-logo-in {
+  from {
+    opacity: 0;
+    scale: 0.2;
+    translate: 0 -20px;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+  }
+}
+@keyframes fest-wiggle {
+  0%,
+  86%,
+  100% {
+    transform: rotate(0);
+  }
+  90% {
+    transform: rotate(-12deg);
+  }
+  95% {
+    transform: rotate(8deg);
+  }
+}
+@keyframes fest-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+}
+
+/* ---------------------------------------------------------------- tugmalar: yaltirash va nur */
+html.fest-buttons[data-festive] .btn-primary,
+html.fest-buttons[data-festive] .btn-accent {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--fest-glow) 45%, transparent),
+    0 10px 28px -10px color-mix(in srgb, var(--fest-glow) 80%, transparent);
+  animation: fest-btn-glow 3.2s ease-in-out infinite;
+}
+html.fest-buttons[data-festive] .btn-primary::after,
+html.fest-buttons[data-festive] .btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 48%, rgba(255, 255, 255, 0.1) 54%, transparent 64%);
+  transform: translateX(-130%);
+  animation: fest-shine 4.6s ease-in-out infinite;
+}
+@keyframes fest-shine {
+  0%,
+  55% {
+    transform: translateX(-130%);
+  }
+  85%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+@keyframes fest-btn-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--fest-glow) 35%, transparent),
+      0 10px 24px -12px color-mix(in srgb, var(--fest-glow) 70%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px color-mix(in srgb, var(--fest-glow) 60%, transparent),
+      0 12px 34px -8px color-mix(in srgb, var(--fest-glow) 90%, transparent);
+  }
+}
+@keyframes fest-flow {
+  to {
+    background-position: 300% 0;
+  }
+}
+
+/* ---------------------------------------------------------------- tabrik banneri */
+.fest-banner {
+  position: fixed;
+  right: clamp(12px, 3vw, 40px);
+  top: calc(var(--header-h, 112px) + 40px);
+  z-index: 85;
+  width: min(480px, calc(100vw - 24px));
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 48px 16px 16px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--surface) 93%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    0 24px 60px -24px color-mix(in srgb, var(--fest-glow) 70%, rgba(0, 0, 0, 0.5)),
+    0 2px 0 rgba(255, 255, 255, 0.4) inset;
+  isolation: isolate;
+  overflow: hidden;
+}
+/* aylanib yuruvchi rangli chegara */
+.fest-banner-ring {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--fa, 0deg), var(--fest-1), var(--fest-2), var(--fest-3), var(--fest-4, var(--fest-1)), var(--fest-1));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: fest-ring 4s linear infinite;
+}
+@property --fa {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes fest-ring {
+  to {
+    --fa: 360deg;
+  }
+}
+.fest-banner-icon {
+  flex: none;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--blue, var(--ink));
+  box-shadow: none;
+}
+.fest-banner-icon svg {
+  width: 34px;
+  height: 34px;
+}
+@keyframes fest-pop {
+  0%,
+  100% {
+    transform: rotate(-6deg) scale(1);
+  }
+  50% {
+    transform: rotate(6deg) scale(1.07);
+  }
+}
+.fest-banner-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.fest-banner-name {
+  font: 800 19px/1.2 var(--font-sans);
+  letter-spacing: -0.01em;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--fest-glow) 80%, var(--ink)),
+    color-mix(in srgb, var(--fest-1) 70%, var(--ink)),
+    color-mix(in srgb, var(--fest-3) 70%, var(--ink)),
+    color-mix(in srgb, var(--fest-glow) 80%, var(--ink))
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fest-flow 5s linear infinite;
+}
+.fest-banner-text {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-2, var(--ink));
+}
+.fest-count {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-top: 6px;
+}
+.fest-count-cell {
+  min-width: 46px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px 4px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--fest-glow) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--fest-glow) 30%, transparent);
+  overflow: hidden;
+}
+.fest-count-cell b {
+  display: block;
+  font: 800 20px/1 var(--font-mono, monospace);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.fest-count-cell small {
+  margin-top: 3px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.fest-count em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-bottom: 6px;
+}
+.fest-today {
+  font-weight: 750;
+  color: var(--fest-glow);
+}
+.fest-banner-off {
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.fest-banner-off:hover {
+  color: var(--ink);
+}
+.fest-banner-x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+.fest-banner-x:hover {
+  transform: rotate(90deg);
+  background: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+/* ---------------------------------------------------------------- bezak tugmasi (pastki chap burchak) */
+.fest-orb {
+  position: fixed;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(12px, 2vw, 24px);
+  z-index: 80;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  /* sayt uslubi: toza chiziqli belgi, doira va soyasiz */
+  border: 1px solid var(--line, #e1e4ea);
+  border-radius: 2px;
+  background: var(--bgA, var(--surface));
+  color: var(--blue, #0a2e73);
+  box-shadow: none;
+  cursor: pointer;
+  isolation: isolate;
+  transition: border-color 0.2s, color 0.2s;
+}
+.fest-orb:hover,
+.fest-orb:focus-visible {
+  border-color: currentColor;
+}
+.fest-orb > svg {
+  width: 24px;
+  height: 24px;
+}
+.fest-orb-ring {
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: 50%;
+  background: conic-gradient(from var(--fa, 0deg), var(--fest-1), var(--fest-2), var(--fest-3), var(--fest-1));
+  animation: fest-ring 3s linear infinite;
+}
+.fest-orb-ring::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.fest-orb.off {
+  color: var(--ink2, #565c69);
+  opacity: 0.75;
+}
+.fest-orb.off .fest-orb-ring {
+  animation: none;
+}
+.fest-orb-tip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  translate: -6px -50%;
+  white-space: nowrap;
+  padding: 7px 12px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, translate 0.25s;
+}
+.fest-orb:hover .fest-orb-tip,
+.fest-orb:focus-visible .fest-orb-tip {
+  opacity: 1;
+  translate: 0 -50%;
+}
+.ck ~ .fest-orb,
+html:has(.ck) .fest-orb {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* admin ko'rish rejimi belgisi */
+.fest-preview {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  translate: -50% 0;
+  z-index: 86;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 14px;
+  border-radius: 999px;
+  background: #0b1a30;
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5);
+}
+.fest-preview button {
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--fest-glow);
+  color: #fff;
+  font-weight: 650;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .fest-banner {
+    right: 12px;
+    top: auto;
+    bottom: 84px;
+    gap: 12px;
+    padding: 14px 44px 14px 14px;
+  }
+  .fest-banner-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+  .fest-banner-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .fest-banner-name {
+    font-size: 16.5px;
+  }
+  .fest-count-cell {
+    min-width: 40px;
+  }
+  .fest-count-cell b {
+    font-size: 17px;
+  }
+  .fest-garland {
+    height: 36px;
+  }
+  .fg-lantern svg {
+    width: 16px;
+    height: 28px;
+  }
+  .fg-flag {
+    width: 18px;
+    height: 22px;
+  }
+  .fest-preview {
+    bottom: auto;
+    top: calc(var(--header-h, 100px) + 10px);
+    max-width: calc(100vw - 24px);
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .fest-preview b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 42vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fest-garland *,
+  .fest-logo,
+  .fest-logo svg,
+  .fest-aura,
+  .fest-banner-ring,
+  .fest-orb-ring,
+  .fest-banner-icon,
+  .fest-banner-name,
+  html[data-festive] .btn-primary,
+  html[data-festive] .btn-primary::after,
+  html[data-festive] .btn-accent::after {
+    animation: none !important;
+  }
+}
+@media print {
+  .fest-canvas,
+  .fest-aura,
+  .fest-garland,
+  .fest-logo,
+  .fest-banner,
+  .fest-orb,
+  .fest-preview {
+    display: none !important;
+  }
+}

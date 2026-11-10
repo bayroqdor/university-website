@@ -1,0 +1,136 @@
+/* /accessibility — «Maxsus imkoniyatlar bayonoti»: sayt uslubida, tekis, chiziqlar bilan ajratilgan bo'limlar */
+.site.uni .ast-open,
+.site.uni .bt.ast-open {
+  margin-top: 32px;
+  max-width: 100%;
+  padding-block: 10px;
+  white-space: normal;
+  text-align: left;
+}
+.site.uni .ast-in {
+  display: grid;
+  gap: 0;
+  max-width: 880px;
+}
+.site.uni .ast-in > section {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .ast-in > section:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.site.uni .ast h2 {
+  margin: 0 0 20px;
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.site.uni .ast p,
+.site.uni .ast li,
+.site.uni .ast dd,
+.site.uni .ast td {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.site.uni .ast p {
+  margin: 0 0 14px;
+  max-width: 70ch;
+}
+.site.uni .ast ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+  max-width: 70ch;
+}
+.site.uni .ast-dl {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .ast-dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 8px 32px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .ast-dl dt {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.site.uni .ast-dl dd {
+  margin: 0;
+}
+.site.uni .ast-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.site.uni .ast table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.site.uni .ast :is(th, td) {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.site.uni .ast thead th {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  border-bottom-color: var(--ink);
+}
+.site.uni .ast tbody th {
+  width: 40%;
+  font-weight: 500;
+}
+.site.uni .ast kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgB);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site.uni .ast a:not(.bt) {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site.uni .ast .bt {
+  white-space: normal;
+  text-align: center;
+}
+.site.uni .ast-updated {
+  margin-top: 28px !important;
+  font-size: 15px !important;
+  color: var(--ink2) !important;
+}
+@media (max-width: 760px) {
+  .site.uni .ast-in > section {
+    padding: 32px 0;
+  }
+  .site.uni .ast h2 {
+    font-size: 24px;
+  }
+  .site.uni .ast-dl > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .site.uni .ast tbody th {
+    width: auto;
+  }
+}

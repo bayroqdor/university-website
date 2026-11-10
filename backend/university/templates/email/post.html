@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block card %}
+{% if image %}
+<a href="{{ post_url }}"><img src="{{ image }}" width="600" alt="{{ post.feature_alt or post.title }}" style="display:block;width:100%;max-width:600px;height:auto;border:0;"></a>
+{% endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pad" style="padding:32px 40px 36px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td style="padding:0 0 0 10px;border-left:3px solid #b08d3c;font:600 11px/14px {{ sans }};letter-spacing:1.4px;text-transform:uppercase;color:{{ accent }};">{{ kind_label }}</td>
+    {% if post.tags %}<td style="padding-left:10px;font:600 12px/14px {{ sans }};color:#565c69;">#{{ post.tags[0] }}</td>{% endif %}
+  </tr></table>
+  <h1 class="h1" style="margin:16px 0 10px;font:600 27px/34px {{ sans }};color:#121418;"><a href="{{ post_url }}" style="color:#121418;text-decoration:none;">{{ post.title }}</a></h1>
+  <div style="font:500 13px/19px {{ sans }};color:#565c69;">{{ meta_line }}</div>
+  {% if event_box %}
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:18px;border:1px solid #e1e4ea;border-radius:2px;"><tr>
+    <td style="padding:14px 16px;font:400 14px/21px {{ sans }};color:#121418;">
+      {% for label, value in event_box %}<div><b style="color:{{ accent }};">{{ label }}:</b> {{ value }}</div>{% endfor %}
+    </td>
+  </tr></table>
+  {% endif %}
+  {% if summary %}<p style="margin:18px 0 0;font:400 16px/26px {{ sans }};color:#565c69;">{{ summary }}</p>{% endif %}
+  {% with href=post_url, label=L.read %}{% include "_button.html" %}{% endwith %}
+</td></tr></table>
+{% endblock %}
+{% block footer %}{{ L.why }}<br><a href="{{ unsub }}" style="color:#f6f4ef;font-weight:600;">{{ L.unsubscribe }}</a>{% endblock %}

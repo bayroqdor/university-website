@@ -1,0 +1,15 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Node / Vite
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+# ma'lumotlar (SQLite, media, eksport) va lokal muhit
+var/
+backend/var/
+.env
+*.log
+.DS_Store

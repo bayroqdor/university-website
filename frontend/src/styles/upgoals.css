@@ -1,0 +1,737 @@
+/* BRM sahifasi (/upgoals). Sayt tizimi: Onest, radius 2px, gradient va soyasiz; maqsad ranglari — rasmiy BRM palitrasi.
+   Animatsiyalar: orbita yoylari chizilib chiqadi va sekin aylanadi; plitka rangi pastdan ko'tariladi; raqamlar sanaladi.
+   «Harakatni kamaytirish»da (prefers-reduced-motion yoki sayt sozlamasi) — darhol yakuniy holat. */
+
+.site.uni .ug {
+  --ug-sec: 128px;
+}
+.site.uni .ug-sec {
+  padding: var(--ug-sec) 0 0;
+}
+.site.uni .ug-sec:last-child,
+.site.uni .ug-band {
+  padding-bottom: var(--ug-sec);
+}
+.site.uni .ug-head {
+  max-width: 760px;
+  margin-bottom: 48px;
+}
+.site.uni .ug-head .h2 {
+  margin-top: 14px;
+}
+.site.uni .ug-head > p:last-child:not(.ey) {
+  margin: 18px 0 0;
+  color: var(--ink2);
+  max-width: 62ch;
+}
+.site.uni .ug-note {
+  margin: 28px 0 0;
+  font-size: 13px;
+  color: var(--ink2);
+}
+.site.uni .ug-muted {
+  color: var(--ink2);
+}
+
+/* ------------------------------------------------------------ hero */
+.site.uni .ug-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: center;
+  margin-top: 96px;
+}
+.site.uni .ug-hero .display {
+  margin-top: 20px;
+}
+.site.uni .ug-lead {
+  margin: 28px 0 0;
+  max-width: 60ch;
+  color: var(--ink2);
+  font-size: 19px;
+  line-height: 1.6;
+}
+.site.uni .ug-hero-a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+.site.uni .ug-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--blue-fill);
+  transition: background 0.2s;
+}
+.site.uni .ug-btn:hover,
+.site.uni .ug-btn:focus-visible {
+  background: var(--blue-d);
+}
+.site.uni .ug-btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.site.uni .ug-btn.ghost:hover,
+.site.uni .ug-btn.ghost:focus-visible {
+  border-color: var(--ink);
+}
+
+/* orbita */
+.site.uni .ug-orbit {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  justify-self: end;
+  aspect-ratio: 1;
+}
+.site.uni .ug-orbit svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.site.uni .ug-orbit-spin {
+  transform-origin: 260px 260px;
+  animation: ug-spin 160s linear infinite;
+}
+.site.uni .ug-orbit:hover .ug-orbit-spin,
+.site.uni .ug-orbit:focus-within .ug-orbit-spin {
+  animation-play-state: paused;
+}
+.site.uni .ug-orbit-guide {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+.site.uni .ug-arc-p {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 34;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: ug-draw 0.9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 70ms + 200ms);
+  transition: stroke-width 0.35s var(--ease-out);
+}
+.site.uni .ug-arc.hot .ug-arc-p {
+  stroke-width: 52;
+}
+.site.uni .ug-arc-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 60;
+  cursor: pointer;
+  outline: none;
+}
+.site.uni .ug-dot {
+  fill: var(--c);
+  opacity: 0;
+  animation: ug-fade 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 70ms + 900ms);
+  transition: r 0.3s var(--ease-out);
+}
+.site.uni .ug-orbit-c {
+  position: absolute;
+  inset: 26%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.site.uni .ug-orbit-c b {
+  font-size: clamp(40px, 4.4vw, 72px);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  transition: color 0.3s;
+}
+.site.uni .ug-orbit-c > span {
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--ink2);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+@keyframes ug-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ug-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ug-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------ plitkalar */
+.site.uni .ug-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.site.uni .ug-prio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 8px;
+}
+.site.uni .ug-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+  padding: 18px 18px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  background: var(--bgB);
+  isolation: isolate;
+}
+.site.uni .ug-tile.big {
+  min-height: 360px;
+  padding: 26px 26px 0;
+}
+.site.uni .ug-tile-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--c);
+  z-index: -1;
+  clip-path: inset(0 0 0 0);
+}
+.site.uni .ug-tile.rv {
+  opacity: 1;
+  transform: none;
+}
+.site.uni .ug-tile.rv .ug-tile-fill {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.9s var(--ease-out) var(--d, 0ms);
+}
+.site.uni .ug-tile.rv.in .ug-tile-fill {
+  clip-path: inset(0 0 0 0);
+}
+.site.uni .ug-tile.rv > :not(.ug-tile-fill) {
+  opacity: 0;
+  transition: opacity 0.6s ease calc(var(--d, 0ms) + 350ms);
+}
+.site.uni .ug-tile.rv.in > :not(.ug-tile-fill) {
+  opacity: 1;
+}
+.site.uni .ug-tile-n {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+.site.uni .ug-tile-t {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  max-width: 16ch;
+}
+.site.uni .ug-tile.big .ug-tile-n {
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.site.uni .ug-tile.big .ug-tile-t {
+  font-size: 26px;
+  margin-top: 14px;
+  max-width: 18ch;
+}
+.site.uni .ug-tile-x {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.92);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* piktogramma: rasmiy ikonkaning pastki (matnsiz) qismi */
+.site.uni .ug-picto {
+  position: relative;
+  display: block;
+  margin-top: auto;
+  align-self: flex-end;
+  width: 62%;
+  aspect-ratio: 720 / 430;
+  overflow: hidden;
+  transform: translateY(8%);
+  transition: transform 0.6s var(--ease-out);
+}
+.site.uni .ug-tile.big .ug-picto {
+  width: 46%;
+}
+.site.uni .ug-picto img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  filter: none !important;
+}
+.site.uni .ug-tile:hover .ug-picto,
+.site.uni .ug-tile:focus-visible .ug-picto {
+  transform: translateY(0) scale(1.04);
+}
+.site.uni .ug-tile-go {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition:
+    opacity 0.3s,
+    transform 0.4s var(--ease-out);
+}
+.site.uni .ug-tile:hover .ug-tile-go,
+.site.uni .ug-tile:focus-visible .ug-tile-go {
+  opacity: 1;
+  transform: none;
+}
+.site.uni .ug-tile:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------ hujjatlar */
+.site.uni .ug-band {
+  margin-top: var(--ug-sec);
+  background: var(--bgB);
+  border-top: 1px solid var(--line);
+}
+.site.uni .ug-band-in {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: start;
+}
+.site.uni .ug-docs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .ug-docs a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+.site.uni .ug-docs a span {
+  flex: 1;
+}
+.site.uni .ug-docs a:hover,
+.site.uni .ug-docs a:focus-visible {
+  color: var(--blue);
+}
+
+/* ------------------------------------------------------------ maqsad sahifasi */
+.site.uni .ug-d-hero {
+  background: var(--c);
+  color: #fff;
+  padding: 56px 0 0;
+}
+.site.uni .ug-d-hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 48px;
+  align-items: end;
+  padding-bottom: 56px;
+}
+.site.uni .ug-d-hero .ey,
+.site.uni .ug-d-hero .display,
+.site.uni .ug-crumb {
+  color: #fff;
+}
+.site.uni .ug-d-hero .ey {
+  margin-top: 40px;
+  opacity: 0.9;
+}
+.site.uni .ug-d-hero .display {
+  margin-top: 16px;
+  font-size: clamp(44px, 5vw, 88px);
+}
+.site.uni .ug-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.9;
+}
+.site.uni .ug-crumb:hover,
+.site.uni .ug-crumb:focus-visible {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site.uni .ug-d-short {
+  margin: 24px 0 0;
+  max-width: 56ch;
+  font-size: 20px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+}
+.site.uni .ug-d-icon {
+  position: relative;
+  justify-self: end;
+  width: 100%;
+  max-width: 340px;
+}
+.site.uni .ug-d-icon img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  outline: 1px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 10px;
+  filter: none !important;
+  animation: ug-rise 0.9s var(--ease-out) both;
+}
+.site.uni .ug-d-n {
+  position: absolute;
+  right: 100%;
+  bottom: -0.12em;
+  margin-right: 12px;
+  font-size: clamp(120px, 14vw, 240px);
+  font-weight: 600;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  animation: ug-fade 1.2s ease both 0.2s;
+}
+@keyframes ug-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+/* 17 maqsad bo'ylab tez o'tish */
+.site.uni .ug-strip {
+  display: grid;
+  grid-template-columns: repeat(17, minmax(0, 1fr));
+  gap: 4px;
+  padding-bottom: 0;
+}
+.site.uni .ug-strip a {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+  padding: 0 0 6px 6px;
+  background: var(--c);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  outline: 1px solid rgba(255, 255, 255, 0.25);
+  transition: height 0.3s var(--ease-out);
+}
+.site.uni .ug-strip a:hover,
+.site.uni .ug-strip a:focus-visible,
+.site.uni .ug-strip a.on {
+  height: 56px;
+}
+.site.uni .ug-strip a.on {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+.site.uni .ug-strip {
+  align-items: end;
+  height: 56px;
+}
+
+.site.uni .ug-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.site.uni .ug-fact {
+  padding: 32px 32px 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .ug-fact + .ug-fact {
+  padding-left: 32px;
+  border-left: 1px solid var(--line);
+}
+.site.uni .ug-fact b {
+  display: block;
+  font-size: clamp(40px, 3.8vw, 64px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--c);
+  text-wrap: balance;
+}
+:root[data-theme="dark"] .site.uni .ug-fact b {
+  filter: brightness(1.25);
+}
+.site.uni .ug-fact > span {
+  display: block;
+  margin-top: 16px;
+  color: var(--ink2);
+  max-width: 34ch;
+}
+.site.uni .ug-fact.rv {
+  transition-delay: var(--d, 0ms);
+}
+
+.site.uni .ug-two-in {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px;
+}
+.site.uni .ug-act .h2,
+.site.uni .ug-ours .h2 {
+  margin-top: 14px;
+}
+.site.uni .ug-act ol {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .ug-act li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 8px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .ug-act li > span {
+  font-weight: 600;
+  color: var(--c);
+}
+:root[data-theme="dark"] .site.uni .ug-act li span {
+  filter: brightness(1.3);
+}
+.site.uni .ug-act li p {
+  margin: 0;
+}
+.site.uni .ug-ours {
+  padding: 36px;
+  background: var(--bgB);
+  border-top: 4px solid var(--c);
+  align-self: start;
+}
+.site.uni .ug-ours-t {
+  margin: 20px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.site.uni .ug-ours .ug-docs {
+  margin-top: 28px;
+}
+
+.site.uni .ug-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.site.uni .ug-item {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.site.uni .ug-item img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 18px;
+}
+.site.uni .ug-item time {
+  font-size: 13px;
+  color: var(--ink2);
+}
+.site.uni .ug-item h3 {
+  margin: 6px 0 0;
+  font-size: 21px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.site.uni .ug-item p {
+  margin: 10px 0 0;
+  color: var(--ink2);
+}
+.site.uni .ug-item a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site.uni .ug-pn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: var(--ug-sec);
+  margin-bottom: var(--ug-sec);
+}
+.site.uni .ug-pn a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--c);
+  border-radius: 2px;
+  font-weight: 600;
+  transition: border-color 0.3s;
+}
+.site.uni .ug-pn a.nx {
+  justify-content: flex-end;
+  text-align: right;
+  border-left-width: 1px;
+  border-right: 6px solid var(--c);
+}
+.site.uni .ug-pn a small {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink2);
+  margin-bottom: 4px;
+}
+.site.uni .ug-pn a:hover,
+.site.uni .ug-pn a:focus-visible {
+  border-color: var(--c);
+}
+
+/* ------------------------------------------------------------ moslashuv */
+@media (max-width: 1180px) {
+  .site.uni .ug-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .site.uni .ug {
+    --ug-sec: 96px;
+  }
+  .site.uni .ug-hero,
+  .site.uni .ug-band-in,
+  .site.uni .ug-two-in,
+  .site.uni .ug-d-hero-in {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .ug-hero {
+    margin-top: 48px;
+  }
+  .site.uni .ug-d-n {
+    display: none;
+  }
+  .site.uni .ug-orbit {
+    justify-self: center;
+    max-width: 420px;
+  }
+  .site.uni .ug-d-icon {
+    justify-self: start;
+    max-width: 220px;
+  }
+  .site.uni .ug-facts {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .ug-fact,
+  .site.uni .ug-fact + .ug-fact {
+    padding: 28px 0;
+    border-left: 0;
+  }
+  .site.uni .ug-strip {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    height: auto;
+    row-gap: 4px;
+  }
+  .site.uni .ug-strip a,
+  .site.uni .ug-strip a:hover,
+  .site.uni .ug-strip a.on {
+    height: 36px;
+  }
+}
+@media (max-width: 640px) {
+  .site.uni .ug-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site.uni .ug-prio-grid {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .ug-tile {
+    min-height: 190px;
+    padding: 14px 14px 0;
+  }
+  .site.uni .ug-tile-t {
+    font-size: 16px;
+  }
+  .site.uni .ug-tile.big {
+    min-height: 300px;
+  }
+  .site.uni .ug-pn {
+    grid-template-columns: 1fr;
+  }
+  .site.uni .ug-ours {
+    padding: 24px;
+  }
+  .site.uni .ug-d-icon {
+    max-width: 180px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site.uni .ug-orbit-spin,
+  .site.uni .ug-arc-p,
+  .site.uni .ug-dot,
+  .site.uni .ug-d-icon img,
+  .site.uni .ug-d-n {
+    animation: none !important;
+  }
+  .site.uni .ug-arc-p {
+    stroke-dashoffset: 0;
+  }
+  .site.uni .ug-dot {
+    opacity: 1;
+  }
+}
+/* sayt sozlamasida animatsiya o'chirilgan bo'lsa (.ug.still) */
+.site.uni .ug.still .ug-orbit-spin,
+.site.uni .ug.still .ug-arc-p,
+.site.uni .ug.still .ug-dot {
+  animation: none !important;
+}
+.site.uni .ug.still .ug-arc-p {
+  stroke-dashoffset: 0;
+}
+.site.uni .ug.still .ug-dot {
+  opacity: 1;
+}

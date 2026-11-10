@@ -1,0 +1,491 @@
+/* ONLYOFFICE: «Hujjatlar» ilovasi (kabinet / admin — MatDash tokenlari), tahrirlagich va saytdagi ko'ruvchi */
+
+/* ---------- tur belgilari: Word — ko'k, Excel — yashil, PowerPoint — to'q sariq, PDF — qizil ---------- */
+.oo-ic {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  color: #fff;
+  background: #2b579a;
+}
+.oo-ic.k-cell {
+  background: #1e7145;
+}
+.oo-ic.k-slide {
+  background: #c43e1c;
+}
+.oo-ic.k-pdf {
+  background: #b42318;
+}
+
+/* ---------- tezkor yaratish ---------- */
+.oo-quick {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.oo-quick-i {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+  box-shadow: var(--md-shadow);
+  color: var(--md-heading);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.oo-quick-i:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--md-primary);
+  box-shadow: var(--md-shadow-dd);
+}
+.oo-quick-i:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.oo-quick-i span {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.oo-quick-i b {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+}
+
+/* ---------- ro'yxat ---------- */
+.oo-off {
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--md-gold-c);
+  color: var(--md-body);
+}
+.oo-list {
+  padding: 8px 0 6px;
+}
+.oo-filters {
+  margin: 10px 18px 6px;
+}
+.oo-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.oo-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px 6px 8px;
+  border-top: 1px solid var(--md-border);
+}
+.oo-row:first-child {
+  border-top: 0;
+}
+.oo-row-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--md-r-sm);
+  background: none;
+  color: var(--md-heading);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.oo-row-main:hover {
+  background: var(--md-hover);
+}
+.oo-row-t {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.oo-row-t b {
+  font-size: 14.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.oo-row-t b em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--md-muted);
+}
+.oo-row-t small {
+  color: var(--md-muted);
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.oo-star.on {
+  color: var(--md-gold-c);
+}
+.oo-star.on svg {
+  fill: currentColor;
+}
+.oo-menu-w {
+  position: relative;
+}
+.oo-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  display: grid;
+  min-width: 210px;
+  padding: 6px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+  box-shadow: var(--md-shadow-dd);
+}
+.oo-menu > * {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: var(--md-r-sm);
+  background: none;
+  color: var(--md-heading);
+  font: 500 13.5px/1.2 var(--md-font);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.oo-menu > *:hover {
+  background: var(--md-hover);
+}
+.oo-menu .danger {
+  color: var(--md-red);
+}
+
+/* ---------- «Yaratish» oynasi ---------- */
+.oo-types {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.oo-type {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 26px 14px 20px;
+  border: 1.5px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+  color: var(--md-heading);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.oo-type .oo-ic {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+}
+.oo-type b {
+  font-size: 16px;
+}
+.oo-type:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: var(--md-primary);
+  box-shadow: var(--md-shadow-dd);
+}
+.oo-type.k-cell:hover:not(:disabled) {
+  border-color: #1e7145;
+}
+.oo-type.k-slide:hover:not(:disabled) {
+  border-color: #c43e1c;
+}
+
+/* ---------- tahrirlagich ---------- */
+.oo-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: calc(100vh - var(--md-top-h, 72px) - 40px);
+  min-height: 520px;
+}
+.oo-edit-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.oo-edit-bar .oo-ic {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+.oo-edit-t {
+  flex: 1;
+  min-width: 0;
+  color: var(--md-heading);
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.oo-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--md-border, #e1e4ea);
+  border-radius: var(--md-r, 12px);
+  overflow: hidden;
+  background: #fff;
+}
+.oo-frame > div[id],
+.oo-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.oo-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  background: var(--md-card, #fff);
+  color: var(--md-muted, #565c69);
+  font-size: 14px;
+  pointer-events: none;
+}
+.oo-err {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 24px;
+  color: var(--md-body, #565c69);
+  text-align: center;
+}
+.oo-how {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--md-body);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.oo-how li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+}
+.oo-how svg {
+  margin-top: 3px;
+  color: var(--md-primary);
+}
+
+/* «Ulanishni tekshirish» natijasi: ikki yo'nalish va vaqtlar */
+.oo-test {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--md-border, #e5eaef);
+  border-radius: 2px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--md-body);
+}
+.oo-test ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+.oo-test-ok,
+.oo-test-bad {
+  display: inline-flex;
+  gap: 6px;
+  align-items: flex-start;
+  font-weight: 600;
+}
+.oo-test-ok {
+  color: var(--md-green);
+}
+.oo-test-bad {
+  color: var(--md-red);
+}
+.oo-test p.oo-test-bad {
+  display: block;
+  margin: 8px 0 0;
+  font-weight: 500;
+}
+.oo-test svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ---------- ONLYOFFICE ko'ruvchisi: /docs/view (kabinet ichidan to'g'ridan-to'g'ri havola) ---------- */
+.oo-view {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f3f5f8;
+  font-family: "Onest Variable", "Onest", system-ui, sans-serif;
+}
+.oo-view-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 56px;
+  padding: 0 16px;
+  background: #0a2e73;
+  color: #fff;
+}
+.oo-view-back,
+.oo-view-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 2px;
+  background: transparent;
+  color: #fff;
+  font: 600 14px/1 inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.oo-view-back:hover,
+.oo-view-dl:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.oo-view-brand {
+  display: inline-flex;
+}
+.oo-view-t {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.oo-view-main {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+}
+.oo-view-main .oo-frame {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+@media (max-width: 760px) {
+  .oo-quick,
+  .oo-types {
+    grid-template-columns: 1fr;
+  }
+  .oo-view-back span,
+  .oo-view-dl span,
+  .oo-view-brand {
+    display: none;
+  }
+  .oo-edit {
+    height: calc(100vh - 120px);
+  }
+}
+
+/* ------------------------------------------------------------------ saytdagi hujjat sahifasi (/document): PDF pdf.js bilan, ONLYOFFICE'siz */
+.site.uni .docpage {
+  padding: clamp(28px, 4vw, 48px) 0 clamp(56px, 8vw, 96px);
+}
+.site.uni .docpage-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  min-width: 0;
+}
+.site.uni .docpage-t {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.site.uni .docpage-acts {
+  display: inline-flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.site.uni .docpage-bar .btn {
+  gap: 8px;
+}
+.site.uni .docpage-open {
+  width: 44px;
+  padding: 0;
+  justify-content: center;
+}
+/* sahifaning o'z tugmalari bor — DocViewer'ning ichki sarlavha qatori takrorlanmaydi */
+.site.uni .docpage-view .dv-bar {
+  display: none;
+}
+.site.uni .docpage-msg {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bgB);
+  color: var(--ink2);
+}
+@media (max-width: 640px) {
+  .site.uni .docpage-bar {
+    flex-wrap: wrap;
+  }
+  .site.uni .docpage-t {
+    order: 3;
+    flex-basis: 100%;
+    white-space: normal;
+  }
+  .site.uni .docpage-acts {
+    margin-left: auto;
+  }
+  .site.uni .docpage-bar .btn.sm {
+    height: 40px;
+    padding: 0 14px;
+  }
+  .site.uni .docpage-open {
+    width: 40px;
+    padding: 0;
+  }
+}

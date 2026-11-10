@@ -1,0 +1,168 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: university-website:1.0
+    # image Docker Hub'dan tortilmaydi — har doim mahalliy yig'iladi (Portainer uchun muhim)
+    pull_policy: build
+    ports:
+      # tashqi port : ilova ichki porti (8000)
+      - "${SITE_PORT:-11659}:8000"
+    environment:
+      SITE_ADMIN_LOGIN: ${SITE_ADMIN_LOGIN:-admin}
+      # birinchi ishga tushishda admin paroli; bo'sh bo'lsa tasodifiy parol yaratilib logga yoziladi
+      SITE_ADMIN_PASSWORD: ${SITE_ADMIN_PASSWORD:-}
+      SITE_ADMIN_EMAIL: ${SITE_ADMIN_EMAIL:-}
+      # "1" bo'lsa, har ishga tushishda admin paroli SITE_ADMIN_PASSWORD ga qaytariladi (parol unutilganda)
+      SITE_ADMIN_RESET_PASSWORD: ${SITE_ADMIN_RESET_PASSWORD:-}
+      SITE_TZ: ${SITE_TZ:-Asia/Tashkent}
+      # sayt HTTPS orqali ochilsa "1" qiling (cookie faqat HTTPS da yuboriladi)
+      SITE_COOKIE_SECURE: ${SITE_COOKIE_SECURE:-}
+      # External site URL (links in emails, sitemap, RSS), e.g. https://example.edu
+      SITE_URL: ${SITE_URL:-}
+      # PDF/og:image uchun bir vaqtda ishlaydigan Chromium soni (har biri ~150 MB xotira)
+      SITE_RENDER_CONCURRENCY: ${SITE_RENDER_CONCURRENCY:-2}
+      # namuna o'quv ma'lumotlari (guruhlar, o'qituvchilar, talabalar, jadval). Ishlab chiqarishda "0" qiling
+      SITE_DEMO_ACADEMIC: ${SITE_DEMO_ACADEMIC:-1}
+      SITE_DEMO_PASSWORD: ${SITE_DEMO_PASSWORD:-demo2025}
+      # ---------- ichki pochta (veb-pochta + Stalwart). Hammasi avtomatik: «mail» konteyneri o'zini sozlaydi,
+      # administrator paroli umumiy «mail-secrets» volume'da yaratiladi va sayt uni o'zi o'qiydi. Qo'lda hech narsa kiritish shart emas.
+      # Pochtani o'chirish: SITE_MAIL_ENABLED=0. Admin panel → «Pochta serveri» da ham sozlanadi
+      SITE_MAIL_ENABLED: ${SITE_MAIL_ENABLED:-}
+      SITE_MAIL_DOMAIN: ${SITE_MAIL_DOMAIN:-example.edu}
+      SITE_MAIL_IMAP_HOST: ${SITE_MAIL_IMAP_HOST:-mail}
+      SITE_MAIL_IMAP_PORT: ${SITE_MAIL_IMAP_PORT:-993}
+      SITE_MAIL_IMAP_SECURITY: ${SITE_MAIL_IMAP_SECURITY:-ssl}
+      SITE_MAIL_SMTP_HOST: ${SITE_MAIL_SMTP_HOST:-mail}
+      SITE_MAIL_SMTP_PORT: ${SITE_MAIL_SMTP_PORT:-465}
+      SITE_MAIL_SMTP_SECURITY: ${SITE_MAIL_SMTP_SECURITY:-ssl}
+      # ichki tarmoqda Stalwart o'z-o'zidan imzolangan sertifikat bilan ishlaydi
+      SITE_MAIL_TLS_VERIFY: ${SITE_MAIL_TLS_VERIFY:-0}
+      SITE_MAIL_MASTER_USER: ${SITE_MAIL_MASTER_USER:-}
+      SITE_MAIL_MASTER_PASSWORD: ${SITE_MAIL_MASTER_PASSWORD:-}
+      SITE_MAIL_PROVISION: ${SITE_MAIL_PROVISION:-stalwart}
+      SITE_MAIL_STALWART_URL: ${SITE_MAIL_STALWART_URL:-http://mail:8081}
+      SITE_MAIL_STALWART_USER: ${SITE_MAIL_STALWART_USER:-admin}
+      SITE_MAIL_STALWART_PASSWORD: ${SITE_MAIL_STALWART_PASSWORD:-}
+      SITE_MAIL_STALWART_TOKEN: ${SITE_MAIL_STALWART_TOKEN:-}
+      SITE_MAIL_HOSTNAME: ${MAIL_HOSTNAME:-mail.example.edu}
+      SITE_MAIL_PUBLIC_IMAP: ${SITE_MAIL_PUBLIC_IMAP:-}
+      SITE_MAIL_PUBLIC_SMTP: ${SITE_MAIL_PUBLIC_SMTP:-}
+      # ---------- ma'lumotlar bazasi: PostgreSQL («db» xizmati). Parol avtomatik yaratiladi (db-secrets volume) — qo'lda kiritish shart emas.
+      # Birinchi ishga tushishda /data/site.sqlite3 (eski versiyadagi baza) bo'lsa — barcha ma'lumotlar PostgreSQL'ga bir marta o'zi ko'chiriladi.
+      SITE_DATABASE_URL: ${SITE_DATABASE_URL:-postgresql://university@db:5432/university}
+      SITE_DATABASE_PASSWORD_FILE: /db-secrets/db_password
+      # ulanishlar puli hajmi (bir vaqtda bazaga murojaat qiladigan so'rovlar soni)
+      SITE_DATABASE_POOL: ${SITE_DATABASE_POOL:-20}
+      # ---------- ONLYOFFICE (hujjatlarni brauzerda ko'rish va tahrirlash). Hammasi avtomatik: brauzer serverga sayt orqali
+      # (/office-ds/…) murojaat qiladi, JWT kaliti office-secrets volume'da yaratiladi. O'chirish: SITE_OFFICE_ENABLED=0
+      SITE_OFFICE_ENABLED: ${SITE_OFFICE_ENABLED:-1}
+      SITE_OFFICE_URL: ${SITE_OFFICE_URL:-/office-ds}
+      SITE_OFFICE_INTERNAL_URL: ${SITE_OFFICE_INTERNAL_URL:-http://onlyoffice}
+      SITE_OFFICE_APP_URL: ${SITE_OFFICE_APP_URL:-http://web:8000}
+      SITE_OFFICE_JWT_FILE: /office-secrets/jwt
+    depends_on:
+      mail:
+        condition: service_started
+      db:
+        condition: service_healthy
+      onlyoffice:
+        condition: service_started
+    volumes:
+      - site-data:/data
+      - mail-secrets:/secrets:ro
+      - db-secrets:/db-secrets:ro
+      - office-secrets:/office-secrets:ro
+    restart: unless-stopped
+
+  # ONLYOFFICE Docs (Document Server) — Word / Excel / PowerPoint hujjatlarini brauzerda ochish va birgalikda tahrirlash (kabinet va admin panel).
+  # Sayt uni /office-ds/ yo'lida o'zi proksilaydi. Tezroq: serverdagi nginx /office-ds/ ni to'g'ridan-to'g'ri shu portga yo'naltirsin
+  # (README → «Hujjatlar (ONLYOFFICE)»): tahrirlagichning ~150 ta fayli Python ilovasidan o'tmaydi. Port standart holda faqat server
+  # ichidan ochiq (127.0.0.1). Kamida ~2 GB bo'sh xotira kerak; birinchi ishga tushish 1–2 daqiqa.
+  onlyoffice:
+    image: onlyoffice/documentserver:${ONLYOFFICE_VERSION:-latest}
+    ports:
+      - "${OFFICE_PORT:-127.0.0.1:8082}:80"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        [ -s /secrets/jwt ] || (head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n' > /secrets/jwt)
+        chmod 644 /secrets/jwt
+        export JWT_ENABLED=true JWT_HEADER=Authorization JWT_SECRET="$$(cat /secrets/jwt)"
+        exec /app/ds/run-document-server.sh
+    environment:
+      # sayt konteyneri ichki (xususiy) tarmoqda — hujjat serveri undan faylni yuklab olishi uchun ruxsat
+      ALLOW_PRIVATE_IP_ADDRESS: "true"
+      ALLOW_META_IP_ADDRESS: "true"
+      WOPI_ENABLED: "false"
+    volumes:
+      - office-data:/var/www/onlyoffice/Data
+      - office-lib:/var/lib/onlyoffice
+      - office-secrets:/secrets
+    restart: unless-stopped
+
+  # PostgreSQL 16 — saytning asosiy bazasi (kontent, foydalanuvchilar, jadval, kutubxona, statistika…).
+  # Parol birinchi ishga tushishda tasodifiy yaratiladi va db-secrets volume'da saqlanadi (sayt uni o'zi o'qiydi).
+  # Manual connection: docker compose exec db psql -U university university
+  db:
+    image: postgres:16-alpine
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        [ -s /secrets/db_password ] || (head -c 24 /dev/urandom | od -An -tx1 | tr -d ' \n' > /secrets/db_password)
+        chmod 644 /secrets/db_password
+        export POSTGRES_PASSWORD_FILE=/secrets/db_password
+        exec docker-entrypoint.sh postgres -c max_connections=200 -c shared_buffers=256MB -c work_mem=16MB
+    environment:
+      POSTGRES_USER: university
+      POSTGRES_DB: university
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - db-secrets:/secrets
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "university", "-d", "university"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  # Institutning o'z pochta serveri — Stalwart Mail Server (ochiq kodli: SMTP, IMAP, JMAP, spam filtri, DKIM/SPF/DMARC).
+  # Birinchi ishga tushishda o'zini avtomatik sozlaydi (docker/mail/entrypoint.sh): server nomi, domen, DKIM kalitlari,
+  # administrator paroli (mail-secrets volume'da). Sayt shu parol bilan barcha xodim va talabalar uchun qutilarni o'zi yaratadi.
+  # Stalwart boshqaruv paneli (ixtiyoriy): http://127.0.0.1:${MAIL_ADMIN_PORT:-8080}/admin, login: admin,
+  # parol: docker compose exec mail cat /secrets/admin_password
+  mail:
+    build:
+      context: docker/mail
+    image: university-mail:1.0
+    pull_policy: build
+    hostname: ${MAIL_HOSTNAME:-mail.example.edu}
+    environment:
+      MAIL_HOSTNAME: ${MAIL_HOSTNAME:-mail.example.edu}
+      MAIL_DOMAIN: ${SITE_MAIL_DOMAIN:-example.edu}
+      # "1" — Let's Encrypt sertifikatini avtomatik olish (mail.<domen> DNS'da shu serverga qarashi va 443-port ochiq bo'lishi kerak)
+      MAIL_ACME: ${MAIL_ACME:-0}
+    ports:
+      - "${MAIL_SMTP_PORT:-25}:25"            # SMTP (boshqa serverlardan kiruvchi xatlar)
+      - "${MAIL_SUBMISSION_PORT:-465}:465"    # SMTP SSL (telefon/Thunderbird orqali yuborish)
+      - "${MAIL_IMAP_PORT:-993}:993"          # IMAP SSL (telefon/Thunderbird)
+      # boshqaruv paneli: standart holda faqat server ichidan (SSH tunnel yoki reverse proxy orqali oching)
+      - "${MAIL_ADMIN_PORT:-127.0.0.1:8081}:8081"
+    volumes:
+      - mail-etc:/etc/stalwart
+      - mail-data:/var/lib/stalwart
+      - mail-secrets:/secrets
+    restart: unless-stopped
+
+volumes:
+  site-data:
+  db-data:
+  db-secrets:
+  office-data:
+  office-lib:
+  office-secrets:
+  mail-etc:
+  mail-data:
+  mail-secrets:

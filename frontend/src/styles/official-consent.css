@@ -1,0 +1,33 @@
+/* Rozilik qatori (site/official/Consent.tsx): forma ichida, yuborish tugmasidan oldin */
+.of-consent {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink2, #565c69);
+  max-width: 60ch;
+}
+.of-consent a {
+  color: var(--blue, #0a2e73);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.of-consent a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+.of-consent.on-dark,
+.of-consent.on-dark a {
+  color: var(--on-dark2, rgba(246, 244, 239, 0.8));
+}
+.of-consent.on-dark a {
+  color: var(--on-dark, #f6f4ef);
+}
+.ft-sub-consent {
+  margin-top: 10px;
+  font-size: 13px;
+}
+.ck-text .ck-policy {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

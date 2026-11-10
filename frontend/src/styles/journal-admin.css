@@ -1,0 +1,467 @@
+/* Ilmiy jurnal — admin panel (MatDash --md-* tokenlari) */
+.jA-tabs {
+  margin-bottom: 16px;
+}
+.jA-stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.jA-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+}
+.jA-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.jA-row > .a-input,
+.jA-row > select {
+  flex: 1;
+  min-width: 200px;
+}
+.jA-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+.jA-foot.left {
+  justify-content: flex-start;
+}
+.jA-sp {
+  flex: 1;
+}
+.jA-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.jA-dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 8px 16px;
+  margin: 0;
+}
+.jA-dl dt {
+  color: var(--md-muted);
+}
+.jA-dl dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.jA-index {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--md-border);
+}
+.jA-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--md-primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+.jA-link:hover {
+  text-decoration: underline;
+}
+.jA-acts {
+  white-space: nowrap;
+  text-align: right;
+}
+.jA-nowrap {
+  white-space: nowrap;
+}
+.jA-title a {
+  color: var(--md-heading);
+  font-weight: 600;
+}
+.jA-title small,
+.jA-block {
+  display: block;
+  margin-top: 2px;
+  color: var(--md-muted);
+  font-size: 12px;
+}
+.jA-warn {
+  color: var(--md-gold) !important;
+}
+.jA-back {
+  color: var(--md-primary);
+}
+
+/* takrorlanuvchi bloklar (mualliflar, tahrir hay'ati) */
+.jA-rep {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jA-rep-item {
+  padding: 12px 14px 14px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+}
+.jA-rep-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  color: var(--md-heading);
+}
+.jA-grip {
+  display: inline-flex;
+  padding: 4px;
+  color: var(--md-muted);
+  cursor: grab;
+}
+.jA-person {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 14px;
+}
+.jA-corr {
+  align-self: end;
+}
+
+/* PDF */
+.jA-pdf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.jA-pdf-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--md-primary);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.jA-pdfinfo {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--md-body);
+}
+.jA-pdfinfo li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.jA-pdfinfo .ok {
+  color: var(--md-green);
+}
+.jA-pdfinfo .bad {
+  color: var(--md-red);
+  font-weight: 600;
+}
+.jA-pdfinfo .warn {
+  color: var(--md-gold);
+}
+.jA-langs {
+  margin-bottom: 12px;
+}
+.jA-langs + .a-field,
+.jA-langs ~ .a-field + .a-field {
+  margin-top: 10px;
+}
+.jA-g4 {
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+.jA-url code {
+  font-size: 12px;
+}
+
+/* muharrir: o'ngda tekshiruv va iqtibos */
+.jA-ed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 16px;
+  align-items: start;
+}
+.jA-side {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--md-top-h) + 16px);
+}
+.jA-check {
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+}
+.jA-check > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--md-heading);
+}
+.jA-score {
+  font-size: 12px;
+  font-weight: 600;
+}
+.jA-score.ok {
+  color: var(--md-green);
+}
+.jA-score.warn {
+  color: var(--md-gold);
+}
+.jA-score.bad {
+  color: var(--md-red);
+}
+.jA-check ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0 16px 14px;
+  list-style: none;
+  font-size: 13px;
+}
+.jA-check li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  color: var(--md-body);
+}
+.jA-check li svg {
+  margin-top: 2px;
+}
+.jA-check li.ok svg {
+  color: var(--md-green);
+}
+.jA-check li.warn svg {
+  color: var(--md-gold-c);
+}
+.jA-check li.bad svg {
+  color: var(--md-red);
+}
+.jA-check li.bad span {
+  color: var(--md-heading);
+  font-weight: 600;
+}
+.jA-meta {
+  margin: 0 16px 14px;
+  border-top: 1px solid var(--md-border);
+  padding-top: 10px;
+}
+.jA-meta summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--md-primary);
+}
+.jA-meta pre {
+  max-height: 340px;
+  margin: 10px 0 0;
+  padding: 10px;
+  overflow: auto;
+  border-radius: var(--md-r);
+  background: var(--md-light);
+  color: var(--md-heading);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.jA-cite + .jA-cite {
+  margin-top: 12px;
+}
+.jA-cite b {
+  font-size: 12px;
+  color: var(--md-muted);
+}
+.jA-cite p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--md-heading);
+  overflow-wrap: anywhere;
+}
+.jA-stat {
+  margin: 0;
+}
+@media (max-width: 1200px) {
+  .jA-ed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .jA-side {
+    position: static;
+  }
+}
+@media (max-width: 760px) {
+  .jA-person,
+  .jA-index {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------- saytda ko'rinish holati (sahifa tepasi) va muharrirdagi blok */
+.jA-status {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+  color: var(--md-body);
+  font-size: 14px;
+}
+.jA-status.one {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.jA-status.ok > svg,
+.jA-status-h > svg {
+  flex: none;
+}
+.jA-status.ok > svg,
+.jA-status.ok .jA-status-h > svg {
+  color: var(--md-green);
+}
+.jA-status p {
+  margin: 0;
+}
+.jA-status b {
+  color: var(--md-heading);
+}
+.jA-status.todo {
+  border-color: var(--md-gold-c);
+}
+.jA-status.todo .jA-status-h > svg {
+  color: var(--md-gold-c);
+}
+.jA-status.prompt {
+  border-color: var(--md-primary);
+  background: var(--md-primary-s);
+}
+.jA-status-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.jA-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+.jA-prompt p {
+  flex: 1 1 320px;
+}
+.jA-steps {
+  display: grid;
+  gap: 2px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.jA-steps li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 0;
+  border-top: 1px solid var(--md-border);
+}
+.jA-steps li:first-child {
+  border-top: 0;
+}
+.jA-steps li.ok {
+  color: var(--md-muted);
+}
+.jA-steps li.ok svg {
+  color: var(--md-green);
+}
+.jA-steps li.bad svg {
+  color: var(--md-muted);
+}
+.jA-steps li.bad > span {
+  color: var(--md-heading);
+  font-weight: 600;
+}
+.jA-steps li.warn svg {
+  color: var(--md-gold-c);
+}
+.jA-steps li.info svg {
+  color: var(--md-muted);
+}
+.jA-steps.warn {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--md-border);
+}
+.jA-steps li > .a-btn {
+  justify-self: end;
+}
+.jA-vis {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: var(--md-card);
+  font-size: 13px;
+}
+.jA-vis.bad {
+  border-color: var(--md-gold-c);
+}
+.jA-vis-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--md-heading);
+}
+.jA-vis.ok .jA-vis-h svg {
+  color: var(--md-green);
+}
+.jA-vis.bad .jA-vis-h svg {
+  color: var(--md-gold-c);
+}
+.jA-vis ul {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.jA-vis li {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  color: var(--md-body);
+}
+@media (max-width: 640px) {
+  .jA-steps li {
+    grid-template-columns: 16px minmax(0, 1fr);
+  }
+  .jA-steps li > .a-btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

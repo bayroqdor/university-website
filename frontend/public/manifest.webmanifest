@@ -1,0 +1,21 @@
+{
+  "name": "University — Library & Portal",
+  "short_name": "University",
+  "description": "University digital library, student and faculty portal",
+  "lang": "uz",
+  "start_url": "/library",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#0a2e73",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "Kutubxona katalogi", "url": "/library", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Talaba kabineti", "url": "/student/library", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

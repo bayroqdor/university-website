@@ -1,0 +1,815 @@
+/* ================================================================ Admin: e'lon oynasi va bayram bezaklari */
+
+/* ---------------------------------------------------------------- e'lonlar ro'yxati */
+.pop-adm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pop-adm-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  border-radius: 2px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-line);
+  transition: border-color 0.2s;
+}
+.pop-adm-row:hover {
+  border-color: var(--a-line-2);
+}
+.pop-adm-row.off {
+  opacity: 0.66;
+}
+.pop-adm-thumb {
+  position: relative;
+  flex: none;
+  width: 108px;
+  height: 68px;
+  border: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--md-fill);
+  cursor: pointer;
+}
+.pop-adm-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pop-adm-eye {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.pop-adm-thumb:hover .pop-adm-eye {
+  opacity: 1;
+}
+.pop-adm-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pop-adm-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pop-adm-title b {
+  font-size: 15px;
+}
+.pop-adm-sub {
+  color: var(--a-ink-2);
+  font-size: 13.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pop-adm-meta {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.pop-adm-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pop-adm-tools .a-toggle {
+  margin-right: 6px;
+}
+
+/* ---------------------------------------------------------------- tahrirlovchi */
+.pop-ed {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  gap: 20px;
+  align-items: start;
+}
+.pop-ed-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.pop-ed-prev {
+  position: sticky;
+  top: 84px;
+}
+.pop-ed-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 520px;
+  padding: 46px 22px 22px;
+  border-radius: 2px;
+  /* saytdagi oyna orqasidagi qoraytirilgan fon kabi — tekis */
+  background: #3a4459;
+  overflow: hidden;
+}
+.pop-ed-stage .pop-card {
+  width: 100%;
+  max-height: none;
+}
+.pop-ed-stage .pop-card.pl-split {
+  flex-direction: column;
+}
+.pop-ed-stage .pl-split .pop-media {
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+.pop-ed-stage .pl-split .pop-body {
+  padding: 24px 26px 28px;
+}
+.pop-ed-label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pop-seg,
+.fx-seg {
+  display: inline-flex;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 14px;
+  border-radius: 2px;
+  background: var(--a-surface-2);
+  border: 1px solid var(--a-line);
+}
+.pop-seg button,
+.fx-seg button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: var(--a-ink-2);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.pop-seg button.on,
+.fx-seg button.on {
+  background: var(--a-surface);
+  color: var(--a-ink);
+  box-shadow: inset 0 0 0 1px var(--a-line);
+}
+.fx-seg {
+  margin-bottom: 0;
+}
+.fx-seg button svg {
+  color: currentColor;
+  opacity: 0.7;
+  margin-right: -4px;
+}
+.fx-seg button svg:last-of-type {
+  margin-right: 2px;
+}
+.pop-layouts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.pop-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  color: var(--a-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.pop-layout:hover {
+  border-color: var(--a-line-2);
+}
+.pop-layout.on {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.pop-layout small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.pop-layout-ic {
+  position: relative;
+  width: 64px;
+  height: 44px;
+  margin-bottom: 6px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.pop-layout-ic i {
+  display: block;
+  background: var(--a-line-2);
+}
+/* matn qatorlari — ikki ingichka chiziq */
+.pop-layout-ic b {
+  display: block;
+  flex: none;
+  height: 8px;
+  margin: 5px 6px;
+  border-top: 2px solid var(--a-line-2);
+  border-bottom: 2px solid var(--a-line-2);
+}
+.pop-layout-ic.stack i {
+  height: 46%;
+}
+.pop-layout-ic.split {
+  flex-direction: row;
+}
+.pop-layout-ic.split i {
+  width: 45%;
+  height: 100%;
+  flex: none;
+}
+.pop-layout-ic.split b {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 22px;
+  margin: -4px 0 0;
+}
+.pop-layout-ic.cover i {
+  position: absolute;
+  inset: 0;
+}
+.pop-layout-ic.cover b {
+  position: relative;
+  margin: auto 6px 5px;
+  flex: none;
+  height: 8px;
+  border-color: #fff;
+}
+.pop-accents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pop-accent {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 2px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+.pop-accent.on {
+  outline: 2px solid var(--a-ink);
+  outline-offset: 2px;
+}
+/* boshqa rang — oddiy chegarali kvadrat, ichida palitra belgisi */
+.pop-accent.custom {
+  overflow: hidden;
+  background: var(--a-surface);
+  color: var(--a-ink-2);
+  box-shadow: inset 0 0 0 1px var(--a-line-2);
+}
+.pop-accent.custom:hover {
+  box-shadow: inset 0 0 0 1px var(--a-ink-2);
+}
+.pop-accent.custom input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.pop-btn-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--a-line);
+}
+.pop-btn-row-tools {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pop-btn-row-tools .a-input {
+  width: auto;
+  min-width: 180px;
+}
+.pop-btn-row-tools .a-btn {
+  margin-left: auto;
+}
+.pop-btn-row:last-child {
+  border-bottom: 0;
+}
+.pop-btn-row .a-toggle-text {
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+/* ---------------------------------------------------------------- bayram bezaklari */
+.fx-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fx-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* bayram hozir saytda — tekis karta, chapda ko'k chiziq */
+.fx-hero.live {
+  border-left: 3px solid var(--accent);
+}
+.fx-hero-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.fx-hero-main > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.fx-hero-main small {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+}
+.fx-hero-main b {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--a-ink);
+}
+.fx-hero-main span {
+  font-size: 13.5px;
+  color: var(--a-ink-2);
+}
+.fx-chip {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--a-ink);
+  box-shadow: inset 0 0 0 1px var(--a-line);
+}
+.fx-chip svg {
+  width: 24px;
+  height: 24px;
+}
+.fx-chip.idle {
+  background: var(--a-surface-2);
+  color: var(--a-muted);
+  box-shadow: inset 0 0 0 1px var(--a-line);
+}
+.fx-hero.live .fx-chip {
+  color: var(--accent);
+}
+.fx-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 16px;
+}
+.fx-effects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+}
+.fx-list {
+  display: flex;
+  flex-direction: column;
+}
+.fx-row {
+  border-top: 1px solid var(--a-line);
+}
+.fx-row:first-child {
+  border-top: 0;
+}
+.fx-row.off .fx-chip {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+.fx-row.off .fx-row-info b {
+  color: var(--a-muted);
+}
+.fx-row.open {
+  background: var(--a-surface-2);
+}
+.fx-row-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+}
+.fx-row-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--a-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.fx-row-info b {
+  font-size: 14.5px;
+}
+.fx-row-info span {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.fx-row-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fx-exp {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+  background: var(--a-surface);
+  color: var(--a-ink-2);
+  cursor: pointer;
+}
+.fx-exp:hover {
+  border-color: var(--a-line-2);
+  color: var(--a-ink);
+}
+.fx-exp svg {
+  transition: transform 0.2s;
+}
+.fx-exp.on svg {
+  transform: rotate(180deg);
+}
+.fx-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 4px 18px 18px 80px;
+}
+.fx-edit > * {
+  width: 100%;
+}
+.fx-edit > .a-btn {
+  width: auto;
+}
+.fx-years .a-hint {
+  margin: 2px 0 8px;
+}
+.fx-custom {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--a-line);
+}
+.fx-custom:last-child {
+  border-bottom: 0;
+}
+.fx-custom.off {
+  opacity: 0.6;
+}
+.fx-custom-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fx-custom-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.fx-styles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+.fx-style {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  color: var(--a-ink);
+  font: inherit;
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.fx-style > span:not(.fx-chip) {
+  flex: 1;
+}
+.fx-style > svg {
+  color: var(--a-muted);
+}
+.fx-style:hover {
+  border-color: var(--accent);
+}
+.fx-style .fx-chip {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+}
+.fx-style .fx-chip svg {
+  width: 24px;
+  height: 24px;
+}
+.fx-savebar {
+  position: sticky;
+  bottom: 16px;
+  z-index: 20;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 8px 8px 16px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  color: var(--a-ink);
+  font-weight: 600;
+  box-shadow: var(--md-shadow-dd);
+}
+
+@media (max-width: 1100px) {
+  .pop-ed {
+    grid-template-columns: 1fr;
+  }
+  .pop-ed-prev {
+    position: static;
+  }
+  .fx-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .pop-adm-row {
+    flex-wrap: wrap;
+  }
+  .pop-adm-tools {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .pop-btn-row {
+    grid-template-columns: 1fr;
+  }
+  .pop-btn-row-tools {
+    flex-wrap: wrap;
+  }
+  .pop-layouts {
+    grid-template-columns: 1fr;
+  }
+  .fx-effects {
+    grid-template-columns: 1fr;
+  }
+  .fx-row-head {
+    flex-wrap: wrap;
+  }
+  .fx-row-tools {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .fx-edit {
+    padding: 4px 14px 16px;
+  }
+  .fx-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------------- kontrakt narxlari */
+.tu-adm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tu-adm-warn {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border-radius: 2px;
+  background: var(--md-gold-s);
+  border: 1px solid var(--a-line);
+  border-left: 3px solid var(--md-gold-c);
+  color: var(--a-ink);
+}
+.tu-adm-warn svg {
+  flex: none;
+  color: var(--a-warn);
+  margin-top: 2px;
+}
+.tu-adm-warn div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tu-adm-warn span {
+  color: var(--a-ink-2);
+  font-size: 13.5px;
+}
+.tu-adm-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 2px;
+  background: var(--a-surface-2);
+  color: var(--a-ink-2);
+  font-size: 13.5px;
+}
+.tu-adm-tools {
+  display: flex;
+  gap: 8px;
+}
+.tu-adm-pct {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--a-muted);
+}
+.tu-adm-pct .a-input {
+  width: 74px;
+}
+.tu-adm-forms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--a-muted);
+}
+.tu-adm-forms button {
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  background: var(--a-surface);
+  color: var(--a-ink-2);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tu-adm-forms button.on {
+  background: var(--md-fill);
+  border-color: var(--md-fill);
+  color: #fff;
+}
+.tu-adm-forms .a-toggle {
+  margin-left: auto;
+}
+.tu-adm-table {
+  overflow-x: auto;
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+}
+.tu-adm-tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(var(--cols, 1), minmax(0, 1fr)) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 14px;
+  border-top: 1px solid var(--a-line);
+  min-width: calc(420px + var(--cols, 1) * 170px);
+}
+.tu-adm-tr:first-child {
+  border-top: 0;
+}
+.tu-adm-tr.th {
+  background: var(--a-surface-2);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+}
+.tu-adm-tr.off {
+  opacity: 0.6;
+}
+.tu-adm-prog {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 7px;
+}
+.tu-adm-tr > span {
+  min-width: 0;
+}
+.tu-adm-tr .a-input {
+  width: 100%;
+}
+.tu-adm-prog small {
+  color: var(--a-muted);
+}
+.tu-adm-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tu-money {
+  position: relative;
+}
+.tu-money .a-input {
+  width: 100%;
+  padding-right: 46px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+.tu-money span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--a-muted);
+  font-size: 12px;
+  pointer-events: none;
+}
+.tu-money.sm .a-input {
+  height: 32px;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-decoration: line-through;
+  color: var(--a-muted);
+}
+.tu-adm-fees {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+.tu-adm-fees label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tu-adm-fees small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.tu-adm-link {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--accent);
+}

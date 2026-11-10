@@ -1,0 +1,588 @@
+/* ============================================================ Davlat shaklidagi dars jadvali */
+.ofs-sheet {
+  --ofs-ink: #0b1a30;
+  --ofs-line: #1f2a3d;
+  --ofs-soft: #f3f6fb;
+  /* varaq har doim oq (qog'oz) — tungi rejimda ham to'q ko'k / oltin */
+  --ofs-acc: #0a2e73;
+  --ofs-acc2: #b08d3c;
+  page: ofs;
+  background: #fff;
+  color: var(--ofs-ink);
+  border-radius: 2px;
+  border: 1px solid #e1e4ea;
+  padding: clamp(18px, 3vw, 36px);
+  font-family: "Lora Variable", "Times New Roman", Times, serif;
+  position: relative;
+  overflow: hidden;
+}
+.ofs-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+  font-family: var(--font-sans, Inter, system-ui, sans-serif);
+}
+.ofs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+.ofs-uni {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 700 13px/1.3 "Lora Variable", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  max-width: 360px;
+  color: var(--ofs-acc);
+}
+.ofs-uni img {
+  height: 54px;
+  width: auto;
+}
+.ofs-approve {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 260px;
+  font-size: 14px;
+}
+.ofs-approve b {
+  font-size: 15px;
+  letter-spacing: 0.14em;
+}
+/* telefonda: «Tasdiqlayman» bloki institut nomi ostiga tushadi (ustma-ust chiqmaydi) */
+@media screen and (max-width: 640px) {
+  .ofs-head {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ofs-approve {
+    min-width: 0;
+    align-self: flex-end;
+  }
+}
+.ofs-sign {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+.ofs-sign i,
+.ofs-signs i {
+  display: inline-block;
+  width: 110px;
+  border-bottom: 1px solid var(--ofs-ink);
+  height: 1em;
+}
+.ofs-title {
+  text-align: center;
+  margin: 18px 0 18px;
+}
+.ofs-title p {
+  margin: 0;
+  font-size: 15.5px;
+}
+.ofs-title h2 {
+  font: 700 clamp(22px, 2.6vw, 30px) / 1.2 "Lora Variable", "Times New Roman", serif;
+  letter-spacing: 0.32em;
+  margin: 6px 0 0;
+  color: var(--ofs-ink);
+}
+.ofs-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #56637a;
+  font-family: var(--font-sans, Inter, sans-serif);
+}
+.ofs-scroll {
+  overflow-x: auto;
+}
+.ofs {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 720px;
+  font-size: 13px;
+}
+.ofs th,
+.ofs td {
+  border: 1px solid var(--ofs-line);
+  padding: 4px 6px;
+  vertical-align: middle;
+}
+.ofs thead th {
+  background: var(--ofs-soft);
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 6px;
+}
+.ofs-day-h {
+  width: 40px;
+}
+.ofs .ofs-n {
+  width: 34px;
+  text-align: center;
+  font-weight: 700;
+}
+.ofs .ofs-time {
+  width: 74px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+.ofs-group b {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.ofs-group small {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  color: #56637a;
+}
+.ofs-day {
+  background: var(--ofs-soft);
+  padding: 0 !important;
+  width: 40px;
+}
+.ofs-day span {
+  display: block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 0 auto;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+}
+.ofs tr.day-start > * {
+  border-top-width: 2.5px;
+}
+.ofs-cell {
+  position: relative;
+  height: 56px;
+  text-align: center;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.ofs-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 3px 4px;
+  border-radius: 2px;
+  line-height: 1.25;
+}
+.ofs-chip + .ofs-chip {
+  margin-top: 3px;
+  border-top: 1px dashed #c8d1df;
+}
+.ofs-chip b {
+  font-weight: 700;
+  font-size: 13px;
+}
+.ofs-chip em {
+  font-style: normal;
+  font-weight: 400;
+}
+.ofs-chip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 8px;
+  font-size: 11.5px;
+  color: #3c4a63;
+}
+.ofs-room {
+  font-weight: 700;
+  color: var(--ofs-ink);
+}
+.ofs-room::before {
+  content: "xona ";
+  font-weight: 400;
+  color: #56637a;
+}
+.ofs-split {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+}
+.ofs-half + .ofs-half {
+  border-top: 1px dashed var(--ofs-line);
+}
+.ofs-par {
+  display: block;
+  font: 600 9.5px/1.4 var(--font-sans, Inter, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6a7790;
+}
+/* rang belgilari (ekranda) */
+@media screen {
+  .ofs-chip.t-lecture {
+    box-shadow: inset 3px 0 0 var(--ofs-acc);
+    background: color-mix(in srgb, var(--ofs-acc) 6%, #fff);
+  }
+  .ofs-chip.t-practice,
+  .ofs-chip.t-seminar {
+    box-shadow: inset 3px 0 0 #1e4a38;
+    background: #ebf1ee;
+  }
+  .ofs-chip.t-lab {
+    box-shadow: inset 3px 0 0 #b08d3c;
+    background: #f6f2e7;
+  }
+  .ofs-chip.t-exam {
+    box-shadow: inset 3px 0 0 var(--ofs-acc2);
+    background: color-mix(in srgb, var(--ofs-acc2) 6%, #fff);
+  }
+  .ofs-legend .t-lecture {
+    color: var(--ofs-acc);
+  }
+  .ofs-legend .t-practice,
+  .ofs-legend .t-seminar {
+    color: #1e4a38;
+  }
+  .ofs-legend .t-lab {
+    color: #7d6120;
+  }
+}
+.ofs-chip.editable {
+  cursor: grab;
+}
+.ofs-chip.editable:hover {
+  outline: 2px solid color-mix(in srgb, var(--ofs-acc) 45%, transparent);
+}
+.ofs-chip.dragging {
+  opacity: 0.45;
+}
+.ofs-add {
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed transparent;
+  border-radius: 2px;
+  background: none;
+  color: transparent;
+  font: 600 18px/1 var(--font-sans, Inter, sans-serif);
+  transition: border-color 0.2s, color 0.2s;
+}
+.ofs-cell:hover .ofs-add {
+  border-color: #c3cddc;
+  color: #8693a8;
+}
+/* sudrab ko'chirish holatlari */
+.ofs-cell.drop-ok {
+  background: #ebf1ee;
+  box-shadow: inset 0 0 0 2px #1e4a38;
+}
+.ofs-cell.drop-ok:hover {
+  background: #dce8e1;
+}
+.ofs-cell.drop-bad {
+  background: #fbefed;
+  box-shadow: inset 0 0 0 1px rgba(180, 35, 24, 0.4);
+  cursor: not-allowed;
+}
+.ofs-cell.drop-na {
+  opacity: 0.45;
+}
+.ofs-cell.drop-origin {
+  box-shadow: inset 0 0 0 2px var(--ofs-acc);
+}
+.ofs-cell.drop-wait {
+  background: #f8fafc;
+}
+.ofs-lock {
+  position: absolute;
+  right: 4px;
+  top: 2px;
+  font: 700 11px/1 var(--font-sans, Inter, sans-serif);
+  color: #e11d48;
+}
+.ofs-foot {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px 28px;
+  font-size: 13.5px;
+}
+.ofs-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 12.5px;
+}
+.ofs-signs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+.ofs-signs span {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.ofs-note {
+  flex-basis: 100%;
+  font-size: 12.5px;
+  color: #56637a;
+}
+.ofs-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #56637a;
+}
+.ofs.dense {
+  font-size: 11.5px;
+}
+.ofs.dense .ofs-chip b {
+  font-size: 11.5px;
+}
+:root[data-theme="dark"] .ofs-sheet {
+  border-color: #2a3c5c;
+}
+
+/* ------------------------------------------------------------ v2: statistika, bugun, bo'sh kunlar, kunlar ustunda */
+.ofs-stats {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 12.5px;
+  color: #56637a;
+}
+.ofs-stats span {
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: var(--ofs-soft);
+  border: 1px solid #e3e8f1;
+}
+.ofs-stats b {
+  color: var(--ofs-acc);
+}
+@media screen {
+  .ofs tbody tr:hover > td.ofs-cell {
+    background: #fafcff;
+  }
+  .ofs tr.today > .ofs-day,
+  .ofs tr.today > .ofs-n,
+  .ofs tr.today > .ofs-time {
+    background: color-mix(in srgb, var(--ofs-acc) 12%, #fff);
+    color: var(--ofs-acc);
+  }
+  .ofs tr.now > td.ofs-cell {
+    box-shadow: inset 0 0 0 2px var(--ofs-acc2);
+  }
+  .ofs th.today,
+  .ofs td.today {
+    background: color-mix(in srgb, var(--ofs-acc) 6%, #fff);
+  }
+  .ofs thead th.today {
+    background: var(--ofs-acc);
+    color: #fff;
+  }
+  .ofs-dl.now {
+    outline: 2px solid var(--ofs-acc2);
+  }
+}
+.ofs tr.day-off .ofs-day span {
+  writing-mode: horizontal-tb;
+  transform: none;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  padding: 6px 2px;
+}
+.ofs-off {
+  text-align: center;
+  color: #8a96ab;
+  font-style: italic;
+  font-size: 12.5px;
+  height: 32px;
+  background: #f7f8fa;
+}
+.ofs-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+  margin: 0 0 12px;
+  font: 12.5px/1.4 var(--font-sans, Inter, sans-serif);
+  color: #3c4a63;
+}
+.ofs-slots i {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--ofs-acc);
+  color: #fff;
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  margin-right: 3px;
+}
+.ofs-days {
+  min-width: 900px;
+}
+.ofs-days thead th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.ofs-gcol {
+  width: 118px;
+  text-align: left !important;
+  background: var(--ofs-soft);
+}
+.ofs-gcol b {
+  display: block;
+  font-size: 14px;
+}
+.ofs-gcol small {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  color: #56637a;
+}
+.ofs-dcell {
+  vertical-align: top !important;
+  padding: 5px !important;
+}
+.ofs-dl {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 4px 5px;
+  border-radius: 2px;
+  line-height: 1.25;
+  text-align: left;
+}
+.ofs-dl + .ofs-dl {
+  margin-top: 3px;
+}
+.ofs-dl i {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--ofs-ink);
+  color: #fff;
+  font: 700 10.5px/1 var(--font-sans, Inter, sans-serif);
+  font-style: normal;
+  margin-top: 1px;
+}
+.ofs-dl b {
+  display: block;
+  font-size: 12.5px;
+}
+.ofs-dl em {
+  font-style: normal;
+  font-weight: 400;
+}
+.ofs-dl small {
+  display: block;
+  font-size: 10.5px;
+  color: #56637a;
+}
+@media screen {
+  .ofs-dl.t-lecture {
+    background: color-mix(in srgb, var(--ofs-acc) 6%, #fff);
+  }
+  .ofs-dl.t-practice,
+  .ofs-dl.t-seminar {
+    background: #f0fbf6;
+  }
+  .ofs-dl.t-lab {
+    background: #fff8ec;
+  }
+  .ofs-dl.t-exam {
+    background: color-mix(in srgb, var(--ofs-acc2) 6%, #fff);
+  }
+}
+.ofs-none {
+  display: block;
+  text-align: center;
+  color: #b4bdcc;
+}
+
+/* chop etish: A4 albom, faqat jadval */
+@page ofs {
+  size: A4 landscape;
+  margin: 9mm;
+}
+@media print {
+  body.printing-form * {
+    visibility: hidden;
+  }
+  body.printing-form .ofs-sheet,
+  body.printing-form .ofs-sheet * {
+    visibility: visible;
+  }
+  body.printing-form .ofs-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  .no-print,
+  .ofs-add,
+  .ofs-lock {
+    display: none !important;
+  }
+  .ofs {
+    min-width: 0;
+    font-size: 10.5px;
+  }
+  .ofs-chip b {
+    font-size: 10.5px;
+  }
+  .ofs-chip-meta {
+    font-size: 9.5px;
+    color: #000;
+  }
+  .ofs-cell {
+    height: 38px;
+  }
+  .ofs-scroll {
+    overflow: visible;
+  }
+  .ofs tr {
+    break-inside: avoid;
+  }
+  .ofs-days {
+    min-width: 0;
+  }
+  .ofs-dl b {
+    font-size: 9.5px;
+  }
+  .ofs-dl small {
+    font-size: 8.5px;
+  }
+  .ofs-dl i {
+    width: 14px;
+    height: 14px;
+    font-size: 8.5px;
+  }
+  .ofs-gcol {
+    width: 80px;
+  }
+  .ofs-stats {
+    display: none;
+  }
+}

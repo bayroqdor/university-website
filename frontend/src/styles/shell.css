@@ -1,0 +1,295 @@
+/* ================================================================ Admin va kabinetlar: telefon / planshet
+   ≤1000px — yon menyu chapdan chiqadigan panel (burger tugma bilan), yuqori panel ixcham, sahifa ekrandan chiqmaydi.
+   Uslub asosiy sayt bilan bir xil: 2px radius, 1px chiziq, blur va rangli soyalar yo'q. */
+
+/* keng jadvallar — o'z joyida yon tomonga suriladi, sahifa emas */
+.a-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+.a-table-scroll > .a-table {
+  min-width: 100%;
+}
+
+/* sahifa hech qachon gorizontal suriladigan bo'lmasin */
+.a-main {
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.tb-burger,
+.a-side-close,
+.a-side-backdrop {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .a-main .tb-burger {
+    display: inline-flex;
+  }
+  .a-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .a-side {
+    position: fixed !important;
+    z-index: 130;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(300px, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 14px;
+    transform: translateX(-104%);
+    transition:
+      transform 0.36s cubic-bezier(0.22, 0.9, 0.24, 1),
+      box-shadow 0.36s;
+    will-change: transform;
+    overflow: hidden;
+  }
+  html.side-open .a-side {
+    transform: none;
+    box-shadow: var(--md-shadow-dd, 0 8px 24px rgba(18, 20, 24, 0.08));
+  }
+  .a-side nav {
+    display: block;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .a-nav {
+    padding: 10px 10px;
+  }
+  .a-side-close {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    cursor: pointer;
+  }
+  .a-side .a-brand {
+    padding-right: 48px;
+  }
+  .portal-shell .a-side > .a-side-close {
+    position: absolute;
+  }
+  .a-side-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 129;
+    background: rgba(11, 17, 29, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  html.side-open .a-side-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  html.side-open,
+  html.side-open body {
+    overflow: hidden;
+  }
+
+  /* burger tugma */
+  .tb-burger {
+    flex: none;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 42px;
+    height: 42px;
+    padding: 0 11px;
+    border: 1px solid var(--a-line-2);
+    border-radius: 2px;
+    background: var(--a-surface);
+    cursor: pointer;
+  }
+  .tb-burger span {
+    display: block;
+    height: 2px;
+    border-radius: 0;
+    background: var(--a-ink);
+    transition: transform 0.3s, opacity 0.2s;
+  }
+  .tb-burger span:nth-child(2) {
+    width: 70%;
+  }
+  html.side-open .tb-burger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  html.side-open .tb-burger span:nth-child(2) {
+    opacity: 0;
+  }
+  html.side-open .tb-burger span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+  .tb {
+    gap: 10px;
+  }
+  .tb-left {
+    flex: none;
+    min-width: 0;
+  }
+  .tb-crumb {
+    max-width: 30vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .tb-right {
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-end;
+  }
+  .tb-search {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 760px) {
+  .a-main .tb-left {
+    display: flex;
+  }
+  .a-main .tb-crumb {
+    display: none;
+  }
+  .a-grid2.top,
+  .a-grid3,
+  .a-grid4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fx-seg,
+  .pop-seg {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .fs-row {
+    flex-wrap: wrap;
+  }
+  .tb {
+    position: sticky;
+    top: 0;
+    flex-wrap: nowrap;
+    min-height: 60px;
+    padding: 9px 12px;
+  }
+  .tb-left {
+    display: flex;
+  }
+  .tb-crumb {
+    display: none;
+  }
+  .tb-right {
+    width: auto;
+    gap: 8px;
+  }
+  .tb-search {
+    height: 42px;
+  }
+  .tb-search input {
+    padding-left: 38px;
+    font-size: 14px;
+  }
+  .a-page {
+    padding: 18px 14px 48px;
+    gap: 14px;
+  }
+}
+
+/* ---------------------------------------------------------------- umumiy: tor kartalarda ham sig'sin */
+.lang-tabs {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.lang-tabs::-webkit-scrollbar {
+  display: none;
+}
+.a-card-head {
+  flex-wrap: wrap;
+}
+.a-card-head > div:first-child {
+  min-width: 0;
+  flex: 1 1 220px;
+}
+.a-card-actions,
+.a-page-actions {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.a-card-body {
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .a-grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* foydalanuvchilar: guruh tanlash va qidiruv */
+.u-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+.u-filters .a-input {
+  width: auto;
+  max-width: 100%;
+}
+.u-filters .a-search {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+.a-search input {
+  min-width: 0;
+}
+
+/* yangilik / sahifa muharriri: telefonda yuqori panel ikki qatorga bo'linadi */
+@media (max-width: 640px) {
+  .doc-bar {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    padding: 8px 10px;
+  }
+  .doc-bar-l {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .doc-bar-l .lang-tabs {
+    flex: 1;
+    min-width: 0;
+  }
+  .doc-bar-r {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .doc-status {
+    margin-right: auto;
+  }
+}
+
+/* muharrir: telefonda ham asosiy tugma (Saqlash / Nashr) matni ko'rinsin */
+@media (max-width: 640px) {
+  .doc-bar-r .a-btn.primary span {
+    display: inline;
+  }
+}

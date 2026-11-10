@@ -1,0 +1,464 @@
+/* ================================================================ hujjat ko'rish oynasi (rich/DocViewer.tsx)
+   PDF (pdf.js), Google Drive fayli va papkasi, rasm. Sayt tokenlari: --line, --surface, --bg-2, --ink, --muted, --blue / --blue-fill, --radius-sm. */
+.prose .doc-embed,
+.prose .dv-holder {
+  margin: 1.6em 0;
+}
+/* flex/grid qatoridagi oyna uzun (bir qatorli) fayl nomi tufayli ekrandan kengayib ketmasin */
+.prose .dv-holder,
+.dv {
+  min-width: 0;
+  max-width: 100%;
+}
+.prose li .dv-holder,
+.prose td .dv-holder {
+  margin: 0.8em 0;
+}
+.prose .dv-holder:empty {
+  display: none;
+}
+.dv {
+  scroll-margin-top: 96px; /* yopishqoq sayt sarlavhasi ostida qolmasin */
+  border: 1px solid var(--line, #e1e4ea);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-2, #f3f5f8);
+  overflow: hidden;
+}
+.dv-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line, #e1e4ea);
+  background: var(--surface, #fff);
+  color: var(--ink, #121418);
+  font-size: 14px;
+}
+.dv-bar > svg {
+  flex: none;
+  color: var(--blue, var(--accent));
+}
+.dv-bar b {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-acts {
+  display: inline-flex;
+  gap: 4px;
+}
+.dv .dv-acts a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--muted, #565c69);
+  text-decoration: none;
+}
+.dv .dv-acts a:hover,
+.dv .dv-acts a:focus-visible {
+  background: var(--bg-2, #f3f5f8);
+  color: var(--blue, var(--accent));
+}
+
+/* ekrandan uzoqdagi oyna — hali yuklanmagan, joyi ajratilgan */
+.dv-placeholder {
+  height: 160px;
+}
+.dv-placeholder.tall {
+  height: min(70vh, 720px);
+}
+
+/* ---------------------------------------------------------------- PDF sahifalari */
+.dv-pages {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  max-height: min(88vh, 1100px);
+  padding: 12px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.dv-pages.loading {
+  min-height: min(70vh, 720px);
+  align-content: center;
+}
+.dv-page {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.dv-page canvas,
+.dv-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.dv-count {
+  position: sticky;
+  bottom: 0;
+  justify-self: end;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(18, 20, 24, 0.72);
+  color: #fff;
+  font-size: 12px;
+}
+
+/* ---------------------------------------------------------------- Drive / Docs oynasi */
+.dv-framewrap {
+  position: relative;
+}
+.dv-wait {
+  position: absolute;
+  inset: 0 0 auto;
+}
+.dv .dv-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: min(88vh, 1100px);
+  aspect-ratio: auto;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.dv .dv-frame.ready {
+  background: #fff;
+}
+.dv .dv-frame-list {
+  height: min(60vh, 560px);
+  border-top: 1px solid var(--line, #e1e4ea);
+}
+.prose .dv-img {
+  display: block;
+  width: 100%;
+  border-radius: 0;
+}
+.dv-msg {
+  margin: 0;
+  padding: 24px 16px;
+  color: var(--muted, #565c69);
+  font-size: 15px;
+  text-align: center;
+}
+.dv-msg p {
+  margin: 0 0 14px;
+}
+
+/* ---------------------------------------------------------------- tugmalar (sayt tugmalari uslubida, kichik) */
+.dv .dv-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--blue-fill, var(--accent));
+  border-radius: var(--radius-sm, 6px);
+  background: var(--blue-fill, var(--accent));
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.dv .dv-btn:hover,
+.dv .dv-btn:focus-visible {
+  background: var(--blue-d, var(--accent-deep, var(--accent)));
+  border-color: var(--blue-d, var(--accent-deep, var(--accent)));
+  color: #fff;
+}
+.dv .dv-btn.ghost {
+  border-color: var(--line, #e1e4ea);
+  background: var(--surface, #fff);
+  color: var(--ink, #121418);
+}
+.dv .dv-btn.ghost:hover,
+.dv .dv-btn.ghost:focus-visible {
+  border-color: var(--blue, var(--accent));
+  background: var(--bg-2, #f3f5f8);
+  color: var(--blue, var(--accent));
+}
+.dv .dv-btn:focus-visible,
+.dv .dv-item:focus-visible,
+.dv .dv-crumb button:focus-visible {
+  outline: 2px solid var(--blue, var(--accent));
+  outline-offset: -2px;
+}
+
+/* ---------------------------------------------------------------- Drive papkasi: yo'l (breadcrumbs) va ro'yxat */
+.dv-sub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line, #e1e4ea);
+  background: var(--surface, #fff);
+}
+.dv-sub-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-crumbs {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.dv-crumbs::-webkit-scrollbar {
+  display: none;
+}
+.dv-crumb {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 2px;
+  color: var(--muted, #565c69);
+}
+.dv-crumb button {
+  padding: 4px 4px;
+  border: 0;
+  border-radius: var(--radius-sm, 4px);
+  background: none;
+  color: var(--blue, var(--accent));
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.dv-crumb button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.dv-crumb.cur {
+  flex: 0 1 auto;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px;
+  color: var(--ink, #121418);
+  font-weight: 600;
+}
+.dv-crumb.cur svg {
+  flex: none;
+  color: var(--blue, var(--accent));
+}
+.dv-crumb.cur span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dv-list {
+  max-height: min(70vh, 640px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--surface, #fff);
+}
+.dv .dv-item {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto 16px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--line, #e1e4ea);
+  background: transparent;
+  color: var(--ink, #121418);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.35;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.dv .dv-item:last-child {
+  border-bottom: 0;
+}
+.dv .dv-item:hover {
+  background: var(--bg-2, #f3f5f8);
+}
+.dv .dv-item:hover .dv-item-name {
+  color: var(--blue, var(--accent));
+}
+.dv-item-ic {
+  display: grid;
+  color: var(--muted, #565c69);
+}
+.dv-item.folder .dv-item-ic {
+  color: var(--blue, var(--accent));
+}
+.dv-item-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dv-item.folder .dv-item-name {
+  font-weight: 600;
+}
+.dv-item-date {
+  grid-column: 3;
+  color: var(--muted, #565c69);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.dv-item-go {
+  grid-column: 4;
+  color: var(--muted, #565c69);
+}
+
+/* ---------------------------------------------------------------- Drive'dagi arxiv (RAR/ZIP): tayyorlanish holati, rasm */
+.dv-sub-ic {
+  flex: none;
+  color: var(--blue, var(--accent));
+}
+.dv-prep {
+  padding: 28px 16px 32px;
+  background: var(--surface, #fff);
+  color: var(--muted, #565c69);
+  font-size: 15px;
+  text-align: center;
+}
+.dv-prep p {
+  margin: 0 0 12px;
+}
+.dv-prep-pct {
+  color: var(--ink, #121418);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.dv-progress {
+  max-width: 360px;
+  height: 4px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line, #e1e4ea);
+}
+.dv-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue-fill, var(--accent));
+  transition: width 0.4s ease;
+}
+.dv .dv-arch-img {
+  display: block;
+  width: 100%;
+  max-height: min(88vh, 1100px);
+  object-fit: contain;
+  background: var(--surface, #fff);
+}
+
+/* ---------------------------------------------------------------- matndagi PDF/Drive havolasi yonidagi «Ko'rish» tugmasi */
+.prose .dv-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  margin-left: 10px;
+  padding: 0 12px;
+  border: 1px solid var(--blue-fill, var(--accent));
+  border-radius: var(--radius-sm, 6px);
+  background: var(--surface, #fff);
+  color: var(--blue, var(--accent));
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+.prose .dv-toggle svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.prose .dv-toggle:hover,
+.prose .dv-toggle:focus-visible,
+.prose .dv-toggle[aria-expanded="true"] {
+  border-color: var(--blue-fill, var(--accent));
+  background: var(--blue-fill, var(--accent));
+  color: #fff;
+}
+.prose .dv-toggle[aria-expanded="true"]:hover {
+  border-color: var(--blue-d, var(--accent-deep, var(--accent)));
+  background: var(--blue-d, var(--accent-deep, var(--accent)));
+}
+.prose .dv-toggle:focus-visible {
+  outline: 2px solid var(--blue, var(--accent));
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .dv-pages {
+    max-height: 75vh;
+    padding: 8px;
+  }
+  .dv .dv-frame {
+    height: 75vh;
+  }
+  .dv-placeholder.tall {
+    height: 60vh;
+  }
+  .dv-pages.loading {
+    min-height: 60vh;
+  }
+  .dv-hide-sm {
+    display: none;
+  }
+  .dv .dv-btn {
+    padding: 0 10px;
+  }
+  .dv .dv-item {
+    grid-template-columns: 20px minmax(0, 1fr) 16px;
+    row-gap: 2px;
+    padding: 10px 12px;
+  }
+  .dv-item-date {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 12.5px;
+  }
+  .dv-item-go {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+  .dv-sub {
+    padding: 8px 10px;
+  }
+}
+
+/* kabinetdagi «Hujjatlar»: PDF tahrirlagich o'rnida — sahifaning qolgan balandligini to'ldiradi */
+.oo-edit > .dv {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.oo-edit > .dv .dv-pages {
+  flex: 1;
+  max-height: none;
+}

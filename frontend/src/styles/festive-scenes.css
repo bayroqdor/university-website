@@ -1,0 +1,415 @@
+/* Bayram sahnasi (sarlavha ostida): haqiqiy fotosurat + jonli qatlamlar.
+   Tuzilishi: matn paneli (bir tomonda) → surat (ikkinchi tomonda, chetlari panel rangiga singib ketadi) →
+   canvas qatlamlari (qor, gulbarglar, uchqunlar) → salyut → matn. Bosh sahifada — katta sahna, ichki sahifalarda — ixcham lenta. */
+.fs2 {
+  --ink: #fff;
+  --ink-2: rgba(255, 255, 255, 0.8);
+  --line: rgba(255, 255, 255, 0.2);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: clamp(400px, 38vw, 560px);
+  background: var(--panel);
+  color: var(--ink);
+  font-family: "Onest Variable", "Onest", system-ui, sans-serif;
+}
+.fs2.tone-light {
+  --ink: #1b2130;
+  --ink-2: rgba(27, 33, 48, 0.78);
+  --line: rgba(27, 33, 48, 0.16);
+}
+.fs2.strip {
+  height: 124px;
+}
+
+/* ---------- surat */
+.fs2-photo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 66%;
+  z-index: 0;
+  container-type: size;
+  overflow: hidden;
+}
+.fs2.side-right .fs2-photo {
+  right: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 34%);
+}
+.fs2.side-left .fs2-photo {
+  left: 0;
+  -webkit-mask-image: linear-gradient(270deg, transparent 0, #000 34%);
+  mask-image: linear-gradient(270deg, transparent 0, #000 34%);
+}
+.fs2-stage {
+  --w: max(100cqw, 100cqh * var(--ar));
+  position: absolute;
+  width: var(--w);
+  height: calc(var(--w) / var(--ar));
+  left: calc((100cqw - var(--w)) * var(--fx));
+  top: calc((100cqh - var(--w) / var(--ar)) * var(--fy));
+  transform-origin: calc(var(--fx) * 100%) calc(var(--fy) * 100%);
+  animation: fs2-kb 40s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.fs2.fit-height .fs2-stage {
+  --w: calc(100cqh * var(--ar));
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent 0, #000 22%, #000 90%, transparent);
+}
+.fs2-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes fs2-kb {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+/* ---------- qatlamlar */
+.fs2-fx,
+.fs2-fw {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.fs2-fw {
+  z-index: 1; /* salyut osmonda — Qorbobo ortida */
+}
+.fs2-fx {
+  z-index: 3;
+}
+.fs2.has-fw {
+  cursor: crosshair;
+}
+
+/* Qorbobo: haqiqiy fotosurat (fonidan ajratilgan), archa yonida */
+.fs2-dm {
+  position: absolute;
+  z-index: 2;
+  left: 40%;
+  bottom: -4%;
+  height: 93%;
+  width: auto;
+  transform-origin: 50% 100%;
+  filter: brightness(0.9) saturate(0.95) drop-shadow(-14px 12px 26px rgba(4, 8, 24, 0.55));
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
+  mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
+  animation: fs2-breath 6.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes fs2-breath {
+  50% {
+    transform: rotate(0.7deg) translateY(-2px);
+  }
+}
+
+/* Bug'ular chanani tortib uchadi (chapdan o'ngga — bug'ular oldinda) */
+.fs2-sleigh {
+  position: absolute;
+  z-index: 3;
+  top: 12%;
+  left: -32%;
+  width: clamp(220px, 25vw, 380px);
+  aspect-ratio: 2601 / 734;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px rgba(255, 228, 160, 0.95)) drop-shadow(0 0 14px rgba(255, 196, 96, 0.5));
+  animation: fs2-fly 28s linear infinite;
+  animation-delay: 1.5s;
+}
+.fs2-sleigh i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #d8962a 0%, #ffe9b0 38%, #fff6dc 50%, #f2c35e 66%, #c98722 100%);
+  -webkit-mask: url(/festive/sleigh.svg) center / contain no-repeat;
+  mask: url(/festive/sleigh.svg) center / contain no-repeat;
+  animation: fs2-gallop 0.9s ease-in-out infinite;
+}
+@keyframes fs2-fly {
+  0% {
+    left: -32%;
+    top: 16%;
+    transform: rotate(-3deg);
+  }
+  30% {
+    top: 7%;
+  }
+  58% {
+    left: 104%;
+    top: 2%;
+    transform: rotate(-6deg);
+  }
+  100% {
+    left: 104%;
+    top: 2%;
+    transform: rotate(-6deg);
+  }
+}
+@keyframes fs2-gallop {
+  50% {
+    transform: translateY(-3%);
+  }
+}
+
+/* ---------- matn */
+.fs2-in {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+}
+.fs2-in > * {
+  pointer-events: auto;
+}
+.fs2.side-left .fs2-copy {
+  margin-left: auto;
+}
+.fs2-copy {
+  max-width: min(540px, 34vw);
+}
+.fs2-ey {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.fs2-year {
+  padding: 3px 9px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+.fs2-h {
+  margin: 0;
+  font-size: clamp(34px, 3.7vw, 60px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.fs2-sub {
+  margin: 18px 0 0;
+  max-width: 44ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.fs2-count {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 26px;
+}
+.fs2-cell {
+  display: grid;
+  justify-items: center;
+  min-width: 62px;
+  padding: 10px 8px 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.fs2-cell b {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.fs2-cell small {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.fs2-count em {
+  margin: 0 0 8px 6px;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.fs2-today {
+  margin: 22px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fs2-off {
+  display: inline-block;
+  margin-top: 26px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.fs2-off:hover,
+.fs2-off:focus-visible {
+  color: var(--ink);
+}
+.fs2-x {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+  color: var(--ink);
+  cursor: pointer;
+}
+.fs2-credit {
+  position: absolute;
+  z-index: 5;
+  right: 12px;
+  bottom: 8px;
+  margin: 0;
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.62);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.fs2-credit a {
+  color: inherit;
+}
+
+/* ---------- ixcham lenta (ichki sahifalar) */
+.fs2.strip .fs2-photo {
+  width: 52%;
+}
+.fs2.strip .fs2-copy {
+  max-width: none;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.fs2.strip .fs2-ey {
+  margin: 0;
+}
+.fs2.strip .fs2-h {
+  font-size: clamp(20px, 1.9vw, 28px);
+}
+.fs2.strip .fs2-count {
+  margin: 0;
+}
+.fs2.strip .fs2-cell {
+  min-width: 46px;
+  padding: 5px 6px 4px;
+}
+.fs2.strip .fs2-cell b {
+  font-size: 18px;
+}
+.fs2.strip .fs2-cell small {
+  margin-top: 2px;
+  font-size: 9px;
+}
+.fs2.strip .fs2-today {
+  margin: 0;
+}
+.fs2.strip .fs2-sleigh {
+  width: 150px;
+}
+
+/* ---------- telefon: surat tepada, matn pastda */
+@media (max-width: 760px) {
+  .fs2.full {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .fs2.full .fs2-photo {
+    position: relative;
+    width: 100%;
+    height: 64vw;
+    max-height: 360px;
+    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+    mask-image: linear-gradient(180deg, #000 70%, transparent);
+  }
+  .fs2.full .fs2-in {
+    height: auto;
+    margin-top: -36px;
+    padding-bottom: 34px;
+  }
+  .fs2.full .fs2-copy {
+    max-width: none;
+  }
+  .fs2.full .fs2-dm {
+    left: auto;
+    right: 3%;
+    top: 6vw;
+    bottom: auto;
+    height: 58vw;
+  }
+  .fs2-sleigh {
+    width: 46vw;
+  }
+  .fs2-h {
+    font-size: 32px;
+  }
+  .fs2-sub {
+    font-size: 15.5px;
+  }
+  .fs2-cell {
+    min-width: 54px;
+  }
+  .fs2-cell b {
+    font-size: 24px;
+  }
+  .fs2.strip {
+    height: 104px;
+  }
+  .fs2.strip .fs2-photo {
+    width: 60%;
+  }
+  .fs2.strip .fs2-count,
+  .fs2.strip .fs2-ey span:first-child {
+    display: none;
+  }
+  .fs2.strip .fs2-h {
+    font-size: 18px;
+  }
+  .fs2-credit {
+    font-size: 9.5px;
+    right: 8px;
+    bottom: auto;
+    top: calc(min(64vw, 360px) - 22px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs2-stage,
+  .fs2-dm,
+  .fs2-sleigh i {
+    animation: none;
+  }
+  .fs2-sleigh {
+    display: none;
+  }
+}

@@ -1,0 +1,1611 @@
+/* ============================================================ Admin va kabinet: institut palitrasi (sovuq oq + to'q ko'k) */
+:root {
+  --a-bg: #f3f6fb;
+  --a-surface: #ffffff;
+  --a-surface-2: #f7f9fd;
+  --a-ink: #0b1a30;
+  --a-ink-2: #34445f;
+  --a-muted: #6b7891;
+  --a-line: #e3e8f1;
+  --a-line-2: #d0d8e6;
+  --a-side: #0a2350;
+  --a-shadow: 0 1px 2px rgba(11, 26, 48, 0.04), 0 8px 30px -12px rgba(11, 26, 48, 0.16);
+}
+:root[data-theme="dark"] {
+  --a-bg: #07111f;
+  --a-surface: #0f1d33;
+  --a-surface-2: #132440;
+  --a-ink: #eaf0fa;
+  --a-ink-2: #c4cfe2;
+  --a-muted: #8a98b3;
+  --a-line: #1c2c47;
+  --a-line-2: #29405f;
+  --a-side: #050c17;
+}
+.sched-tabs {
+  display: inline-flex !important;
+  width: auto !important;
+  margin-bottom: 14px;
+}
+.list-tools select.a-input {
+  width: auto;
+  min-width: 170px;
+}
+/* ============================================================ Admin: institut qo'shimchalari (dars jadvali tuzish) */
+.sch-grid-wrap {
+  overflow-x: auto;
+}
+.sch-grid {
+  width: 100%;
+  min-width: 960px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.sch-grid th {
+  text-align: left;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--a-muted);
+  font-weight: 600;
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--a-line);
+}
+.sch-grid th.slot-h,
+.sch-grid td.slot-h {
+  width: 72px;
+}
+.sch-grid td {
+  vertical-align: top;
+  padding: 6px;
+  border-bottom: 1px solid var(--a-line);
+  border-right: 1px solid var(--a-line);
+}
+.sch-grid td:last-child {
+  border-right: 0;
+}
+.sch-grid td.slot-h {
+  text-align: center;
+  padding-top: 12px;
+}
+.sch-grid td.slot-h b {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto 4px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  color: var(--a-ink);
+  font-size: 13px;
+}
+.sch-grid td.slot-h small {
+  font: 500 10.5px/1.3 var(--font-mono);
+  color: var(--a-muted);
+}
+.sch-cell {
+  min-height: 72px;
+  position: relative;
+}
+.sch-cell .sch-lesson.mini {
+  grid-template-columns: 1fr;
+  padding: 8px 10px 8px 12px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+.sch-cell .sch-lesson.mini .sch-subject {
+  font-size: 12.5px;
+}
+.sch-cell .sch-lesson.mini .sch-meta {
+  font-size: 11px;
+}
+.sch-cell .sch-meta .warn {
+  color: var(--a-warn);
+  font-weight: 600;
+}
+.sch-add {
+  width: 100%;
+  border: 1px dashed transparent;
+  background: none;
+  border-radius: 2px;
+  color: var(--a-muted);
+  display: grid;
+  place-items: center;
+  height: 28px;
+  opacity: 0;
+  transition: opacity 0.15s, border-color 0.15s;
+}
+.sch-cell:hover .sch-add {
+  opacity: 1;
+  border-color: var(--a-line-2);
+}
+.sch-add:hover {
+  color: var(--md-primary);
+  border-color: var(--md-primary) !important;
+}
+.doc-thumb.round {
+  border-radius: 50%;
+  width: 46px;
+}
+.doc-row.dim {
+  opacity: 0.6;
+}
+tr.dim td {
+  opacity: 0.55;
+}
+@media print {
+  .md-side,
+  .md-top,
+  .a-page-head .a-page-actions,
+  .list-tools,
+  .sch-add {
+    display: none !important;
+  }
+  .sch-grid {
+    min-width: 0;
+  }
+}
+.hero-imgs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.hero-img {
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--a-line);
+}
+.hero-img img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.hero-img-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 6px;
+  border-top: 1px solid var(--a-line);
+}
+.hero-img-n {
+  margin-right: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--a-muted);
+}
+.hero-img.add {
+  border-style: dashed;
+  padding: 8px;
+}
+/* bosh sahifa suratlari (site.home_images) */
+.home-imgs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+/* sudrab ko'chirish (jadval tuzuvchi) */
+.sch-cell.drop-ok {
+  background: var(--md-green-s);
+  box-shadow: inset 0 0 0 2px var(--md-green);
+}
+.sch-cell.drop-bad {
+  background: var(--md-red-s);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--md-red) 45%, transparent);
+  cursor: not-allowed;
+}
+.sch-cell.drop-na {
+  opacity: 0.4;
+}
+.sch-cell.drop-origin {
+  box-shadow: inset 0 0 0 2px var(--md-primary);
+}
+.sch-lesson.dragging {
+  opacity: 0.4;
+}
+.sch-lesson[draggable="true"] {
+  cursor: grab;
+}
+.sch-lock {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--md-red);
+  text-transform: uppercase;
+}
+.dnd-hint {
+  display: block;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.dnd-hint svg {
+  vertical-align: -2px;
+}
+.ok-dot,
+.bad-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--md-green);
+  vertical-align: -1px;
+}
+.bad-dot {
+  background: var(--md-red);
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* menyu tahrirlash */
+.menu-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px;
+  border-radius: 2px;
+  background: var(--a-surface-2);
+  border: 1px solid var(--a-line);
+}
+.mp-item {
+  position: relative;
+}
+.mp-item > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-weight: 600;
+  cursor: default;
+}
+.mp-item:hover > span {
+  background: var(--a-surface);
+  color: var(--md-primary);
+}
+.mp-drop {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  min-width: calc(var(--cols, 1) * 190px);
+  grid-template-columns: repeat(var(--cols, 1), minmax(170px, 1fr));
+  gap: 10px;
+  padding: 12px;
+  border-radius: 2px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-line);
+  box-shadow: var(--md-shadow-dd);
+}
+.mp-item:hover .mp-drop {
+  display: grid;
+}
+.mp-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+.mp-col b {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--md-primary);
+}
+.menu-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(200px, 1.3fr) minmax(120px, 0.8fr) auto auto auto auto;
+  gap: 8px;
+  align-items: center;
+}
+.menu-row.top {
+  grid-template-columns: auto auto minmax(140px, 1fr) minmax(200px, 1.4fr) auto auto auto auto;
+}
+.menu-idx {
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--md-border-2);
+  color: var(--md-heading);
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.menu-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.menu-children {
+  margin: 14px 0 0 34px;
+  padding-left: 14px;
+  border-left: 2px solid var(--a-line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.menu-child {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.menu-tr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+.menu-tr label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.menu-tr span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--a-muted);
+}
+.menu-actions {
+  display: flex;
+  gap: 10px;
+  margin: 6px 0 18px;
+}
+.menu-card {
+  margin-bottom: 10px;
+}
+@media (max-width: 900px) {
+  /* tor ekranda: nom va havola to'liq qatorda, tugmalar — ostida */
+  .menu-row,
+  .menu-row.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .menu-row > .a-input,
+  .menu-row > .menu-link {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .menu-row.top > .a-input,
+  .menu-row > .a-input:nth-child(3) {
+    flex: 1 1 0;
+  }
+  .menu-row.top > .menu-link {
+    order: 1;
+  }
+  .menu-row.top > :nth-child(n + 5) {
+    order: 2;
+  }
+  .menu-row.top > .a-pill {
+    margin-right: auto;
+  }
+  .menu-children {
+    margin-left: 0;
+  }
+}
+.guide {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 2px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-line);
+  text-decoration: none;
+  color: var(--a-ink);
+  transition: border-color 0.2s;
+}
+.guide-card:hover {
+  border-color: var(--md-primary);
+}
+.guide-ic {
+  width: 38px;
+  height: 38px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--md-border);
+  color: var(--md-primary);
+  margin-bottom: 6px;
+}
+.guide-card small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.form-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.form-tools select.a-input {
+  width: auto;
+  min-width: 160px;
+}
+.sched-tabs-row {
+  margin-bottom: 14px;
+}
+.chk-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.chk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .guide {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* Excel import */
+.xl-import {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.xl-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: s;
+  display: grid;
+  gap: 12px;
+}
+.xl-steps li {
+  counter-increment: s;
+  position: relative;
+  padding: 14px 14px 14px 52px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+.xl-steps li::before {
+  content: counter(s);
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--md-primary);
+  color: var(--md-primary);
+  font-weight: 600;
+  font-size: 13px;
+}
+.xl-steps span {
+  color: var(--a-muted);
+  font-size: 13.5px;
+}
+.xl-drop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 1px dashed var(--a-line-2);
+  border-radius: 2px;
+  cursor: pointer;
+  color: var(--a-muted);
+  background: var(--a-surface);
+  position: relative;
+}
+.xl-drop input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.xl-drop.has {
+  border-color: var(--md-green);
+  color: var(--md-green);
+}
+.xl-sum {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.xl-sum span {
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-size: 14px;
+}
+.xl-sum .ok {
+  background: var(--md-green-s);
+  color: var(--md-green);
+}
+.xl-sum .warn {
+  background: var(--md-gold-s);
+  color: var(--md-gold);
+}
+
+/* ============================================================ Admin → Pochta serveri */
+.mail-checks,
+.mail-log {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+}
+.mail-checks > div,
+.mail-log > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 2px;
+  font-size: 13px;
+  background: var(--a-surface-2);
+  border: 1px solid var(--a-line);
+  flex-wrap: wrap;
+}
+.mail-checks svg,
+.mail-log svg {
+  align-self: center;
+  flex: none;
+}
+.mail-checks .ok svg,
+.mail-log .ok svg {
+  color: var(--a-ok);
+}
+.mail-checks .bad,
+.mail-log .bad {
+  border-color: color-mix(in srgb, var(--a-bad) 35%, transparent);
+}
+.mail-checks .bad svg,
+.mail-log .bad svg {
+  color: var(--a-bad);
+}
+.mail-checks span,
+.mail-log span {
+  color: var(--a-muted);
+  overflow-wrap: anywhere;
+}
+.mail-log {
+  margin-top: 0;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.mail-log time {
+  font-size: 12px;
+  color: var(--a-muted);
+  font-variant-numeric: tabular-nums;
+}
+.mail-sync {
+  margin-top: 14px;
+  display: grid;
+  gap: 6px;
+}
+.mail-sync small {
+  color: var(--a-muted);
+}
+.mail-bar {
+  height: 6px;
+  border-radius: 2px;
+  background: var(--a-line);
+  overflow: hidden;
+}
+.mail-bar i {
+  display: block;
+  height: 100%;
+  background: var(--md-fill);
+  border-radius: inherit;
+  transition: width 0.4s;
+}
+.mail-steps {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+  line-height: 1.6;
+  color: var(--a-ink-2);
+  font-size: 14px;
+}
+.mail-steps code {
+  font-size: 12.5px;
+  background: var(--a-bg);
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+  padding: 1px 6px;
+}
+
+/* ============================================================ Rollar */
+.role-layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: sticky;
+  top: 20px;
+}
+.role-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  border-radius: 2px;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: var(--a-ink);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.role-item:hover {
+  border-color: var(--a-line-2);
+}
+.role-item.on {
+  border-color: var(--md-primary);
+  background: var(--md-primary-s);
+  box-shadow: inset 2px 0 0 var(--md-primary);
+}
+.role-item b {
+  display: block;
+  font-size: 14px;
+}
+.role-item small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.role-ic {
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border: 1px solid var(--md-border);
+  background: var(--md-card);
+  color: var(--md-primary);
+}
+.perm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+}
+.perm-group {
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+  padding: 10px 12px;
+  background: var(--a-surface-2);
+}
+.perm-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--a-muted);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--a-line);
+  cursor: pointer;
+}
+.perm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--a-ink-2);
+}
+.perm span {
+  flex: 1;
+}
+.perm.on {
+  color: var(--a-ink);
+  font-weight: 600;
+}
+.perm svg {
+  color: var(--a-ok);
+}
+.perm input,
+.perm-head input {
+  accent-color: var(--md-fill);
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================================ Foydalanuvchi formasi va professorlar */
+.a-seg.wrap {
+  flex-wrap: wrap;
+  height: auto;
+}
+.a-seg .seg-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+.u-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.person-form .pf-h {
+  margin: 20px 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--a-muted);
+  border-bottom: 1px solid var(--a-line);
+  padding-bottom: 6px;
+}
+.person-kind {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.prof-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--a-line-2);
+  border-radius: 2px;
+  padding: 9px 14px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 260px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.prof-switch input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--md-fill);
+}
+.prof-switch b {
+  display: block;
+  font-size: 14px;
+}
+.prof-switch small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.prof-switch.on {
+  border-color: var(--md-primary);
+  background: var(--md-primary-s);
+}
+.prof-switch svg {
+  color: var(--md-primary);
+  flex: none;
+}
+.pp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+}
+.pp-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  border-radius: 2px;
+  padding: 14px;
+  cursor: pointer;
+  color: var(--a-ink);
+  transition: border-color 0.15s;
+}
+.pp-card:hover {
+  border-color: var(--md-primary);
+}
+.pp-card.dim {
+  opacity: 0.55;
+}
+.pp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.pp-body b {
+  font-size: 14.5px;
+}
+.pp-body .star {
+  color: var(--md-gold-c);
+  fill: currentColor;
+}
+.pp-body small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.pp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* ============================================================ Kafedra o'qituvchilari (DocEditor) */
+.fac-people {
+  border-top: 1px solid var(--a-line);
+  margin-top: 14px;
+  padding-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+.fac-people-h b {
+  display: block;
+  font-size: 13.5px;
+}
+.fac-people-h small {
+  color: var(--a-muted);
+  font-size: 11.5px;
+}
+.fac-people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+.fp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+}
+.fp-row.on {
+  background: var(--a-surface-2);
+  border-color: var(--a-line);
+}
+.fp-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+.fp-name input {
+  accent-color: var(--md-fill);
+}
+.fp-name b {
+  display: block;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fp-name small {
+  color: var(--a-muted);
+  font-size: 11.5px;
+}
+.fp-edit {
+  border: 1px solid var(--a-line-2);
+  background: var(--a-surface);
+  color: var(--a-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  flex: none;
+}
+.fp-edit.on {
+  background: var(--md-fill);
+  border-color: var(--md-fill);
+  color: #fff;
+}
+@media (max-width: 900px) {
+  .role-layout {
+    grid-template-columns: 1fr;
+  }
+  .role-list {
+    position: static;
+  }
+}
+
+/* ============================================================ Pochta serveri: DNS yozuvlari */
+.dns-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 16px 0 10px;
+}
+.dns-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+}
+.dns-table td {
+  vertical-align: top;
+}
+.dns-table tr.warn td {
+  background: color-mix(in srgb, var(--a-warn) 7%, transparent);
+}
+.dns-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.dns-cell code {
+  font-size: 12.5px;
+  background: var(--a-surface-2);
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+  padding: 3px 7px;
+  word-break: break-all;
+}
+.dns-val {
+  max-width: 520px;
+}
+.dns-why {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--a-muted);
+}
+.dns-copy {
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  color: var(--a-muted);
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  flex: none;
+}
+.dns-copy:hover {
+  color: var(--md-primary);
+  border-color: var(--md-primary);
+}
+.dns-copy.ok {
+  color: var(--a-ok);
+  border-color: var(--a-ok);
+}
+.dns-help {
+  margin-top: 12px;
+  font-size: 13.5px;
+  color: var(--a-ink-2);
+}
+.dns-help summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.dns-help ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+  line-height: 1.55;
+}
+.dns-zone {
+  position: relative;
+  margin-top: 10px;
+}
+.dns-zone .dns-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.dns-zone pre {
+  margin: 0;
+  padding: 14px;
+  border-radius: 2px;
+  background: var(--md-bg);
+  border: 1px solid var(--md-border);
+  color: var(--md-heading);
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* ============================================================ Avatar (surat yoki bosh harf) */
+.av {
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+.av.ph {
+  display: inline-grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+.u-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.face-photo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.face-photo-btns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ---------- FAQ, kafedra xodimlari, HEMIS, S3, SEO ---------- */
+.a-toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.a-toolbar .a-search {
+  flex: 1;
+  max-width: 460px;
+}
+.a-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.a-grid2.top {
+  align-items: start;
+  margin-bottom: 16px;
+}
+.a-checks {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 8px;
+  color: var(--a-ink-2);
+  font-size: 14px;
+}
+/* oddiy blok: matn, havola va <code> bitta oqimda (flex bo'lsa har bir bo'lak alohida ustunga bo'linib, so'zlar qatorma-qator tushadi) */
+.a-checks li {
+  position: relative;
+  display: block;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+.a-checks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--a-ok);
+  font-weight: 800;
+}
+.a-checks li svg {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 6px;
+  color: var(--accent);
+}
+.a-checks code {
+  font-size: 12.5px;
+  background: var(--a-surface-2);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+.faq-admin {
+  display: grid;
+  gap: 8px;
+}
+.faq-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 2px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-line);
+}
+.faq-row.off {
+  opacity: 0.6;
+}
+.faq-row-ord {
+  display: grid;
+  gap: 2px;
+}
+.faq-row-body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--a-ink);
+  padding: 4px;
+  border-radius: 2px;
+}
+.faq-row-body:hover {
+  background: var(--a-surface-2);
+}
+.faq-row-body small {
+  color: var(--a-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.faq-row-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fs-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.fs-facs {
+  display: grid;
+  gap: 8px;
+  position: sticky;
+  top: 16px;
+}
+.fs-fac {
+  text-align: left;
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  border-left: 3px solid var(--fc);
+  background: var(--a-surface);
+  color: var(--a-ink);
+  cursor: pointer;
+}
+.fs-fac small {
+  color: var(--a-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fs-fac.on {
+  background: color-mix(in srgb, var(--fc) 9%, var(--a-surface));
+  border-color: color-mix(in srgb, var(--fc) 40%, var(--a-line));
+}
+.fs-list {
+  display: grid;
+  gap: 6px;
+}
+.fs-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+}
+.fs-row.dean {
+  border-color: color-mix(in srgb, var(--md-primary) 45%, var(--a-line));
+  background: var(--md-primary-s);
+}
+.fs-who {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+.fs-who small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.fs-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  background: var(--a-surface);
+  color: var(--a-ink-2);
+  font: 600 12.5px/1 inherit;
+  cursor: pointer;
+}
+.fs-tag.on {
+  background: var(--md-fill);
+  border-color: var(--md-fill);
+  color: #fff;
+}
+.fs-tag:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.fs-add {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--a-line-2);
+  display: grid;
+  gap: 10px;
+}
+.hemis-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+.hemis-stats > div {
+  padding: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  display: grid;
+  gap: 2px;
+}
+.hemis-stats b {
+  overflow-wrap: anywhere;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--md-heading);
+}
+.hemis-stats small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+/* Telegram: «Tezlikni tekshirish» */
+.tg-speed {
+  display: grid;
+  gap: 18px;
+}
+.tg-verdicts {
+  display: grid;
+  gap: 6px;
+}
+.tg-verdicts > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface-2);
+}
+.tg-verdicts svg {
+  flex: none;
+  margin-top: 1px;
+}
+.tg-verdicts b {
+  font-weight: 600;
+  color: var(--a-ink);
+  overflow-wrap: anywhere;
+}
+.tg-verdicts .bad {
+  background: color-mix(in srgb, var(--a-bad) 9%, transparent);
+  border-color: color-mix(in srgb, var(--a-bad) 30%, transparent);
+}
+.tg-verdicts .bad svg {
+  color: var(--a-bad);
+}
+.tg-verdicts .warn {
+  background: color-mix(in srgb, var(--a-warn) 10%, transparent);
+  border-color: color-mix(in srgb, var(--a-warn) 32%, transparent);
+}
+.tg-verdicts .warn svg {
+  color: var(--a-warn);
+}
+.tg-verdicts .ok {
+  background: color-mix(in srgb, var(--a-ok) 9%, transparent);
+  border-color: color-mix(in srgb, var(--a-ok) 30%, transparent);
+}
+.tg-verdicts .ok svg {
+  color: var(--a-ok);
+}
+.tg-verdicts .info svg {
+  color: var(--a-info);
+}
+.tg-speed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.tg-speed-grid h4 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--a-ink);
+}
+.tg-speed-grid h4 small {
+  font-weight: 500;
+  color: var(--a-muted);
+  margin-left: 6px;
+}
+.tg-speed-grid dl {
+  margin: 0;
+  display: grid;
+  border: 1px solid var(--a-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tg-speed-grid dt {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+  background: var(--a-surface-2);
+  border-bottom: 1px solid var(--a-line);
+}
+.tg-speed-grid dl > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 38%) minmax(0, 1fr);
+  gap: 12px;
+  padding: 9px 14px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--a-line);
+}
+.tg-speed-grid dl > div:last-child {
+  border-bottom: 0;
+}
+.tg-speed-grid dl > div > span {
+  color: var(--a-muted);
+}
+.tg-speed-grid dl b {
+  font-weight: 600;
+  color: var(--a-ink);
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.tg-speed-grid .hemis-stats {
+  margin-top: 0;
+}
+.tg-speed .tg-speed-bad {
+  color: var(--a-bad);
+}
+.tg-speed .tg-speed-muted {
+  color: var(--a-muted);
+  font-weight: 500;
+}
+@media (max-width: 1000px) {
+  .tg-speed-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Telegram: guruh va kanallar */
+.tg-add {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  max-width: 520px;
+}
+.tg-add .a-input {
+  flex: 1;
+  min-width: 0;
+}
+.tg-groups {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--a-line);
+  border-radius: 2px;
+}
+.tg-group {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--a-line);
+  background: var(--a-surface);
+}
+.tg-group:last-child {
+  border-bottom: 0;
+}
+.tg-group-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.tg-group-main > b {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--md-heading);
+  overflow-wrap: anywhere;
+}
+.tg-group-meta {
+  font-size: 12.5px;
+  color: var(--a-muted);
+  overflow-wrap: anywhere;
+}
+.tg-group-bad {
+  font-size: 12.5px;
+  color: var(--md-red);
+  overflow-wrap: anywhere;
+}
+.tg-kinds {
+  margin: 6px 0 2px;
+}
+.tg-kinds input {
+  accent-color: var(--md-fill);
+}
+.tg-group-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  flex: none;
+}
+@media (max-width: 640px) {
+  .tg-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tg-group-actions {
+    justify-content: flex-start;
+  }
+}
+.hemis-last {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 12px;
+  color: var(--a-ink-2);
+}
+.hemis-last .bad {
+  color: var(--a-bad);
+}
+.s3-progress {
+  margin: 0 0 12px;
+  display: grid;
+  gap: 6px;
+}
+.s3-progress > div {
+  height: 6px;
+  border-radius: 2px;
+  background: var(--md-fill);
+  transition: width 0.4s;
+  min-width: 4px;
+}
+.desk-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.desk-files a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  color: var(--md-primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (max-width: 640px) {
+  /* xodim qatori: ism to'liq, tugmalar ostida */
+  .fs-row {
+    flex-wrap: wrap;
+  }
+  .fs-who {
+    flex: 1 1 calc(100% - 52px);
+  }
+  .fs-row > .fs-tag:first-of-type,
+  .fs-row > .a-btn {
+    margin-left: 48px;
+  }
+}
+@media (max-width: 900px) {
+  .fs-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fs-facs {
+    position: static;
+  }
+}
+/* foydalanuvchi formasi: institut pochtasi taklifi */
+.mail-suggest {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 14px;
+  padding: 12px 14px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--md-bg);
+}
+.mail-suggest.taken {
+  border-color: color-mix(in srgb, var(--md-red) 45%, var(--a-line));
+  background: var(--md-red-s);
+}
+.mail-suggest .ms-ic {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  border: 1px solid var(--md-border);
+  background: var(--md-card);
+  color: var(--md-primary);
+}
+.mail-suggest.taken .ms-ic {
+  color: var(--md-red);
+}
+.mail-suggest .ms-main {
+  flex: 1;
+  min-width: 220px;
+  display: grid;
+  gap: 2px;
+}
+.mail-suggest .ms-main small {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--a-muted);
+}
+.mail-suggest .ms-main b {
+  font: 600 15px/1.3 var(--font-mono, ui-monospace, monospace);
+  color: var(--a-ink);
+  word-break: break-all;
+}
+.mail-suggest .ms-main em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--a-muted);
+}
+.mail-suggest.taken .ms-main em {
+  color: var(--md-red);
+}
+.mail-suggest .ms-alts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mail-suggest .ms-alts button {
+  padding: 6px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  background: var(--a-surface);
+  color: var(--a-ink-2);
+  font: 600 12px/1 var(--font-mono, ui-monospace, monospace);
+  cursor: pointer;
+}
+.mail-suggest .ms-alts button.on {
+  border-color: var(--md-fill);
+  background: var(--md-fill);
+  color: #fff;
+}

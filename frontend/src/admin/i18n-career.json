@@ -1,0 +1,590 @@
+{
+ "Hamkorlik va karyera": {
+  "ru": "Сотрудничество и карьера",
+  "en": "Cooperation & careers"
+ },
+ "Karyera markazi": {
+  "ru": "Центр карьеры",
+  "en": "Career Centre"
+ },
+ "Hamkorlar": {
+  "ru": "Партнёры",
+  "en": "Partners"
+ },
+ "Bitiruvchilar": {
+  "ru": "Выпускники",
+  "en": "Alumni"
+ },
+ "Startaplar": {
+  "ru": "Стартапы",
+  "en": "Startups"
+ },
+ "Foydali maqolalar": {
+  "ru": "Полезные статьи",
+  "en": "Expert articles"
+ },
+ "imkoniyatlar, kompaniyalar arizalari (moderatsiya), ma’lumot bloki": {
+  "ru": "предложения, заявки компаний (модерация), информационный блок",
+  "en": "opportunities, employer submissions (moderation), info block"
+ },
+ "sanoat, xalqaro, akademik, davlat; amaliyot bazalari": {
+  "ru": "промышленные, международные, академические, государственные; базы практики",
+  "en": "industry, international, academic, government; internship sites"
+ },
+ "hikoyalar, ro‘yxat, bandlik statistikasi": {
+  "ru": "истории, реестр, статистика трудоустройства",
+  "en": "stories, register, employment statistics"
+ },
+ "talaba va o‘qituvchilar loyihalari": {
+  "ru": "проекты студентов и преподавателей",
+  "en": "student and staff projects"
+ },
+ "fan, ta’lim, texnologiyalar; RSS": {
+  "ru": "пищевая безопасность, здоровое питание; RSS",
+  "en": "food safety, healthy nutrition; RSS"
+ },
+ "Imkoniyatlar va moderatsiya": {
+  "ru": "Предложения и модерация",
+  "en": "Opportunities and moderation"
+ },
+ "Ma’lumot bloki va sozlamalar": {
+  "ru": "Информационный блок и настройки",
+  "en": "Info block and settings"
+ },
+ "Karyera markazi: ma’lumot va sozlamalar": {
+  "ru": "Центр карьеры: информация и настройки",
+  "en": "Career Centre: info and settings"
+ },
+ "Hamkorlar va amaliyot bazalari": {
+  "ru": "Партнёры и базы практики",
+  "en": "Partners and internship sites"
+ },
+ "Bitiruvchilar hikoyalari": {
+  "ru": "Истории выпускников",
+  "en": "Alumni stories"
+ },
+ "Bitiruvchilar ro‘yxati": {
+  "ru": "Реестр выпускников",
+  "en": "Alumni register"
+ },
+ "Bandlik statistikasi": {
+  "ru": "Статистика трудоустройства",
+  "en": "Employment statistics"
+ },
+ "Hikoyalar": {
+  "ru": "Истории",
+  "en": "Stories"
+ },
+ "Ro‘yxat (shaxsiy ma’lumotlar)": {
+  "ru": "Реестр (персональные данные)",
+  "en": "Register (personal data)"
+ },
+ "Startaplar va innovatsiyalar": {
+  "ru": "Стартапы и инновации",
+  "en": "Startups and innovation"
+ },
+ "Moderatsiyada": {
+  "ru": "На модерации",
+  "en": "Pending review"
+ },
+ "Nashr qilingan": {
+  "ru": "Опубликовано",
+  "en": "Published"
+ },
+ "Muddati tugagan": {
+  "ru": "Срок истёк",
+  "en": "Expired"
+ },
+ "Rad etilgan": {
+  "ru": "Отклонено",
+  "en": "Rejected"
+ },
+ "Qoralama": {
+  "ru": "Черновик",
+  "en": "Draft"
+ },
+ "Rejalashtirilgan": {
+  "ru": "Запланировано",
+  "en": "Scheduled"
+ },
+ "Tasdiqlash va nashr qilish": {
+  "ru": "Одобрить и опубликовать",
+  "en": "Approve and publish"
+ },
+ "Rad etish": {
+  "ru": "Отклонить",
+  "en": "Reject"
+ },
+ "Rad etish sababi (kompaniyaga emailda yuboriladi)": {
+  "ru": "Причина отклонения (отправляется компании по email)",
+  "en": "Reason for rejection (emailed to the company)"
+ },
+ "Tasdiqlandi va nashr qilindi": {
+  "ru": "Одобрено и опубликовано",
+  "en": "Approved and published"
+ },
+ "Rad etildi": {
+  "ru": "Отклонено",
+  "en": "Rejected"
+ },
+ "Kompaniya": {
+  "ru": "Компания",
+  "en": "Company"
+ },
+ "Mas’ul shaxs": {
+  "ru": "Контактное лицо",
+  "en": "Contact person"
+ },
+ "Veb-sayt": {
+  "ru": "Сайт",
+  "en": "Website"
+ },
+ "Lavozim yoki loyiha nomi": {
+  "ru": "Должность или название проекта",
+  "en": "Role or project title"
+ },
+ "Hamkor (bo‘lsa)": {
+  "ru": "Партнёр (если есть)",
+  "en": "Partner (if any)"
+ },
+ "Turi": {
+  "ru": "Тип",
+  "en": "Type"
+ },
+ "Holat": {
+  "ru": "Статус",
+  "en": "Status"
+ },
+ "Shahar": {
+  "ru": "Город",
+  "en": "City"
+ },
+ "Maosh": {
+  "ru": "Зарплата",
+  "en": "Salary"
+ },
+ "Masofaviy ishlash mumkin": {
+  "ru": "Возможна удалённая работа",
+  "en": "Remote work possible"
+ },
+ "Ariza muddati": {
+  "ru": "Срок подачи",
+  "en": "Application deadline"
+ },
+ "Mos yo‘nalishlar": {
+  "ru": "Подходящие направления",
+  "en": "Relevant programmes"
+ },
+ "Qisqacha": {
+  "ru": "Кратко",
+  "en": "Summary"
+ },
+ "Batafsil tavsif": {
+  "ru": "Подробное описание",
+  "en": "Full description"
+ },
+ "Talablar": {
+  "ru": "Требования",
+  "en": "Requirements"
+ },
+ "Ariza havolasi": {
+  "ru": "Ссылка для отклика",
+  "en": "Application link"
+ },
+ "Ariza uchun email": {
+  "ru": "Email для откликов",
+  "en": "Application email"
+ },
+ "Ariza uchun telefon": {
+  "ru": "Телефон для откликов",
+  "en": "Application phone"
+ },
+ "Logotip": {
+  "ru": "Логотип",
+  "en": "Logo"
+ },
+ "Tanlangan (ro‘yxat boshida)": {
+  "ru": "Избранное (в начале списка)",
+  "en": "Featured (top of the list)"
+ },
+ "Talabalarga xabar yubormaslik": {
+  "ru": "Не уведомлять студентов",
+  "en": "Do not notify students"
+ },
+ "Amaliyot": {
+  "ru": "Практика",
+  "en": "Internship"
+ },
+ "To‘liq stavka": {
+  "ru": "Полная ставка",
+  "en": "Full-time"
+ },
+ "Yarim stavka": {
+  "ru": "Неполная ставка",
+  "en": "Part-time"
+ },
+ "Stajirovka": {
+  "ru": "Стажировка",
+  "en": "Traineeship"
+ },
+ "Loyiha": {
+  "ru": "Проект",
+  "en": "Project"
+ },
+ "Sanoat": {
+  "ru": "Промышленность",
+  "en": "Industry"
+ },
+ "Xalqaro": {
+  "ru": "Международный",
+  "en": "International"
+ },
+ "Akademik": {
+  "ru": "Академический",
+  "en": "Academic"
+ },
+ "Davlat": {
+  "ru": "Государственный",
+  "en": "Government"
+ },
+ "Mamlakat": {
+  "ru": "Страна",
+  "en": "Country"
+ },
+ "Hamkorlik yili": {
+  "ru": "Год начала сотрудничества",
+  "en": "Partner since"
+ },
+ "Shartnoma sanasi": {
+  "ru": "Дата договора",
+  "en": "Agreement date"
+ },
+ "Qisqacha (kartada)": {
+  "ru": "Кратко (в карточке)",
+  "en": "Summary (card)"
+ },
+ "Hamkorlik yo‘nalishlari": {
+  "ru": "Направления сотрудничества",
+  "en": "Areas of cooperation"
+ },
+ "Amaliyot bazasi": {
+  "ru": "База практики",
+  "en": "Internship site"
+ },
+ "Yiliga amaliyot o‘rinlari": {
+  "ru": "Мест для практики в год",
+  "en": "Internship places per year"
+ },
+ "Shu yerda amaliyot o‘taydigan yo‘nalishlar": {
+  "ru": "Направления, проходящие здесь практику",
+  "en": "Programmes with internships here"
+ },
+ "Kenglik (lat)": {
+  "ru": "Широта (lat)",
+  "en": "Latitude (lat)"
+ },
+ "Uzunlik (lng)": {
+  "ru": "Долгота (lng)",
+  "en": "Longitude (lng)"
+ },
+ "Faqat amaliyot bazalari": {
+  "ru": "Только базы практики",
+  "en": "Internship sites only"
+ },
+ "Barcha turlar": {
+  "ru": "Все типы",
+  "en": "All types"
+ },
+ "F.I.Sh.": {
+  "ru": "Ф.И.О.",
+  "en": "Full name"
+ },
+ "Bitirgan yili": {
+  "ru": "Год выпуска",
+  "en": "Graduation year"
+ },
+ "Yo‘nalish": {
+  "ru": "Направление",
+  "en": "Programme"
+ },
+ "Hozirgi lavozimi": {
+  "ru": "Текущая должность",
+  "en": "Current position"
+ },
+ "Ish joyi (kompaniya)": {
+  "ru": "Место работы (компания)",
+  "en": "Employer"
+ },
+ "Surat": {
+  "ru": "Фото",
+  "en": "Photo"
+ },
+ "Qisqa iqtibos": {
+  "ru": "Короткая цитата",
+  "en": "Short quote"
+ },
+ "Hikoya": {
+  "ru": "История",
+  "en": "Story"
+ },
+ "Bitiruvchi nashrga yozma rozilik bergan": {
+  "ru": "Выпускник дал письменное согласие на публикацию",
+  "en": "Graduate gave written consent to publish"
+ },
+ "rozilik yo‘q": {
+  "ru": "нет согласия",
+  "en": "no consent"
+ },
+ "Barcha yillar": {
+  "ru": "Все годы",
+  "en": "All years"
+ },
+ "Barcha yo‘nalishlar": {
+  "ru": "Все направления",
+  "en": "All programmes"
+ },
+ "Barcha holatlar": {
+  "ru": "Все статусы",
+  "en": "All statuses"
+ },
+ "Yangi": {
+  "ru": "Новый",
+  "en": "New"
+ },
+ "Bog‘lanildi": {
+  "ru": "Связались",
+  "en": "Contacted"
+ },
+ "Hikoya tayyorlanmoqda": {
+  "ru": "Готовится история",
+  "en": "Story in progress"
+ },
+ "Arxiv": {
+  "ru": "Архив",
+  "en": "Archive"
+ },
+ "Hikoya qoralamasini yaratish": {
+  "ru": "Создать черновик истории",
+  "en": "Create story draft"
+ },
+ "Ichki izoh (faqat adminlar ko‘radi)": {
+  "ru": "Внутренняя заметка (видят только админы)",
+  "en": "Internal note (admins only)"
+ },
+ "Hali hech kim ro‘yxatdan o‘tmagan": {
+  "ru": "Пока никто не зарегистрировался",
+  "en": "Nobody has registered yet"
+ },
+ "Qator qo‘shish": {
+  "ru": "Добавить строку",
+  "en": "Add row"
+ },
+ "Institut bo‘yicha jami": {
+  "ru": "Итого по институту",
+  "en": "Institute total"
+ },
+ "Bitiruvchilar soni": {
+  "ru": "Число выпускников",
+  "en": "Number of graduates"
+ },
+ "Ish bilan band, %": {
+  "ru": "Трудоустроено, %",
+  "en": "Employed, %"
+ },
+ "Bosqich": {
+  "ru": "Стадия",
+  "en": "Stage"
+ },
+ "G‘oya": {
+  "ru": "Идея",
+  "en": "Idea"
+ },
+ "Prototip": {
+  "ru": "Прототип",
+  "en": "Prototype"
+ },
+ "Pilot": {
+  "ru": "Пилот",
+  "en": "Pilot"
+ },
+ "Bozorda": {
+  "ru": "На рынке",
+  "en": "On the market"
+ },
+ "Loyiha nomi": {
+  "ru": "Название проекта",
+  "en": "Project name"
+ },
+ "Tavsif": {
+  "ru": "Описание",
+  "en": "Description"
+ },
+ "Jamoa": {
+  "ru": "Команда",
+  "en": "Team"
+ },
+ "Muqova": {
+  "ru": "Обложка",
+  "en": "Cover"
+ },
+ "Video havolasi (YouTube)": {
+  "ru": "Ссылка на видео (YouTube)",
+  "en": "Video link (YouTube)"
+ },
+ "Suratlar": {
+  "ru": "Фотографии",
+  "en": "Photos"
+ },
+ "Mukofot va grantlar": {
+  "ru": "Награды и гранты",
+  "en": "Awards and grants"
+ },
+ "Hamkorlar (ro‘yxatdan)": {
+  "ru": "Партнёры (из списка)",
+  "en": "Partners (from list)"
+ },
+ "Boshqa hamkorlar": {
+  "ru": "Другие партнёры",
+  "en": "Other partners"
+ },
+ "Loyiha sayti": {
+  "ru": "Сайт проекта",
+  "en": "Project website"
+ },
+ "A’zo qo‘shish": {
+  "ru": "Добавить участника",
+  "en": "Add member"
+ },
+ "Sarlavha": {
+  "ru": "Заголовок",
+  "en": "Title"
+ },
+ "Muallif (xodim)": {
+  "ru": "Автор (сотрудник)",
+  "en": "Author (staff)"
+ },
+ "Muallif ismi (xodim bo‘lmasa)": {
+  "ru": "Имя автора (если не сотрудник)",
+  "en": "Author name (if not staff)"
+ },
+ "Nashr vaqti": {
+  "ru": "Время публикации",
+  "en": "Publish time"
+ },
+ "Mavzular": {
+  "ru": "Темы",
+  "en": "Topics"
+ },
+ "Matn": {
+  "ru": "Текст",
+  "en": "Text"
+ },
+ "Muqova tavsifi (alt)": {
+  "ru": "Описание обложки (alt)",
+  "en": "Cover description (alt)"
+ },
+ "Teglar": {
+  "ru": "Теги",
+  "en": "Tags"
+ },
+ "Manbalar": {
+  "ru": "Источники",
+  "en": "Sources"
+ },
+ "Manba qo‘shish": {
+  "ru": "Добавить источник",
+  "en": "Add source"
+ },
+ "SEO sarlavha": {
+  "ru": "SEO-заголовок",
+  "en": "SEO title"
+ },
+ "SEO tavsif": {
+  "ru": "SEO-описание",
+  "en": "SEO description"
+ },
+ "Tanlangan": {
+  "ru": "Избранное",
+  "en": "Featured"
+ },
+ "Karyera markazi haqida (saytda)": {
+  "ru": "О центре карьеры (на сайте)",
+  "en": "About the Career Centre (on the site)"
+ },
+ "Aloqa": {
+  "ru": "Контакты",
+  "en": "Contact"
+ },
+ "Xona": {
+  "ru": "Кабинет",
+  "en": "Room"
+ },
+ "Ish vaqti": {
+  "ru": "Часы работы",
+  "en": "Opening hours"
+ },
+ "Mas’ul xodimlar": {
+  "ru": "Ответственные сотрудники",
+  "en": "Responsible staff"
+ },
+ "Talabalarga xabar yuborish": {
+  "ru": "Уведомлять студентов",
+  "en": "Notify students"
+ },
+ "Tanlangan filtr bo‘yicha yozuv yo‘q.": {
+  "ru": "По выбранному фильтру записей нет.",
+  "en": "No records match the filter."
+ },
+ "Hali imkoniyat qo‘shilmagan": {
+  "ru": "Предложений пока нет",
+  "en": "No opportunities yet"
+ },
+ "Hali hamkor qo‘shilmagan": {
+  "ru": "Партнёров пока нет",
+  "en": "No partners yet"
+ },
+ "Hali hikoya qo‘shilmagan": {
+  "ru": "Историй пока нет",
+  "en": "No stories yet"
+ },
+ "Hali loyiha qo‘shilmagan": {
+  "ru": "Проектов пока нет",
+  "en": "No projects yet"
+ },
+ "Hali maqola yozilmagan": {
+  "ru": "Статей пока нет",
+  "en": "No articles yet"
+ },
+ "Karyera imkoniyati": {
+  "ru": "Предложение центра карьеры",
+  "en": "Career opportunity"
+ },
+ "Bitiruvchi": {
+  "ru": "Выпускник",
+  "en": "Graduate"
+ },
+ "Startap": {
+  "ru": "Стартап",
+  "en": "Startup"
+ },
+ "Foydali maqola": {
+  "ru": "Полезная статья",
+  "en": "Expert article"
+ },
+ "Saytda ko‘rinadi": {
+  "ru": "Видно на сайте",
+  "en": "Visible on site"
+ },
+ "Yashirin (qoralama)": {
+  "ru": "Скрыто (черновик)",
+  "en": "Hidden (draft)"
+ },
+ "Ko‘rinishi": {
+  "ru": "Видимость",
+  "en": "Visibility"
+ },
+ "Karyera": {
+  "ru": "Карьера",
+  "en": "Career"
+ }
+}

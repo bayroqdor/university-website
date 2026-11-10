@@ -1,0 +1,729 @@
+/* ============================================================ Kabinet (talaba / o'qituvchi / xodim) — admin.css va matdash.css ustiga qo'shimchalar
+   Sayt uslubi: tekis fon, 1px chiziq, radius 2px; gradient, soya, blur yo'q. Baho va davomat ranglari — faqat holatni bildiradi. */
+.p-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 26px 28px;
+  border-radius: 2px;
+  background: var(--md-fill);
+  color: #fff;
+}
+.p-hero h1 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 600;
+  letter-spacing: normal;
+}
+.p-hero p {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+}
+.p-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.p-hero-meta span {
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  font-size: 12.5px;
+}
+/* tungi rejim: yorqin ko'k blok o'rniga saytdagidek chiziqli to'q quti */
+:root[data-theme="dark"] .p-hero.p-hero {
+  background: var(--md-card);
+  border: 1px solid var(--md-border);
+  color: var(--md-heading);
+}
+:root[data-theme="dark"] .p-hero.p-hero h1 {
+  color: var(--md-heading);
+}
+:root[data-theme="dark"] .p-hero.p-hero p {
+  color: var(--md-body);
+}
+:root[data-theme="dark"] .p-hero.p-hero .p-hero-meta span {
+  border-color: var(--md-border-2);
+  color: var(--md-body);
+}
+.p-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.p-grid .span2 {
+  grid-column: span 2;
+}
+.p-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.p-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--a-line);
+}
+.p-list li:last-child {
+  border-bottom: 0;
+}
+.p-list b {
+  font-size: 14.5px;
+}
+.p-list small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.p-list .grow {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.p-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  background: var(--md-primary-s);
+  color: var(--md-primary);
+  font-weight: 700;
+  font-size: 13px;
+  flex: none;
+}
+.p-grade {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 13px;
+  background: var(--a-surface-2);
+}
+.p-grade.g5 {
+  background: color-mix(in srgb, var(--a-ok) 14%, transparent);
+  color: var(--a-ok);
+}
+.p-grade.g4 {
+  background: color-mix(in srgb, var(--a-info) 14%, transparent);
+  color: var(--a-info);
+}
+.p-grade.g3 {
+  background: color-mix(in srgb, var(--a-warn) 16%, transparent);
+  color: var(--a-warn);
+}
+.p-grade.g2 {
+  background: color-mix(in srgb, var(--a-bad) 14%, transparent);
+  color: var(--a-bad);
+}
+.p-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--a-line);
+  overflow: hidden;
+  min-width: 90px;
+}
+.p-bar i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.p-bar.bad i {
+  background: var(--a-bad);
+}
+.p-bar.ok i {
+  background: var(--a-ok);
+}
+.att-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--a-surface-2);
+  color: var(--a-muted);
+}
+.att-dot.present {
+  background: color-mix(in srgb, var(--a-ok) 16%, transparent);
+  color: var(--a-ok);
+}
+.att-dot.absent {
+  background: color-mix(in srgb, var(--a-bad) 16%, transparent);
+  color: var(--a-bad);
+}
+.att-dot.late {
+  background: color-mix(in srgb, var(--a-warn) 18%, transparent);
+  color: var(--a-warn);
+}
+.att-dot.excused {
+  background: color-mix(in srgb, var(--a-info) 16%, transparent);
+  color: var(--a-info);
+}
+.att-pick {
+  display: inline-flex;
+  gap: 3px;
+  padding: 2px;
+  border-radius: 2px;
+  background: var(--a-surface-2);
+}
+.att-pick button {
+  border: 0;
+  background: none;
+  width: 36px;
+  height: 30px;
+  border-radius: 2px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--a-muted);
+}
+.att-pick button.on.present {
+  background: var(--a-ok);
+  color: #fff;
+}
+.att-pick button.on.absent {
+  background: var(--a-bad);
+  color: #fff;
+}
+.att-pick button.on.late {
+  background: var(--a-warn);
+  color: #fff;
+}
+.att-pick button.on.excused {
+  background: var(--a-info);
+  color: #fff;
+}
+/* tungi rejimda holat ranglari och — ustidagi matn to'q */
+:root[data-theme="dark"] .att-pick button.on {
+  color: #0b111d;
+}
+.journal-wrap {
+  overflow-x: auto;
+}
+.journal {
+  min-width: 720px;
+}
+.journal th.col {
+  min-width: 70px;
+  text-align: center;
+}
+.journal td.col {
+  text-align: center;
+}
+.journal input.cell {
+  width: 56px;
+  text-align: center;
+  padding: 5px 4px;
+  min-height: 30px;
+  border-radius: 2px;
+}
+.journal .stud {
+  position: sticky;
+  left: 0;
+  background: var(--a-surface);
+  z-index: 1;
+}
+.sel-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.sel-row .a-field {
+  min-width: 200px;
+  flex: 1;
+}
+.p-course {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface);
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.p-course:hover,
+.p-course.on {
+  border-color: var(--accent);
+}
+.p-course b {
+  font-size: 15px;
+}
+.p-course small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.p-courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.p-assign {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--a-line);
+}
+.p-assign:last-child {
+  border-bottom: 0;
+}
+.p-assign-date {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.p-assign-date b {
+  font: 600 24px/1 var(--md-font);
+}
+.p-assign-date small {
+  font-size: 10.5px;
+  color: var(--a-muted);
+  text-transform: uppercase;
+}
+.p-assign-main b {
+  display: block;
+  font-size: 15px;
+}
+.p-assign-main small {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+.p-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.p-files a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line-2);
+  font-size: 12.5px;
+  text-decoration: none;
+  color: var(--a-ink-2);
+}
+.p-files a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.p-notice {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--a-line);
+}
+.p-notice:last-child {
+  border-bottom: 0;
+}
+.p-notice.pinned {
+  background: var(--md-primary-s);
+}
+.p-notice h3 {
+  font: 600 15.5px var(--font-sans);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.p-notice p {
+  margin: 6px 0 0;
+  white-space: pre-wrap;
+  color: var(--a-ink-2);
+  font-size: 14px;
+}
+.p-notice small {
+  display: block;
+  margin-top: 8px;
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.p-desc {
+  white-space: pre-wrap;
+  font-size: 14px;
+  color: var(--a-ink-2);
+}
+.p-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.p-stat-row div b {
+  display: block;
+  font: 600 24px/1.1 var(--md-font);
+}
+.p-stat-row div span {
+  color: var(--a-muted);
+  font-size: 12.5px;
+}
+@media (max-width: 1000px) {
+  .p-grid {
+    grid-template-columns: 1fr;
+  }
+  .p-grid .span2 {
+    grid-column: auto;
+  }
+}
+@media (max-width: 640px) {
+  .p-assign {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+  .p-assign > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================================ Xodim kabineti va «Kafedram» */
+.staff-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 18px;
+}
+.staff-notices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.staff-notice {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--a-line);
+}
+.staff-notice:last-child {
+  border-bottom: 0;
+}
+.staff-notice p {
+  margin: 4px 0;
+  color: var(--a-ink-2);
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+.fac-edit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  align-items: start;
+}
+.fac-edit-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.fac-editor {
+  min-height: 420px;
+  padding: 8px 14px 20px;
+}
+.a-form-grid.one {
+  grid-template-columns: 1fr;
+}
+.fac-cover {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.fac-cover img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+}
+.fac-teachers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.fac-teacher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fac-teacher img,
+.fac-teacher > span {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--md-fill);
+  color: #fff;
+  font-weight: 700;
+}
+.fac-teacher b {
+  display: block;
+  font-size: 13.5px;
+}
+.fac-teacher small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+@media (max-width: 1000px) {
+  .staff-grid,
+  .fac-edit {
+    grid-template-columns: 1fr;
+  }
+}
+.fac-editor .editor-foot {
+  position: static;
+  margin: 10px 0 0;
+  display: inline-block;
+}
+
+/* ============================================================ Profil */
+.pf-cam {
+  position: absolute;
+  right: 2px;
+  bottom: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--md-card);
+  background: var(--md-fill);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.pf-cam:hover {
+  background: var(--md-fill-d);
+}
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+  margin-top: 4px;
+}
+.pf-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--a-line);
+  font-size: 14px;
+}
+.pf-row:last-child {
+  border-bottom: 0;
+}
+.pf-row span {
+  color: var(--a-muted);
+}
+.pf-row b {
+  text-align: right;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- HEMIS ma'lumotlari (profil) ---------- */
+.hm {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+.hm-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hm-title svg {
+  color: var(--accent);
+}
+.hm-actions,
+.hm-week {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.hm-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.hm-kpis > div {
+  padding: 14px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface-2);
+  display: grid;
+  gap: 2px;
+}
+.hm-kpis small,
+.hm-grid small {
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.hm-kpis b {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--md-heading);
+}
+.hm-kpis b.bad {
+  color: var(--a-bad);
+}
+.hm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px 16px;
+}
+.hm-grid > div {
+  display: grid;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--a-line);
+}
+.hm-days {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.hm-day {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 12px;
+  border-radius: 2px;
+  border: 1px solid var(--a-line);
+  background: var(--a-surface-2);
+}
+.hm-day > b {
+  text-transform: capitalize;
+  font-size: 13.5px;
+}
+.hm-lesson {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 2px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-line);
+  border-left: 3px solid var(--md-primary);
+}
+.hm-lesson > span:last-child {
+  display: grid;
+}
+.hm-lesson small,
+.hm-sub {
+  display: block;
+  color: var(--a-muted);
+  font-size: 12px;
+}
+.hm-time {
+  font-variant-numeric: tabular-nums;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .hm-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- profil kartalari ---------- */
+.pp-grid {
+  margin-top: 4px;
+}
+.pp-ct {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.pp-ct svg {
+  padding: 7px;
+  box-sizing: content-box;
+  border-radius: 2px;
+  background: var(--md-primary-s);
+  color: var(--md-primary);
+}
+.pp .pf-row {
+  padding: 12px 0;
+}
+.pp .pf-row span {
+  font-size: 13.5px;
+}
+
+
+/* ---------- profil: Telegram ---------- */
+.tgc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+}
+.tgc-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.tgc-qr {
+  flex: none;
+  width: 132px;
+  height: 132px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r);
+  background: #ffffff;
+}
+.tgc-side {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.tgc-pending .a-btn {
+  text-decoration: none;
+}
+.tgc-code,
+.tgc-left {
+  display: grid;
+  gap: 2px;
+}
+.tgc-code span,
+.tgc-left span {
+  color: var(--md-muted);
+  font-size: 12.5px;
+}
+.tgc-code b {
+  color: var(--md-heading);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+.tgc-left b {
+  color: var(--md-body);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .tgc-qr {
+    display: none;
+  }
+}

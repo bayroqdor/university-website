@@ -1,0 +1,72 @@
+/* Tuzilma: bo'lim kartasidagi rahbar qatori va bo'lim sahifasidagi rahbar/xodimlar kartalari.
+   Kartalar sahifalardagi «mas'ul xodim» kartasi (.pc, theme.css) uslubida — yangi bezak yo'q. */
+
+/* ro'yxat: bo'lim kartasida rahbar (rasm, F.I.Sh., «Rahbar · N a'zo») */
+.site.uni .dep-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  min-width: 0;
+}
+.site.uni .dep-head .face {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  overflow: hidden;
+  font-size: 13px;
+}
+.site.uni .dep-head > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.site.uni .dep-head b {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.site.uni .dep-head em {
+  color: var(--ink2);
+  font-size: 13px;
+  font-style: normal;
+}
+
+/* bo'lim sahifasi: rahbar kartasi, so'ng xodimlar (ikki ustun) */
+.site.uni .dep-people {
+  max-width: 1040px;
+}
+.site.uni .dep-people .dep-people-h {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 48px 0 16px;
+}
+.site.uni .dep-people .dep-people-h:first-child {
+  margin-top: 0;
+}
+.site.uni .dep-people-h span {
+  color: var(--blue);
+}
+.site.uni .dep-people .pc-list {
+  margin-bottom: 0;
+}
+/* bir qatordagi kartalar balandligi teng */
+.site.uni .dep-people .pc-list > * > .pc {
+  height: 100%;
+}
+/* F.I.Sh.siz karta (faqat bo'lim aloqasi) — rasm ustunisiz */
+.site.uni .pc.solo {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (max-width: 600px) {
+  .site.uni .pc.solo .pc-body {
+    display: block;
+  }
+}

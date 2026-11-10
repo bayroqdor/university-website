@@ -1,0 +1,1728 @@
+/* Talabalar hayoti, abituriyent, galereya, kampus xaritasi, virtual tur, tadbirga ro'yxat — sayt dizayn tizimi:
+   Onest, ko'k #0A2E73 / #071F50, oq / #F3F5F8, chiziqlar #E1E4EA, radius 2px, tekis (soya, gradiyent yo'q). Tokenlar: theme.css (.site.uni). */
+
+.site.uni .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------- sarlavha va yo'l */
+.site.uni .cx-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-crumbs li {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+.site.uni .cx-crumbs li + li::before {
+  content: "/";
+  margin: 0 10px;
+  color: var(--line);
+}
+:root[data-theme="dark"] .site.uni .cx-crumbs li + li::before {
+  color: var(--ink2);
+}
+.site.uni .cx-crumbs a {
+  color: var(--ink2);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 3px;
+  padding: 6px 0;
+}
+.site.uni .cx-crumbs a:hover {
+  color: var(--blue);
+  text-decoration-color: currentColor;
+}
+.site.uni .cx-crumbs [aria-current] {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.site.uni .cx-hero-in {
+  display: grid;
+  gap: 40px;
+  align-items: end;
+}
+.site.uni .cx-hero.has-aside .cx-hero-in {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+.site.uni .cx-hero .ey {
+  margin-bottom: 16px;
+}
+.site.uni .cx-h1 {
+  /* yangi bo'limlar sarlavhasi bir xil o'lchamda (official.css .of-title) */
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.site.uni .cx-lead {
+  margin: 24px 0 0;
+  max-width: 62ch;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+.site.uni .cx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  margin-top: 32px;
+}
+.site.uni .cx-hero-ph {
+  align-self: stretch;
+}
+
+/* ---------------------------------------------------------------- tugmalar */
+.site.uni .cx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 1px solid var(--blue-fill);
+  border-radius: 2px;
+  background: var(--blue-fill);
+  color: var(--on-dark);
+  font: 600 16px/1.2 var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  justify-self: start;
+}
+.site.uni .cx-btn:hover {
+  background: var(--blue-d);
+  border-color: var(--blue-d);
+}
+.site.uni .cx-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.site.uni .cx-btn.ghost {
+  background: transparent;
+  color: var(--blue);
+  border-color: var(--line);
+}
+.site.uni .cx-btn.ghost:hover {
+  border-color: var(--blue);
+  background: var(--bgB);
+}
+.site.uni .cx-btn.sm {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 15px;
+}
+.site.uni .cx-ibtn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  cursor: pointer;
+}
+.site.uni .cx-ibtn:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .cx-ibtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.site.uni .cx-ibtn[aria-pressed="true"] {
+  background: var(--blue-fill);
+  border-color: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- bo'limlar */
+.site.uni .cx-sec {
+  padding: 72px 0;
+}
+.site.uni .cx-sec + .cx-sec {
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-sec.alt {
+  background: var(--bgB);
+}
+.site.uni .cx-sec.tight-top {
+  /* sarlavha chizig'idan keyingi bo'shliq /news va /documents bilan bir xil */
+  padding-top: clamp(40px, 5.5vw, 80px);
+}
+.site.uni .cx-sec:last-child {
+  padding-bottom: 128px;
+}
+.site.uni .cx-h2 {
+  margin: 0 0 36px;
+  font-size: clamp(30px, 2.8vw, 44px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.site.uni .cx-h3 {
+  margin: 0 0 16px;
+  font-size: clamp(22px, 1.7vw, 28px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.site.uni .cx-h3.sp {
+  margin-top: 48px;
+}
+.site.uni .cx-h4 {
+  margin: 24px 0 8px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.site.uni .cx-p {
+  margin: 0 0 16px;
+  max-width: 65ch;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+.site.uni .cx-p.big {
+  font-size: 19px;
+  color: var(--ink);
+}
+.site.uni .narrow {
+  max-width: 760px;
+}
+.site.uni .cx-narrow {
+  max-width: 920px;
+}
+.site.uni .cx-prose {
+  max-width: 760px;
+}
+.site.uni .cx-prose .prose {
+  font-size: 17px;
+}
+.site.uni .cx-more {
+  margin: 36px 0 0;
+}
+.site.uni .cx-empty {
+  margin: 0;
+  padding: 40px 0;
+  color: var(--ink2);
+}
+.site.uni .cx-loading {
+  display: grid;
+  gap: 16px;
+  padding: 120px var(--pad);
+}
+.site.uni .cx-loading span {
+  display: block;
+  height: 20px;
+  max-width: 640px;
+  background: var(--bgB);
+}
+.site.uni .cx-loading span:first-child {
+  height: 56px;
+  max-width: 420px;
+}
+.site.uni .cx-list {
+  margin: 0;
+  padding-left: 20px;
+}
+.site.uni .cx-list li + li {
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------------- surat */
+.site.uni .cx-pic {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--bgB);
+}
+.site.uni .cx-sec.alt .cx-pic.empty {
+  background: var(--bgA);
+}
+.site.uni .cx-pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+.site.uni a:hover .cx-pic.zoom img,
+.site.uni a:focus-visible .cx-pic.zoom img {
+  transform: scale(1.03);
+}
+
+/* ---------------------------------------------------------------- filtr */
+.site.uni .cx-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 36px;
+}
+.site.uni .cx-tools:empty {
+  display: none;
+}
+.site.uni .cx-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site.uni .cx-seg button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  font: 500 15px/1.2 var(--font);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.site.uni .cx-seg button:hover {
+  border-color: var(--blue);
+}
+.site.uni .cx-seg button.on {
+  background: var(--blue-fill);
+  border-color: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-count {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- bo'lim indeksi */
+.site.uni .cx-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-index li {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-index a {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto 32px;
+  align-items: center;
+  gap: 16px;
+  min-height: 88px;
+  padding: 16px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .cx-index-n {
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-index-t {
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.site.uni .cx-index-c {
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .cx-index-a {
+  color: var(--blue);
+  transition: transform 0.3s var(--ease-out);
+}
+.site.uni .cx-index a:hover .cx-index-t {
+  color: var(--blue);
+}
+.site.uni .cx-index a:hover .cx-index-a {
+  transform: translate(3px, -3px);
+}
+
+/* ---------------------------------------------------------------- kartalar */
+.site.uni .cx-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-cards.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.site.uni .cx-card-a {
+  display: grid;
+  gap: 18px;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.site.uni .cx-card.plain {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+.site.uni .cx-card-b {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.site.uni .cx-card-t {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.site.uni .cx-card-a:hover .cx-card-t {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site.uni .cx-card-s {
+  margin: 0;
+  color: var(--ink2);
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.site.uni .cx-card-m {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-card-m > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.site.uni .cx-mini {
+  display: grid;
+  gap: 6px;
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+.site.uni .cx-mini div {
+  display: flex;
+  gap: 8px;
+}
+.site.uni .cx-mini dt {
+  color: var(--ink2);
+}
+.site.uni .cx-mini dd {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- tafsilot sahifasi */
+.site.uni .cx-split {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 56px;
+  align-items: start;
+}
+.site.uni .cx-main {
+  display: grid;
+  gap: 32px;
+  min-width: 0;
+}
+.site.uni .cx-aside {
+  position: sticky;
+  top: calc(var(--nb-h) + 24px);
+  border-top: 2px solid var(--blue);
+  padding-top: 8px;
+}
+.site.uni .cx-facts {
+  display: grid;
+  margin: 0;
+}
+.site.uni .cx-facts > div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-facts dt {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+.site.uni .cx-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.site.uni .cx-leader {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .cx-leader b {
+  display: block;
+}
+.site.uni .cx-leader small {
+  display: block;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-leader:hover b {
+  color: var(--blue);
+}
+.site.uni .cx-contact {
+  display: grid;
+  gap: 6px;
+}
+.site.uni .cx-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .cx-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-rows li {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-rows a {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) 24px;
+  gap: 16px;
+  align-items: center;
+  min-height: 64px;
+  padding: 14px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .cx-rows a:hover .cx-rows-t {
+  color: var(--blue);
+}
+.site.uni .cx-rows-d {
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-rows-t {
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- suratlar to'ri va ko'ruvchi */
+.site.uni .cx-grid-ph {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-ph-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+.site.uni .cx-ph-btn:hover img {
+  transform: scale(1.03);
+}
+.site.uni .cx-ph-cap {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.cx-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: #071f50;
+  color: #fff;
+  font-family: "Onest Variable", "Onest", system-ui, sans-serif;
+}
+.cx-lb.anim .cx-lb-fig {
+  animation: cx-fade 0.25s ease-out;
+}
+@keyframes cx-fade {
+  from {
+    opacity: 0;
+  }
+}
+.cx-lb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+.cx-lb-count {
+  margin: 0 0 0 8px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.cx-lb-btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: #071f50;
+  color: #fff;
+  cursor: pointer;
+}
+.cx-lb-btn:hover {
+  background: #0a2e73;
+  border-color: #fff;
+}
+.cx-lb-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.cx-lb-fig {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  margin: 0;
+  padding: 0 80px 24px;
+}
+.cx-lb-fig img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  min-height: 0;
+}
+.cx-lb-fig figcaption {
+  max-width: 70ch;
+  font-size: 15px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.86);
+}
+.cx-lb-prev,
+.cx-lb-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.cx-lb-prev {
+  left: 16px;
+}
+.cx-lb-next {
+  right: 16px;
+}
+
+/* ---------------------------------------------------------------- formalar */
+.site.uni .cx-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.site.uni .cx-f {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+}
+.site.uni .cx-f.wide,
+.site.uni .cx-form .wide {
+  grid-column: 1 / -1;
+}
+.site.uni .cx-l {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.site.uni .cx-l i {
+  font-style: normal;
+  color: #b42318;
+}
+.site.uni .cx-l small {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-f input,
+.site.uni .cx-f select,
+.site.uni .cx-f textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid #8a919e;
+  border-radius: 2px;
+  background: var(--bgA);
+  color: var(--ink);
+  font: 400 16px/1.4 var(--font);
+}
+:root[data-theme="dark"] .site.uni .cx-f :is(input, select, textarea) {
+  border-color: #5b6886;
+}
+.site.uni .cx-f textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+.site.uni .cx-f :is(input, select, textarea):focus {
+  border-color: var(--blue);
+  outline: 2px solid var(--blue);
+  outline-offset: 0;
+}
+.site.uni .cx-f.bad :is(input, select, textarea) {
+  border-color: #b42318;
+}
+.site.uni .cx-err,
+.site.uni .cx-formerr {
+  font-size: 14px;
+  color: #b42318;
+}
+.site.uni .cx-formerr {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+:root[data-theme="dark"] .site.uni :is(.cx-err, .cx-formerr, .cx-l i) {
+  color: #f97066;
+}
+.site.uni .cx-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.site.uni .cx-done {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  background: var(--bgA);
+}
+.site.uni .cx-done svg {
+  color: var(--blue);
+}
+.site.uni .cx-done h3 {
+  margin: 0;
+  font-size: 22px;
+}
+.site.uni .cx-done p {
+  margin: 0;
+  color: var(--ink2);
+}
+.site.uni .cx-card-form {
+  padding: 32px;
+  border: 1px solid var(--line);
+  background: var(--bgA);
+}
+
+/* ---------------------------------------------------------------- savol-javob, xodimlar */
+.site.uni .cx-faq {
+  max-width: 880px;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-faq details {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-faq summary {
+  position: relative;
+  padding: 20px 48px 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.site.uni .cx-faq summary::-webkit-details-marker {
+  display: none;
+}
+.site.uni .cx-faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--blue);
+}
+.site.uni .cx-faq details[open] summary::after {
+  content: "−";
+}
+.site.uni .cx-faq p {
+  margin: 0 0 22px;
+  max-width: 70ch;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+.site.uni .cx-people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-people > li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-people-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+.site.uni .cx-people-name:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.site.uni .cx-people-pos {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .cx-people-c {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 10px 0 0;
+  font-size: 15px;
+}
+.site.uni .cx-people-c a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------- sport */
+.site.uni .cx-ach {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-ach > li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 200px;
+  gap: 24px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-ach-y {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.site.uni .cx-ach-b h3 {
+  margin: 0;
+  font-size: 20px;
+}
+.site.uni .cx-ach-r {
+  margin: 6px 0 0;
+  font-weight: 600;
+}
+.site.uni .cx-ach-a {
+  margin: 4px 0 0;
+  color: var(--ink2);
+}
+
+/* ---------------------------------------------------------------- yotoqxona */
+.site.uni .cx-blds {
+  display: grid;
+  gap: 56px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-bld {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 48px;
+  align-items: start;
+}
+.site.uni .cx-bld-ph {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+.site.uni .cx-steps-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: s;
+}
+.site.uni .cx-steps-list > li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-steps-n {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .cx-steps-list h3 {
+  margin: 6px 0 4px;
+  font-size: 19px;
+}
+.site.uni .cx-steps-list p {
+  margin: 0;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+
+/* ---------------------------------------------------------------- stipendiyalar */
+.site.uni .cx-schs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-sch {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  background: var(--bgA);
+}
+.site.uni .cx-sch .cx-h3 {
+  margin-bottom: 8px;
+}
+.site.uni .cx-sch-amt {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.site.uni .cx-sch .tlink {
+  justify-self: start;
+  margin-top: 20px;
+}
+
+/* ---------------------------------------------------------------- videolar */
+.site.uni .cx-videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bgA);
+}
+.site.uni .cx-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------------------------------------------------------------- qabul bosqichlari */
+.site.uni .cx-tl {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 880px;
+}
+.site.uni .cx-tl > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 20px;
+  padding-bottom: 36px;
+}
+.site.uni .cx-tl > li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.site.uni .cx-tl > li.done:not(:last-child)::before {
+  background: var(--blue);
+}
+.site.uni .cx-tl-dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--line);
+  background: var(--bgA);
+  color: var(--ink2);
+  font-weight: 600;
+  font-size: 15px;
+}
+.site.uni .cx-sec.alt .cx-tl-dot {
+  background: var(--bgB);
+}
+.site.uni .cx-tl > li.done .cx-tl-dot {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .cx-tl > li.cur .cx-tl-dot {
+  border-color: var(--blue-fill);
+  background: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-tl-b {
+  padding-top: 6px;
+}
+.site.uni .cx-tl-b h3 {
+  margin: 6px 0 0;
+  font-size: 21px;
+  line-height: 1.25;
+}
+.site.uni .cx-tl > li.cur .cx-tl-b h3 {
+  color: var(--blue);
+}
+.site.uni .cx-tl-when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .cx-tl-st {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.site.uni .cx-tl > li.cur .cx-tl-st {
+  padding: 3px 8px;
+  background: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-tl-s {
+  margin: 8px 0 0;
+  max-width: 65ch;
+  color: var(--ink2);
+  white-space: pre-line;
+}
+.site.uni .cx-tl-b .tlink {
+  margin-top: 12px;
+}
+/* /admission dagi ixcham ko'rinish — kompyuterda gorizontal */
+@media (min-width: 1000px) {
+  .site.uni .cx-tl.compact {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    max-width: none;
+    gap: 16px;
+  }
+  .site.uni .cx-tl.compact > li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding-bottom: 0;
+  }
+  .site.uni .cx-tl.compact > li:not(:last-child)::before {
+    left: 40px;
+    right: -16px;
+    top: 19px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+  .site.uni .cx-tl.compact .cx-tl-b {
+    padding-top: 0;
+  }
+}
+.site.uni .cx-adm {
+  display: grid;
+  gap: 40px;
+  margin: 8px 0 60px;
+}
+.site.uni .cx-adm-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.site.uni .cx-adm-head h2 {
+  margin: 0;
+}
+.site.uni .cx-adm-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site.uni .cx-adm-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: -1px;
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.site.uni .cx-adm-links a:hover {
+  color: var(--blue);
+}
+.site.uni .cx-adm-links svg {
+  flex: none;
+  color: var(--blue);
+}
+
+/* ---------------------------------------------------------------- kalkulyator */
+.site.uni .cx-calc {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(0, 1fr)) auto;
+  gap: 16px 20px;
+  align-items: end;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--bgB);
+}
+.site.uni .cx-calc .cx-btn {
+  min-height: 50px;
+}
+.site.uni .cx-calc .cx-f .cx-err {
+  position: static;
+}
+.site.uni .cx-score {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  font-variant-numeric: tabular-nums;
+}
+.site.uni .cx-calc-res {
+  margin-top: 48px;
+}
+.site.uni .cx-calc-sum {
+  margin: 0 0 24px;
+  color: var(--ink2);
+}
+.site.uni .cx-calc-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-calc-list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(200px, auto) minmax(0, 1.6fr);
+  gap: 12px 24px;
+  align-items: center;
+  padding: 20px 0 20px 18px;
+  border-bottom: 1px solid var(--line);
+  border-left: 3px solid transparent;
+}
+.site.uni .cx-calc-list > li.grant {
+  border-left-color: var(--blue);
+}
+.site.uni .cx-calc-list > li.contract {
+  border-left-color: color-mix(in srgb, var(--blue) 45%, transparent);
+}
+.site.uni .cx-calc-t {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.site.uni .cx-calc-t:hover {
+  color: var(--blue);
+}
+.site.uni .cx-calc-m {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-st {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+  min-height: 34px;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink2);
+}
+.site.uni .cx-st.grant {
+  background: var(--blue-fill);
+  border-color: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-st.contract {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.site.uni .cx-st.short {
+  color: var(--ink);
+}
+.site.uni .cx-calc-d {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 0;
+}
+.site.uni .cx-calc-d dt {
+  font-size: 13px;
+  color: var(--ink2);
+}
+.site.uni .cx-calc-d dd {
+  margin: 2px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+.site.uni .cx-calc-gap {
+  grid-column: 2 / -1;
+  margin: -4px 0 0;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.site.uni .cx-note {
+  max-width: 880px;
+  margin-top: 40px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--line);
+  background: var(--bgB);
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .cx-note p {
+  margin: 0;
+}
+.site.uni .cx-note p + p {
+  margin-top: 10px;
+}
+
+/* ---------------------------------------------------------------- ota-onalar */
+.site.uni .cx-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-stats dd {
+  margin: 0;
+  font-size: clamp(34px, 3vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--blue);
+}
+.site.uni .cx-stats dt {
+  color: var(--ink2);
+  font-size: 15px;
+}
+.site.uni .cx-contacts {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 18px;
+}
+.site.uni .cx-contacts li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.site.uni .cx-contacts svg {
+  flex: none;
+  color: var(--blue);
+  transform: translateY(3px);
+}
+.site.uni .cx-contacts a {
+  color: var(--ink);
+}
+.site.uni .cx-contacts-h {
+  color: var(--ink2);
+  font-size: 16px;
+}
+
+/* ---------------------------------------------------------------- tadbirga ro'yxat */
+.site.uni .cx-reg {
+  margin: 40px 0 0;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  background: var(--bgA);
+}
+.site.uni .cx-reg-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin: 0 0 12px;
+}
+.site.uni .cx-reg-meta dt {
+  font-size: 13px;
+  color: var(--ink2);
+}
+.site.uni .cx-reg-meta dd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-size: 18px;
+}
+.site.uni .cx-reg-meta b {
+  font-size: 26px;
+  color: var(--blue);
+}
+.site.uni .cx-meter {
+  height: 6px;
+  margin-bottom: 28px;
+  background: var(--bgB);
+}
+.site.uni .cx-meter span {
+  display: block;
+  height: 100%;
+  background: var(--blue-fill);
+}
+.site.uni .cx-state {
+  margin: 0;
+  padding: 14px 16px;
+  border-left: 3px solid var(--blue);
+  background: var(--bgB);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- kampus xaritasi */
+.site.uni .cx-map-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
+  gap: 40px;
+  align-items: start;
+}
+.site.uni .cx-map {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.site.uni .cx-map-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.site.uni .cx-map-tools span {
+  min-width: 52px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--ink2);
+}
+.site.uni .cx-map-scroll {
+  max-height: min(78vh, 900px);
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: var(--bgB);
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+.site.uni .cx-map-in {
+  position: relative;
+  min-width: 100%;
+}
+.site.uni .cx-map-in img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.site.uni .cx-hot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 2px;
+  background: #0a2e73;
+  color: #fff;
+  font: 700 15px/1 var(--font);
+  cursor: pointer;
+}
+.site.uni .cx-hot:hover,
+.site.uni .cx-hot.on {
+  background: #071f50;
+  outline: 3px solid #fff;
+  outline-offset: 0;
+}
+.site.uni .cx-hot:focus-visible {
+  outline: 3px solid #fff;
+  box-shadow: 0 0 0 6px #0a2e73 !important;
+}
+.site.uni .cx-osm {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+}
+.site.uni .cx-osm iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.site.uni .cx-spots {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-spots > li {
+  border-bottom: 1px solid var(--line);
+}
+.site.uni .cx-spot-h {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 600 17px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.site.uni .cx-spot-h:hover {
+  color: var(--blue);
+}
+.site.uni .cx-spot-n {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 14px;
+}
+.site.uni .cx-spots > li.on .cx-spot-n {
+  background: var(--blue-fill);
+  border-color: var(--blue-fill);
+  color: var(--on-dark);
+}
+.site.uni .cx-spot-b {
+  display: grid;
+  gap: 12px;
+  padding: 4px 0 20px;
+}
+.site.uni .cx-spot-b .cx-p {
+  margin: 0;
+}
+.site.uni .cx-spot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- virtual tur */
+.site.uni .cx-tour {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(260px, 4fr);
+  gap: 40px;
+  align-items: start;
+}
+.site.uni .cx-tour-view {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.site.uni .cx-pano {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+  background: var(--bgB);
+}
+.site.uni .cx-pano:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+.site.uni .cx-tour-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site.uni .cx-tour-go {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+.site.uni .cx-scenes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.site.uni .cx-scenes button {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  color: var(--ink);
+  font: 500 16px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.site.uni .cx-scenes button span {
+  min-width: 24px;
+  color: var(--ink2);
+}
+.site.uni .cx-scenes button.on,
+.site.uni .cx-scenes button:hover {
+  color: var(--blue);
+  font-weight: 600;
+}
+.site.uni .cx-tour-cur {
+  margin-bottom: 32px;
+}
+/* Pannellum: tekis dizayn, ichki boshqaruvlar o'rniga o'zimizning tugmalar */
+.site.uni .pnlm-container {
+  font-family: var(--font);
+  background: var(--bgB);
+}
+.site.uni .pnlm-hotspot-base.pnlm-scene,
+.site.uni .pnlm-hotspot-base.pnlm-info {
+  border-radius: 2px;
+}
+.site.uni .pnlm-tooltip span {
+  border-radius: 2px;
+  background: #071f50;
+  font-family: var(--font);
+}
+.site.uni .pnlm-load-box {
+  border-radius: 2px;
+  background: #071f50;
+}
+
+/* ---------------------------------------------------------------- moslashuvchan */
+@media (max-width: 1180px) {
+  .site.uni .cx-cards.four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site.uni .cx-calc {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site.uni .cx-calc .cx-btn {
+    grid-column: 1 / -1;
+  }
+  .site.uni .cx-calc-list > li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .site.uni .cx-calc-d {
+    grid-column: 1 / -1;
+  }
+  .site.uni .cx-calc-gap {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 960px) {
+  .site.uni .cx-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site.uni .cx-split,
+  .site.uni .cx-bld,
+  .site.uni .cx-map-wrap,
+  .site.uni .cx-tour,
+  .site.uni .cx-hero.has-aside .cx-hero-in {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .cx-aside {
+    position: static;
+  }
+  .site.uni .cx-grid-ph {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .site.uni .cx-people,
+  .site.uni .cx-schs,
+  .site.uni .cx-videos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .site.uni .cx-crumbs ol {
+    margin-bottom: 20px;
+  }
+  .site.uni .cx-lead {
+    font-size: 17px;
+  }
+  .site.uni .cx-sec {
+    padding: 48px 0;
+  }
+  .site.uni .cx-sec:last-child {
+    padding-bottom: 96px;
+  }
+  .site.uni .cx-h2 {
+    margin-bottom: 24px;
+  }
+  .site.uni .cx-cards,
+  .site.uni .cx-cards.four,
+  .site.uni .cx-form,
+  .site.uni .cx-calc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site.uni .cx-calc {
+    padding: 20px;
+  }
+  .site.uni .cx-grid-ph {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .site.uni .cx-index a {
+    grid-template-columns: 36px minmax(0, 1fr) auto 24px;
+    gap: 10px;
+    min-height: 72px;
+  }
+  .site.uni .cx-rows a {
+    grid-template-columns: minmax(0, 1fr) 24px;
+  }
+  .site.uni .cx-rows-d {
+    grid-column: 1 / -1;
+  }
+  .site.uni .cx-ach > li {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+  .site.uni .cx-ach-ph {
+    grid-column: 1 / -1;
+  }
+  .site.uni .cx-ach-y {
+    font-size: 22px;
+  }
+  .site.uni .cx-calc-list > li {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 14px;
+  }
+  .site.uni .cx-reg,
+  .site.uni .cx-card-form,
+  .site.uni .cx-sch {
+    padding: 22px 18px;
+  }
+  .site.uni .cx-people > li {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .site.uni .cx-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cx-lb-fig {
+    padding: 0 0 88px;
+  }
+  .cx-lb-prev,
+  .cx-lb-next {
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+  .cx-lb-prev {
+    left: calc(50% - 64px);
+  }
+  .cx-lb-next {
+    right: calc(50% - 64px);
+  }
+  .site.uni .cx-pano {
+    aspect-ratio: 4 / 5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site.uni .cx-pic img,
+  .site.uni .cx-index-a,
+  .cx-lb .cx-lb-fig {
+    transition: none !important;
+    animation: none !important;
+  }
+}

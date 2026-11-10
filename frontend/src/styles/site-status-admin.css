@@ -1,0 +1,31 @@
+/* admin/SiteStatus.tsx: bo'lim saytda ko'rinishi haqidagi holat qatori (MatDash tokenlari) */
+.ss-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 2px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  background: var(--md-card);
+  border: 1px solid var(--md-border);
+  color: var(--md-body);
+}
+.ss-note svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--md-muted);
+}
+.ss-note.warn {
+  background: var(--md-gold-s);
+  border-left: 3px solid var(--md-gold-c);
+}
+.ss-note.warn svg {
+  color: var(--md-gold);
+}
+.ss-note a {
+  color: var(--md-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

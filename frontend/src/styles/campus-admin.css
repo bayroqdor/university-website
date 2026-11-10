@@ -1,0 +1,413 @@
+/* Admin → Talabalar hayoti / Abituriyent: MatDash tokenlari (--md-*) */
+.cxa-tabs {
+  margin: 0 0 16px;
+}
+.cxa-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.cxa-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.cxa-row .a-field {
+  min-width: 120px;
+}
+.cxa-sel {
+  width: auto;
+  min-width: 160px;
+}
+.cxa-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+.cxa-foot a {
+  color: var(--md-primary);
+  font-weight: 600;
+}
+.cxa-hidden {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px dashed var(--md-border-2, var(--md-border));
+  border-radius: var(--md-r-sm);
+  color: var(--md-muted);
+  font-size: 13px;
+}
+.cxa-err {
+  margin-right: auto;
+  color: var(--md-red);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.cxa-warn {
+  color: var(--md-red);
+  font-size: 13px;
+  font-weight: 600;
+}
+.cxa-req {
+  color: var(--md-red);
+  font-style: normal;
+}
+.cxa-h {
+  margin: 20px 0 10px;
+  font-size: 14px;
+  color: var(--md-heading);
+}
+.cxa-sub {
+  display: block;
+  color: var(--md-muted);
+  font-size: 12px;
+}
+.cxa-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.cxa-checks label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+.cxa-rich {
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r-sm);
+  min-height: 140px;
+  padding: 6px 10px;
+  background: var(--md-card);
+}
+.cxa-img {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+/* suratlar maydoni */
+.cxa-photos {
+  display: grid;
+  gap: 12px;
+}
+.cxa-drop {
+  cursor: pointer;
+}
+.cxa-photos-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.cxa-ph-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cxa-ph {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r-sm);
+  background: var(--md-card);
+}
+.cxa-ph.drag {
+  opacity: 0.5;
+  border-style: dashed;
+}
+.cxa-ph.bad {
+  border-color: var(--md-red);
+}
+.cxa-ph-img {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--md-r-sm);
+  background: var(--md-fill);
+}
+.cxa-ph-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cxa-ph[draggable="true"] .cxa-ph-img {
+  cursor: grab;
+}
+.cxa-ph-cover {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 2px 8px;
+  border-radius: var(--md-r-sm);
+  background: var(--md-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.cxa-ph-grip {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--md-r-sm);
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+}
+.cxa-ph-f {
+  display: grid;
+  gap: 6px;
+}
+.cxa-ph-f label {
+  display: grid;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--md-muted);
+}
+.cxa-ph-f i {
+  color: var(--md-red);
+  font-style: normal;
+}
+.cxa-ph-a {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.a-icon.on {
+  color: var(--md-gold, #b08d3c);
+}
+
+/* sozlamalar */
+.cxa-set {
+  margin-top: 12px;
+}
+.cxa-pairs {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.cxa-pair {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 8px;
+  width: 100%;
+  align-items: start;
+}
+.cxa-pair > div:nth-child(2) {
+  display: grid;
+  gap: 6px;
+}
+.cxa-pair-n {
+  padding-top: 9px;
+  color: var(--md-muted);
+  font-weight: 600;
+}
+.cxa-pair-a {
+  display: flex;
+  gap: 2px;
+}
+.cxa-staff {
+  display: grid;
+  gap: 6px;
+}
+.cxa-staff-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--md-border);
+  border-radius: var(--md-r-sm);
+}
+.cxa-staff-row span {
+  flex: 1;
+  min-width: 0;
+}
+
+/* o'tish ballari jadvali */
+.cxa-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 4px 0 12px;
+}
+.cxa-forms {
+  margin-bottom: 12px;
+}
+.cxa-forms button.dim {
+  opacity: 0.6;
+}
+.cxa-forms small {
+  margin-left: 4px;
+  opacity: 0.7;
+}
+.cxa-year {
+  width: 90px;
+}
+.cxa-src {
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+.cxa-tablewrap {
+  overflow-x: auto;
+}
+.cxa-table {
+  min-width: 960px;
+}
+.cxa-table td {
+  vertical-align: middle;
+}
+.cxa-table tr.warn td:first-child {
+  box-shadow: inset 3px 0 0 var(--md-red);
+}
+.cxa-table tr.dim td {
+  opacity: 0.55;
+}
+.cxa-table select.a-input {
+  min-width: 140px;
+}
+.cxa-num {
+  width: 84px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.cxa-code {
+  width: 100px;
+}
+.cxa-check {
+  width: 18px;
+  height: 18px;
+}
+.cxa-imp {
+  display: grid;
+  gap: 12px;
+}
+
+/* tadbirga ro'yxat */
+.cxa-ev {
+  /* uzun tadbir nomi telefonda sahifani gorizontal surmasin */
+  width: min(560px, 100%);
+  min-width: 0;
+  max-width: 100%;
+}
+.list-tools > .cxa-row:has(.cxa-ev) {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+.cxa-q {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* xarita */
+.cxa-placer {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.cxa-placer-in {
+  position: relative;
+  max-width: 640px;
+  border: 1px solid var(--md-border);
+  cursor: crosshair;
+}
+.cxa-placer-in img {
+  display: block;
+  width: 100%;
+}
+.cxa-placer-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border: 3px solid #fff;
+  background: var(--md-primary);
+  border-radius: 2px;
+}
+
+/* virtual tur */
+.cxa-pano-up {
+  display: grid;
+  gap: 10px;
+}
+.cxa-pano-prev {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: var(--md-r-sm);
+}
+.cxa-tour {
+  display: grid;
+  gap: 10px;
+}
+.cxa-pano {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  max-height: 380px;
+  background: var(--md-fill);
+}
+.cxa-hs {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cxa-hs li {
+  display: grid;
+  grid-template-columns: 70px minmax(120px, 1fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto auto;
+  gap: 6px;
+  align-items: center;
+}
+.cxa-hs li:has(> b + input) {
+  grid-template-columns: 70px minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto auto;
+}
+@media (max-width: 760px) {
+  .cxa-img,
+  .cxa-q,
+  .cxa-hs li,
+  .cxa-hs li:has(> b + input) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cxa-ph-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cxa-table th,
+.cxa-table td {
+  padding: 6px 6px;
+}
+.cxa-table td:first-child select.a-input {
+  min-width: 280px;
+}
+.cxa-table td:nth-child(3) select.a-input {
+  min-width: 100px;
+}
+.cxa-table .a-input {
+  height: 38px;
+  min-height: 38px;
+}
+.cxa-table th {
+  font-size: 12px;
+  white-space: normal;
+  line-height: 1.25;
+}

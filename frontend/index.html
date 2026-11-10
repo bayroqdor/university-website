@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <title>University</title>
+    <script>
+      // mavzuni sahifa chizilishidan oldin qo'llash (miltillamasligi uchun)
+      try {
+        var t = localStorage.getItem("theme");
+        // institut sayti standart holatda yorug' mavzuda; foydalanuvchi tanlovi saqlanadi
+        if (t === "dark") document.documentElement.dataset.theme = "dark";
+      } catch (e) {}
+      // «Maxsus imkoniyatlar» sozlamalari (matn o'lchami, ranglar, shrift...) — ham chizilishdan oldin (src/a11y/prefs.ts)
+      try {
+        var a = JSON.parse(localStorage.getItem("a11y") || "null"), r = document.documentElement, k, n = 0;
+        if (a && typeof a === "object")
+          for (k in a)
+            if (/^[a-z]{2,8}$/.test(k) && /^[a-z0-9-]{1,10}$/.test(String(a[k]))) {
+              r.setAttribute("data-a11y-" + k, String(a[k]));
+              n++;
+            }
+        if (n) r.setAttribute("data-a11y", "");
+        // tanlangan til ham oldindan: disleksiya shrifti rus sahifada Andika'ga o'tadi (:lang(ru)) — birinchi kadrdayoq to'g'ri shrift
+        if (a && a.font) {
+          var l = new URLSearchParams(location.search).get("lang") || localStorage.getItem(location.pathname.indexOf("/admin") === 0 ? "admin_lang" : "lang");
+          if (l === "uz" || l === "ru" || l === "en") r.lang = l;
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

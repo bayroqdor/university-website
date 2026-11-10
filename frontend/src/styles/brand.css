@@ -1,0 +1,18 @@
+.brand-img {
+  display: block;
+  flex: none;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.brand-fallback {
+  display: grid;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent, #1d3f8f), var(--accent2, #c8102e));
+  color: #fff;
+  font-family: "Plus Jakarta Sans Variable", "Inter Variable", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}

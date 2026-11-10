@@ -1,0 +1,250 @@
+/* ============================================================ haftalik dars jadvali (sayt va kabinetlar uchun umumiy) */
+.sch-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.sch-nav-btn,
+.sch-nav-today {
+  height: 40px;
+  border-radius: 2px;
+  border: 1px solid var(--line-2, var(--a-line-2));
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  font: 500 13.5px/1 var(--font-sans);
+  transition: background-color 0.2s, color 0.2s;
+}
+.sch-nav-btn {
+  width: 40px;
+  padding: 0;
+}
+.sch-nav-btn:hover,
+.sch-nav-today:hover {
+  background: var(--ink, var(--a-ink));
+  color: var(--bg, var(--a-bg));
+}
+.sch-nav-title {
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+}
+.sch-nav-title b {
+  font: 600 17px/1.2 var(--font-sans);
+}
+.sch-nav-title small {
+  color: var(--muted, var(--a-muted));
+  font-size: 12.5px;
+}
+.sch-week {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 6), minmax(0, 1fr));
+  gap: 10px;
+}
+.sch-day {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.sch-day-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 4px 10px;
+  border-bottom: 1px solid var(--line, var(--a-line));
+}
+.sch-day-head b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.sch-day-head span {
+  font: 500 12px var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted, var(--a-muted));
+}
+.sch-day.today .sch-day-head {
+  border-bottom-color: var(--accent);
+}
+.sch-day.today .sch-day-head b {
+  color: var(--accent);
+}
+.sch-day.off {
+  opacity: 0.45;
+}
+.sch-empty {
+  padding: 18px 8px;
+  text-align: center;
+  color: var(--muted, var(--a-muted));
+  font-size: 13px;
+  border: 1px dashed var(--line, var(--a-line));
+  border-radius: 2px;
+}
+.sch-lesson {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px 10px 10px 8px;
+  border-radius: 2px;
+  background: var(--surface, var(--a-surface));
+  border: 1px solid var(--line, var(--a-line));
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.sch-lesson::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--lt, var(--accent));
+}
+.sch-lesson.type-lecture {
+  --lt: var(--accent);
+}
+/* dars turlari — sokin, sayt palitrasiga yaqin ranglar (faqat chap chiziq va tur yozuvida) */
+.sch-lesson.type-practice {
+  --lt: #1e4a38;
+}
+.sch-lesson.type-lab {
+  --lt: #2b5a94;
+}
+.sch-lesson.type-seminar {
+  --lt: #8a6a22;
+}
+.sch-lesson.type-exam {
+  --lt: #b42318;
+}
+.sch-lesson.type-consult,
+.sch-lesson.type-other {
+  --lt: #565c69;
+}
+:root[data-theme="dark"] .sch-lesson.type-practice {
+  --lt: #86c9a8;
+}
+:root[data-theme="dark"] .sch-lesson.type-lab {
+  --lt: #9cbde8;
+}
+:root[data-theme="dark"] .sch-lesson.type-seminar {
+  --lt: #d2b166;
+}
+:root[data-theme="dark"] .sch-lesson.type-exam {
+  --lt: #eb9a90;
+}
+:root[data-theme="dark"] .sch-lesson.type-consult,
+:root[data-theme="dark"] .sch-lesson.type-other {
+  --lt: #a5afc1;
+}
+button.sch-lesson {
+  cursor: pointer;
+}
+button.sch-lesson:hover {
+  border-color: var(--accent);
+}
+.sch-lesson.cancelled {
+  opacity: 0.55;
+}
+.sch-lesson.cancelled .sch-subject {
+  text-decoration: line-through;
+}
+.sch-lesson.changed {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.sch-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.sch-time b {
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line, var(--a-line));
+  background: transparent;
+  color: var(--ink, var(--a-ink));
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.sch-time span {
+  font: 500 10.5px/1.1 var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted, var(--a-muted));
+  text-align: center;
+}
+.sch-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.sch-type {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--lt, var(--accent));
+}
+.sch-subject {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.sch-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 8px;
+  font-size: 11.5px;
+  color: var(--muted, var(--a-muted));
+}
+.sch-change {
+  font-size: 11.5px;
+  color: var(--accent);
+  font-weight: 600;
+}
+.sch-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: var(--muted, var(--a-muted));
+}
+.sch-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sch-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--lt);
+}
+@media (max-width: 1100px) {
+  .sch-week {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .sch-week {
+    grid-template-columns: 1fr;
+  }
+  .sch-day.off {
+    display: none;
+  }
+}

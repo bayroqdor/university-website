@@ -1,0 +1,2 @@
+pymap>=0.36
+aiosmtpd>=1.4

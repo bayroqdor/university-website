@@ -1,0 +1,652 @@
+/* Vakansiyalar (Careers) va ko'p so'raladigan savollar */
+
+/* ---------- hero ---------- */
+.careers-hero {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--header-h) + clamp(48px, 7vw, 100px)) 0 clamp(48px, 7vw, 90px);
+  background: var(--accent-deep);
+  color: #fff;
+}
+.careers-hero .page-eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+.careers-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  margin: 10px 0 18px;
+}
+.careers-sub {
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.6;
+  max-width: 60ch;
+  color: rgba(255, 255, 255, 0.86);
+}
+.careers-cta {
+  margin-top: 28px;
+}
+.careers-hero .btn-primary {
+  background: #fff;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.careers-count {
+  background: var(--accent2);
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 13px;
+}
+.careers-h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 40px);
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+
+/* ---------- afzalliklar ---------- */
+.perk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.perk {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.perk:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.perk-ic {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.perk b {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.perk p {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---------- vakansiyalar ---------- */
+.careers-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.pill-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.pill-tabs button,
+.faq-cats button {
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--ink-2);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font: 600 14px/1 inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pill-tabs button.on,
+.faq-cats button.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.vac-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.vac-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+.vac-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.vac-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  box-shadow: var(--shadow-lg);
+}
+.vac-card:hover::before {
+  transform: scaleX(1);
+}
+.vac-card.closed {
+  opacity: 0.7;
+}
+.vac-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.vac-chip {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.vac-star {
+  color: var(--accent2);
+}
+.vac-card h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  line-height: 1.25;
+  margin: 4px 0 0;
+  color: var(--ink);
+}
+.vac-card p {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+.vac-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--ink-2);
+  font-size: 13.5px;
+}
+.vac-meta span,
+.vac-facts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vac-meta .late,
+.vac-facts .late {
+  color: var(--accent2);
+}
+.vac-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 6px;
+}
+.vac-empty {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 26px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.hire-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  counter-reset: s;
+}
+.hire-steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.hire-steps li span {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-weight: 800;
+  flex: none;
+}
+.hire-steps li b {
+  color: var(--ink);
+  font-size: 16px;
+}
+
+/* ---------- vakansiya sahifasi ---------- */
+.vac-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.vac-facts span {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+.vac-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 40px;
+  align-items: start;
+}
+.vac-main .article-wrap.top {
+  margin-top: 0;
+}
+.vac-list {
+  margin: 28px 0;
+}
+.vac-list h3 {
+  font-family: var(--font-head);
+  font-size: 22px;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.vac-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.vac-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.vac-list li svg {
+  color: var(--accent);
+  flex: none;
+  margin-top: 4px;
+}
+.vac-side {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+.apply-form {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+}
+.apply-form h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+.cv-drop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: 1.5px dashed var(--line-2);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cv-drop:hover,
+.cv-drop.has {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.cv-drop svg {
+  color: var(--accent);
+  flex: none;
+}
+.cv-drop span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.cv-drop b {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cv-drop small {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+.apply-done {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 26px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+  color: var(--ink);
+}
+.apply-done svg {
+  color: #16a34a;
+}
+.apply-done.closed svg {
+  color: var(--accent2);
+}
+.apply-done p {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+/* ---------- FAQ ---------- */
+.faq-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 48px;
+  align-items: start;
+}
+.faq-side {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+.faq-sub {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.faq-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.faq-cats i {
+  font-style: normal;
+  opacity: 0.65;
+  margin-left: 4px;
+  font-size: 12px;
+}
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.faq-item.on {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: var(--shadow);
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ink);
+  font: 700 16.5px/1.4 var(--font-head);
+}
+.faq-q i {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  transition: background 0.25s, transform 0.3s;
+}
+.faq-q i::before,
+.faq-q i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: transform 0.3s, background 0.25s;
+}
+.faq-q i::after {
+  transform: rotate(90deg);
+}
+.faq-item.on .faq-q i {
+  background: var(--accent);
+  transform: rotate(180deg);
+}
+.faq-item.on .faq-q i::before,
+.faq-item.on .faq-q i::after {
+  background: #fff;
+}
+.faq-item.on .faq-q i::after {
+  transform: rotate(0);
+}
+.faq-a {
+  display: grid;
+  transition: grid-template-rows 0.35s ease;
+}
+.faq-a > div {
+  overflow: hidden;
+}
+.faq-a p {
+  margin: 0;
+  padding: 0 20px 18px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+/* ---------- fakultet dekani ---------- */
+.dean-card {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 26px;
+  margin-bottom: 30px;
+  border-radius: calc(var(--radius) + 4px);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  box-shadow: var(--shadow-lg);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.dean-card:hover {
+  transform: translateY(-3px);
+}
+.dean-photo {
+  width: 200px;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.dean-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dean-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.dean-card h3 {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 3vw, 32px);
+  margin: 12px 0 4px;
+  color: var(--ink);
+}
+.dean-card .dean-pos {
+  color: var(--accent);
+  font-weight: 600;
+}
+.dean-card p {
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 12px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dean-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.dean-contacts span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 1100px) {
+  .perk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .vac-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .vac-layout,
+  .faq-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .vac-side,
+  .faq-side {
+    position: static;
+  }
+}
+@media (max-width: 680px) {
+  .perk-grid,
+  .vac-grid,
+  .hire-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dean-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dean-photo {
+    width: 140px;
+  }
+}
+
+/* ---------- obunani bekor qilish ---------- */
+.unsub-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: clamp(28px, 5vw, 48px);
+  border-radius: calc(var(--radius) + 6px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+}
+.unsub-card .page-title {
+  margin: 0;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.unsub-card .page-sub {
+  margin: 0 auto;
+  max-width: 46ch;
+}
+.unsub-ic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.unsub-card.done .unsub-ic {
+  background: color-mix(in srgb, #16a34a 14%, var(--surface));
+  color: #16a34a;
+}
+.unsub-card.error .unsub-ic {
+  background: var(--accent2-soft);
+  color: var(--accent2);
+}
+.unsub-card .sub-form,
+.unsub-card form {
+  width: min(100%, 440px);
+}
